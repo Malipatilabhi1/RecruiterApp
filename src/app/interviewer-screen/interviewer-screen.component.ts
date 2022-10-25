@@ -1,6 +1,6 @@
 // import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, NgModel } from '@angular/forms';
+import { FormBuilder, NgModel,FormGroup } from '@angular/forms';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 
 

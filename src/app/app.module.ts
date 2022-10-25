@@ -61,7 +61,9 @@ import { HttpClientModule } from '@angular/common/http';
     ScrollingModule,
     MatGridListModule,
     HttpClientModule,
-    AngularEditorModule
+    AngularEditorModule,
+    
+    
    
   ],
   providers: [],
