@@ -49,29 +49,34 @@
           <angular-editor id="editor1"  [config]="editorConfig">
             <!-- <h2 *ngFor="let x of arr">{{x[nextI].Question.value}}</h2>
             <h4 *ngFor="let x of arr">{{x[nextI].Answer.value}</h4> -->
+            
           </angular-editor>
-        </div>    
-    </div>
-    
-
-    <div class="grid2">
+        </div>   
+      </div>
+      
+      
+      <div class="grid2">
         <div id="div1" class="">    
-            <angular-editor id="editor2"  [config]="editorConfig1" >
-              <h1>HIII</h1>
-              <p>Hiiii</p>
+          <angular-editor id="editor2"  [config]="editorConfig1"  [(ngModel)]="htmlContent">
+            <!-- <h1>HIII</h1>
+              <p>Hiiii</p> -->
+              hiii
             </angular-editor>    
-        </div>
-
-        
-        <div id="div2" >
-          <mat-slider formControlName="weightage"
-          thumbLabel [displayWith]="formatLabel"
-          tickInterval="5" step="5" min="0"max="25" aria-label="text">
+          </div>
+          
+          
+          <div id="div2" >
+            <mat-slider formControlName="weightage"
+            thumbLabel [displayWith]="formatLabel"
+            tickInterval="5" step="5" min="0"max="25" aria-label="text">
           </mat-slider>
         </div>
-    </div>
-    <hr>
-    
+      </div>
+      <hr>
+      
+      <h2>HTML genrated by user</h2> <br>
+      {{this.htmlContent}}
+      <div class="btn btn-danger" onclick="clickMe()" >click me</div>
     <div>
       <div id="div1" class="space">
         <mat-form-field class="full-width">

@@ -10,11 +10,15 @@ import { AngularEditorConfig } from '@kolkov/angular-editor';
   styleUrls: ['./interviewer-screen.component.css']
 })
 export class InterviewerScreenComponent implements OnInit {
+
+  htmlContent='';
   
   arr:any=[
           {Question:'What is TypeScript',
           Answer:'TypeScript is a superset of JavaScript that offers excellent consistency. It is highly recommended, as it provides some syntactic sugar and makes the code base more comfortable to understand and maintain.',catid:1,lvlid:1},
-        {Question:' What is C#?',Answer:'C# is an object-oriented, type-safe, and managed language that is compiled by .Net framework to generate Microsoft Intermediate Language.',catid:2,lvlid:1}];
+
+        {Question:' What is C#?',Answer:'C# is an object-oriented, type-safe, and managed language that is compiled by .Net framework to generate Microsoft Intermediate Language.',catid:2,lvlid:1},
+      ];
   
         Category:any=[{catid:1,catname:'Angular'},{catid:2,catname:'C#'},{catid:3,catname:'SQL'}]
   Level:any=[{lvlid:1,level:'Easy'},{lvlid:2,level:'Medium'},{lvlid:3,level:'Hard'}]
@@ -165,5 +169,10 @@ export class InterviewerScreenComponent implements OnInit {
       return "L"+Math.round(value/5);
     }
     return value;
+  }
+
+  clickMe(){
+    console.log(this.htmlContent);
+    
   }
 }
