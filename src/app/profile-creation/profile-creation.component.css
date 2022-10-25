@@ -1,0 +1,33 @@
+
+.full-width{
+   width:100%;
+}
+.adjustable{
+   width: 50%;
+}
+.form-container{
+   margin: 100px;
+}
+.top{
+   padding-top: 10px;
+   padding-bottom: 2px;
+}
+#div1,#div2,#div3{
+   display: inline;
+}
+.spaceL{
+   padding-left: 10px;
+}
+mat-slider{
+   width:200px;
+}
+.space{
+   padding-left: 85%;
+}
+button{
+   width: 50px;
+   height: 30px;
+}
+.resume{
+   color: rgba(0, 0, 0, 0.592);
+}

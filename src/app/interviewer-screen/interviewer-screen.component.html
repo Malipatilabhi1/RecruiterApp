@@ -1,0 +1,89 @@
+<!-- <div class="split1">
+    <mat-grid-list cols="1" rowHeight="18:111">
+      <mat-grid-tile></mat-grid-tile>
+    </mat-grid-list>
+</div> -->
+
+<div [formGroup]="recruiterdata" class="split2">
+  <mat-card class="adjustable">
+    <mat-card-content>
+      <h1>Interviewer Screen</h1>
+  <div>
+    <div class="spaceL" id="div1">
+      <button mat-raised-button color="primary">Start</button>
+     </div>
+
+  <div id="div2" class="spaceL">
+    <mat-form-field >  
+    <mat-label> Category </mat-label> 
+    <mat-select formControlName="category" (ngModelChange)="onSelect($event)" >
+     <mat-option *ngFor="let x of Category" value="{{x.catid}}" (change)="onSelect($event)" [(ngModel)]="x.catid.value">{{x.catname}}</mat-option>  
+    </mat-select>  
+    </mat-form-field>
+  </div>
+
+  <div id="div3" class="spaceL">
+    <mat-form-field >  
+    <mat-label> Level </mat-label>  
+    <mat-select formControlName="level" (ngModelChange)="onSelectL($event)">
+      <mat-option *ngFor="let x of Level" value="{{x.lvlid}}">{{x.level}}</mat-option>
+    </mat-select>  
+    </mat-form-field>
+  </div>
+  
+</div><hr>
+
+    <div class="">
+        
+        <div class="left">
+          <button mat-mini-fab color="primary" aria-label="Example icon button with a menu icon" >
+            <mat-icon (click)=" onClick('next')">arrow_circle_left</mat-icon>
+          </button>
+
+            <button mat-mini-fab color="primary" aria-label="Example icon button with a menu icon" >
+              <mat-icon (click)=" onClick('previous')">arrow_circle_right</mat-icon>
+            </button>
+        </div>
+
+        <div>
+          <angular-editor id="editor1"  [config]="editorConfig">
+            <!-- <h2 *ngFor="let x of arr">{{x[nextI].Question.value}}</h2>
+            <h4 *ngFor="let x of arr">{{x[nextI].Answer.value}</h4> -->
+          </angular-editor>
+        </div>    
+    </div>
+    
+
+    <div class="grid2">
+        <div id="div1" class="">    
+            <angular-editor id="editor2"  [config]="editorConfig1" >
+              <h1>HIII</h1>
+              <p>Hiiii</p>
+            </angular-editor>    
+        </div>
+
+        
+        <div id="div2" >
+          <mat-slider formControlName="weightage"
+          thumbLabel [displayWith]="formatLabel"
+          tickInterval="5" step="5" min="0"max="25" aria-label="text">
+          </mat-slider>
+        </div>
+    </div>
+    <hr>
+    
+    <div>
+      <div id="div1" class="space">
+        <mat-form-field class="full-width">
+          <textarea formControlName="Qstn" matInput placeholder="Additinal Question"></textarea>
+        </mat-form-field>
+      </div>
+      <div id="div2" class="space">
+        <mat-form-field class="full-width">
+          <textarea formControlName="QAns" matInput placeholder="Answer"></textarea>
+        </mat-form-field>
+      </div>
+    </div>
+  </mat-card-content>
+  </mat-card>
+</div>

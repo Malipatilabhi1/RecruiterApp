@@ -1,0 +1,52 @@
+<form [formGroup]="profileForm" class="form-container" (ngSubmit)="saveData()">
+    <mat-card class="adjustable">
+      <mat-card-header>
+        <mat-card-title>Profile Creation</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div>
+          <mat-form-field class="full-width">
+            <input formControlName="Question" matInput placeholder="Question">
+          </mat-form-field>
+        </div>
+        <div class="top">
+            <mat-form-field class="full-width">
+                <input formControlName="Answer" matInput placeholder="Ans">
+              </mat-form-field>
+        </div><hr>
+        <div>
+            <mat-form-field class="full-width">
+              <input formControlName="catid" matInput placeholder="Categoryid">
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field class="full-width">
+              <input formControlName="Lvlid" matInput placeholder="Levelid">
+            </mat-form-field>
+          </div>
+        <button type="submit">Submit</button>
+      </mat-card-content>
+    </mat-card>
+</form>
+
+<hr><hr>
+<form [formGroup]="catForm" class="form-container" (ngSubmit)="saveCat()">
+    <mat-card class="adjustable">
+      <mat-card-header>
+        <mat-card-title>Profile Creation</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>  
+        <div>
+            <mat-form-field class="full-width">
+              <input formControlName="catid" matInput placeholder="Categoryid">
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field class="full-width">
+              <input formControlName="catName" matInput placeholder="CategoryName">
+            </mat-form-field>
+          </div>
+        <button type="submit">Submit</button>
+      </mat-card-content>
+    </mat-card>
+</form>

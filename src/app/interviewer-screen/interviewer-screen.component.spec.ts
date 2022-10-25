@@ -1,0 +1,23 @@
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { InterviewerScreenComponent } from './interviewer-screen.component';
+
+describe('InterviewerScreenComponent', () => {
+  let component: InterviewerScreenComponent;
+  let fixture: ComponentFixture<InterviewerScreenComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [ InterviewerScreenComponent ]
+    })
+    .compileComponents();
+
+    fixture = TestBed.createComponent(InterviewerScreenComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});
