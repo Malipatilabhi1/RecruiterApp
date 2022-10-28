@@ -1,37 +1,93 @@
 /* mat-grid-tile {
    background: rgb(217, 238, 244);
- } */
- .split1{
-   height: 100%;
-   width: 10%;
+ }
+ .form{
+  align-items: center;
+  border: solid 2px;
+  width: 90%;
+  padding-left: 5%;
+ /* } */
+ /* .split1{
+   
+   width: 40%;
    position: fixed;  
    z-index: 1;
    left: 0;
    overflow-x: hidden;
-   padding-top: 20px;
- }
- .split2{
-   height: 100%;
-   width: 90%;
+   padding-top: 40%;
+ } */
+ /* .split2{
+   
+   width: 50%;
    position: fixed;  
    z-index: 1;
    right: 0;
    overflow-x: hidden;
-   padding-right: 5%;
+   padding-right: 40%;
+   padding-bottom: 90%;
  }
- #div1,#div2,#div3{
-   display: inline;
- }
- .container {
+  */
+ /* .container {
    border: 2px solid #ccc;
    background-color: #eee;
    border-radius: 5px;
    padding: 16px;
    margin: 16px 0
+ } */
+ /* h3{
+  color: rgb(50, 16, 16);
+ } */
+ .bg-color
+ {
+  background-color:rgb(231, 227, 227);
+  padding: 10px;
  }
- h1{
-   text-align: center;
+ mat-icon{
+  color:darkgreen;
  }
+ hr{
+  padding: none;
+ }
+ .width{
+  width:441px;
+ }
+ .padd{
+  /* padding-top: 4px;
+  padding-bottom: 10px; */
+ }
+ .container{
+  border: 2px solid rgb(23, 21, 122);
+  padding-top: 5px;
+  background-color: rgba(249, 248, 245, 0.765);
+ }
+ #div1,#div2,#div3,#div4,#div5{
+  display: inline;
+} 
+.spaceL{
+  padding-right: 30px;
+}
+h1{
+  text-align: center;
+}
+.example-spacer {
+  flex: 1 1 auto;
+}
+.left{
+  padding-left: 51%;
+}
+mat-slider{
+  width:200px;
+}
+.space{
+  padding-right: 30px;
+}
+.size
+{
+  border: solid black 1px;
+  padding: 6px;
+  padding-top: 2px;
+}
+ /* 
  h2,p{
    padding-left: 9%;
  }
@@ -42,15 +98,9 @@
 .space{
    padding-right: 50px;
 }
-.spaceL{
-   padding-left: 30px;
-}
-mat-slider{
-   width:200px;
-}
-.left{
-   padding-left: 85%;
-}
+
+
+
 table{
    padding-left: 16%;
    padding-right: 16%;
@@ -60,9 +110,10 @@ table{
 {
   padding-left:2%;
   width: 80%;
-  /* background-color: rgba(243, 234, 234, 0.705); */
+  background-color: rgba(140, 138, 138, 0.048);
 }
 hr{
   background-color: rgba(8, 0, 0, 0);
   border-radius: 2px;
 }
+ */

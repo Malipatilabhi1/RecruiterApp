@@ -1,24 +1,23 @@
 <div>
   <mat-toolbar color="primary">
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+    <!-- <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon"> -->
       <mat-icon >menu</mat-icon>
-    </button>
-    <span class="space">Recruiter App</span>
-    <span class="example-spacer"></span>
-    <button mat-icon-button> 
-      <mat-icon>logout</mat-icon>
-    </button>
-  </mat-toolbar>
-  <!-- <mat-sidenav-container>
-    <mat-sidenav #sidenav opened="false">
-      <mat-nav-list>Profile</mat-nav-list>
-      <mat-nav-list>Interviewer Screen</mat-nav-list>
-      <mat-nav-list></mat-nav-list>
-    </mat-sidenav>
-    <mat-sidenav-content>
-      <div style="height:88vh">
-        <router-outlet></router-outlet>
+    <!-- </button> -->
+    <span class="space">Recruitment App</span>
+    <span class="example-spacer1"></span>
+    <!-- <button mat-icon-button>  -->
+      <div class="dropdown">
+        <button class="dropbtn">Profile</button>
+        <div class="dropdown-content">
+          <a href="#">Interviewer</a>
+          <a href="#">Candidate</a>
+          <a href="#"></a>
+        </div>
       </div>
-    </mat-sidenav-content>
-  </mat-sidenav-container> -->
+       
+      
+      <span class="example-spacer"></span>
+      <mat-icon>logout</mat-icon>
+    <!-- </button> -->
+  </mat-toolbar>
 </div>

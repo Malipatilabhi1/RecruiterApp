@@ -1,12 +1,11 @@
-<!-- <div class="split1">
+ <!-- <div class="split1">
     <mat-grid-list cols="1" rowHeight="18:111">
       <mat-grid-tile></mat-grid-tile>
     </mat-grid-list>
 </div> -->
-
+<!--
 <div [formGroup]="recruiterdata" class="split2">
-  <mat-card class="adjustable">
-    <mat-card-content>
+  
       <h1>Interviewer Screen</h1>
   <div>
     <div class="spaceL" id="div1">
@@ -45,11 +44,13 @@
             </button>
         </div>
 
-        <div>
-          <angular-editor id="editor1"  [config]="editorConfig">
-            <!-- <h2 *ngFor="let x of arr">{{x[nextI].Question.value}}</h2>
-            <h4 *ngFor="let x of arr">{{x[nextI].Answer.value}</h4> -->
-          </angular-editor>
+        <div *ngFor="let x of arr">
+
+            <div class="size">
+              <h2 >{{x.Question}}</h2>
+              <h4>{{x.Answer}}</h4>
+            </div>         
+         
         </div>    
     </div>
     
@@ -84,6 +85,149 @@
         </mat-form-field>
       </div>
     </div>
-  </mat-card-content>
-  </mat-card>
+  
+</div> -->
+
+<!-- --------------------------------------------------------------------------------- -->
+
+
+<!-- <form [formGroup]="recruiterdata" class="">
+  <div class="container">
+  <div class="padd">
+    <div class="spaceL" id="div1">
+      <button mat-raised-button color="primary">Assesment-Start</button>
+    </div>
+    <div id="div2">
+      <Span class="spaceL"><input type="text" placeholder="Assesment-id: 1" disabled> </Span>
+      <span class="spaceL width"><input type="text" placeholder="Assesment-date: {{Today | date:'MMM-dd'}}" disabled></span>
+    </div>
+  </div><hr>
+
+  <div>
+    <div id="div3" class="spaceL">
+      <mat-form-field >  
+      <mat-label> Skill </mat-label> 
+      <mat-select formControlName="category" ngDefaultControl (ngModelChange)="onSelect($event)" >
+       <mat-option *ngFor="let x of Skill" value="{{x.skillId}}" (change)="onSelect($event)" >{{x.catname}}</mat-option>  
+      </mat-select>  
+      </mat-form-field>
+    </div>
+
+    <div id="div2" class="spaceL">
+      <mat-form-field >  
+        <mat-label> Complexity </mat-label>  
+        <mat-select formControlName="level" ngDefaultControl (ngModelChange)="onSelectC($event)">
+        <mat-option *ngFor="let x of Complexity" value="{{x.complexity}}">{{x.complexity}}</mat-option>
+      </mat-select>  
+      </mat-form-field>
+    </div>
+    <div class="left" id="div3">
+      
+        <mat-icon (click)="privQuestion('prev')">arrow_circle_left</mat-icon>
+     
+          <mat-icon (click)="nextQuestion('next')">arrow_circle_right</mat-icon>
+       
+        <span class="spaceL">{{nextI}}/{{arrayLength}}</span>
+    </div>   
+  </div> 
+  
+  <div>
+    <div class="size" >
+      <h3  class="space" ><b>Q:</b> {{question}}</h3>
+      
+      <mat-icon id="div1" class="width" (click)="hideAnswer()">visibility_off</mat-icon>
+      <h4 *ngIf="showMe" id="div2"><b>A:</b>{{answer}}</h4>
+    </div>         
+  </div><br>
+
+
+  <h3>Scroll for Weightage</h3>
+      <mat-slider formControlName="weightage" (click)="updateSetting($event)" ngDefaultControl
+      thumbLabel [displayWith]="formatLabel"
+      tickInterval="5" step="5" min="0"max="25" aria-label="text" >
+      </mat-slider>    
+<hr>
+  <div class="">
+    <div id="div1" class="">
+      <h2>Additinal Question </h2>    
+        <angular-editor id="editor1"  [config]="editorConfig" >
+        </angular-editor>    
+    </div><hr>
+    <div id="div2" class="bottom">
+      <h2>Note</h2>    
+      <angular-editor id="editor2"  [config]="editorConfig1" >
+        .
+      </angular-editor>    
+  </div>
+</div><br>
 </div>
+</form> -->
+
+<form [formGroup]="recruiterData">
+  <div class="container">
+    <div class="bg-color">
+    <div class="padd">
+      <div class="spaceL" id="div1">
+        <button mat-raised-button color="primary">Assesment-Start</button>
+      </div>
+      <div id="div2">
+        <Span class="spaceL"><input type="text" placeholder="Assesment-id: 1" disabled> </Span>
+        <span class="spaceL width"><input type="text" placeholder="Assesment-date: {{Today | date:'MMM-dd'}}" disabled></span>
+      </div>
+    </div>
+
+    <div id="div3" class="spaceL">
+      <mat-form-field >  
+      <mat-label> Skill </mat-label> 
+      <mat-select formControlName="category" ngDefaultControl (ngModelChange)="onSelect($event)" >
+       <mat-option *ngFor="let x of Skill" value="{{x.skillId}}" (change)="onSelect($event)" >{{x.catname}}</mat-option>  
+      </mat-select>  
+      </mat-form-field>
+    </div>
+
+    <div id="div2" class="spaceL">
+      <mat-form-field >  
+        <mat-label> Complexity </mat-label>  
+        <mat-select formControlName="level" ngDefaultControl (ngModelChange)="onSelectC($event)">
+        <mat-option *ngFor="let x of Complexity" value="{{x.complexity}}">{{x.complexity}}</mat-option>
+      </mat-select>  
+      </mat-form-field>
+    </div>
+   
+    <div class="left" id="div3">
+      <mat-icon (click)="privQuestion('prev')">arrow_circle_left</mat-icon>
+      <mat-icon (click)="nextQuestion('next')">arrow_circle_right</mat-icon> 
+      <span class="spaceL">{{nextI}}/{{arrayLength}}</span>
+    </div>   
+  </div>  
+  <div class="size" >
+    <h2  class="space" ><b></b> {{"Q"+question}}</h2> 
+    <mat-icon id="div1" class="width" (click)="hideAnswer()">visibility_off</mat-icon>
+    <h3 *ngIf="showMe" id="div2"><b>A:</b>{{answer}}</h3>
+  </div>  
+
+  <div class="space">
+      <label>Weightage :</label> 
+      <mat-slider formControlName="weightage" (click)="updateSetting($event)" ngDefaultControl
+      thumbLabel [displayWith]="formatLabel"
+      tickInterval="5" step="5" min="0"max="25" aria-label="text" >
+      </mat-slider>  
+    </div>
+
+    <div class="">
+      <div id="div1" class="split1">
+        <label>Additional Questions </label>    
+          <angular-editor id="editor1"  [config]="editorConfig" >
+          </angular-editor>    
+      </div>
+      <div id="div2" class="bottom split2">
+        <label>Note</label> 
+        <angular-editor id="editor2"  [config]="editorConfig1" >
+          
+        </angular-editor>    
+    </div>
+  </div><br>
+
+  </div>
+
+</form>
