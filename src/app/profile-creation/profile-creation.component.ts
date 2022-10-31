@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { FormArray } from '@angular/forms';
 
 @Component({
   selector: 'app-profile-creation',
@@ -17,8 +18,24 @@ export class ProfileCreationComponent implements OnInit {
     name:[''],
     message:[],
     skill:[''],
-    weightage:['']
+
+    weightage:this.formBuilder.array([
+      this.formBuilder.control('')
+    ])
+
   })
+
+  get weightage(){
+    return this.profileForm.get('weightage') as FormArray;
+  }
+
+  addNew(){
+    this.weightage.push(this.formBuilder.control(''));
+  }
+
+  storeData(){
+    
+  }
 
   formatLabel(value:number){
     if(value>=5){

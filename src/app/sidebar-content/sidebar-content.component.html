@@ -1,0 +1,73 @@
+<form [formGroup]="recruiterdata" class="">
+    <div class="container">
+      <h1 style="font-weight: bolder; color: darkgrey">
+        Question & Answer Section
+      </h1>
+      <div>
+        <h2 style="color: blue; padding-left: 10px">
+          Choose Skill and Complexity to View Question
+        </h2>
+        <div id="div2" class="spaceL">
+          <mat-form-field>
+            <mat-label style="width: 10px"> Skill </mat-label>
+            <mat-select
+              formControlName="category"
+              ngDefaultControl
+              (ngModelChange)="onSelect($event)"
+            >
+              <mat-option
+                *ngFor="let x of Category"
+                value="{{ x.catid }}"
+                (change)="onSelect($event)"
+                [(ngModel)]="x.catid.value"
+                [ngModelOptions]="{ standalone: true }"
+                >{{ x.catname }}</mat-option
+              >
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div id="div3" class="spaceL">
+          <mat-form-field>
+            <mat-label> Complexity </mat-label>
+            <mat-select
+              formControlName="level"
+              ngDefaultControl
+              (ngModelChange)="onSelectC($event)"
+            >
+              <mat-option
+                *ngFor="let x of Level"
+                value="{{ x.lvlid }}"
+                [(ngModel)]="x.lvlid.value"
+                [ngModelOptions]="{ standalone: true }"
+                >{{ x.level }}</mat-option
+              >
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div></div>
+      </div>
+      <hr />
+      <div>
+        <div class="size" *ngIf="ques">
+          <table class="table table-hover table-bordered">
+            <thead class="thead">
+              <!-- <th scope="col">#</th> -->
+              <th scope="col" style="font-size: 20px; color:black; padding: 17px;">Question</th>
+              <th scope="col" style="font-size: 20px; color:black; padding: 17px;">Answer</th>
+            </thead>
+            <tbody>
+              <tr  class="info" *ngFor="let item of levelA">
+                <!-- <th scope="row"></th> -->
+                <td style="font-weight: bold; text-align: center;">{{ item.Question }}</td>
+                <td style="font-weight: bold; padding: 17px;">{{ item.Answer }}</td>
+              </tr>
+            </tbody>
+          </table>
+          <!-- <h2  class="space" ><b>Q:</b> {{question}}</h2>
+          <mat-icon id="div1" (click)="hideAnswer()">visibility_off</mat-icon>
+          <h4 *ngIf="showMe" id="div2"><b>A:</b>{{answer}}</h4> -->
+        </div>
+      </div>
+      <br />
+    </div>
+  </form>

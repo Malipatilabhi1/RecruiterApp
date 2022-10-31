@@ -168,19 +168,27 @@
     <div class="bg-color">
     <div class="padd">
       <div class="spaceL" id="div1">
-        <button mat-raised-button color="primary">Assesment-Start</button>
+        <button mat-raised-button color="primary" class="color">Assesment-Start</button>
       </div>
       <div id="div2">
         <Span class="spaceL"><input type="text" placeholder="Assesment-id: 1" disabled> </Span>
         <span class="spaceL width"><input type="text" placeholder="Assesment-date: {{Today | date:'MMM-dd'}}" disabled></span>
+      </div>
+      <div class="dropdown">
+          <span class="border">Info<mat-icon class="dropbtn">account_box</mat-icon></span> 
+        <div class="dropdown-content">
+          <!-- <a href="#">Candidate</a> -->
+          <a href="#">Name |Id:001</a>
+          <span></span>
+        </div>
       </div>
     </div>
 
     <div id="div3" class="spaceL">
       <mat-form-field >  
       <mat-label> Skill </mat-label> 
-      <mat-select formControlName="category" ngDefaultControl (ngModelChange)="onSelect($event)" >
-       <mat-option *ngFor="let x of Skill" value="{{x.skillId}}" (change)="onSelect($event)" >{{x.catname}}</mat-option>  
+      <mat-select formControlName="skillId" ngDefaultControl (ngModelChange)="onSelectSkill($event)" >
+       <mat-option *ngFor="let x of Skill" value="{{x.skillId}}" (change)="onSelectSkill($event)" >{{x.skillName}}</mat-option>  
       </mat-select>  
       </mat-form-field>
     </div>
@@ -188,38 +196,43 @@
     <div id="div2" class="spaceL">
       <mat-form-field >  
         <mat-label> Complexity </mat-label>  
-        <mat-select formControlName="level" ngDefaultControl (ngModelChange)="onSelectC($event)">
-        <mat-option *ngFor="let x of Complexity" value="{{x.complexity}}">{{x.complexity}}</mat-option>
+        <mat-select formControlName="level" ngDefaultControl (ngModelChange)="onSelectComple($event)">
+        <mat-option *ngFor="let x of Complexity" value="{{x.Id}}">{{x.Name}}</mat-option>
       </mat-select>  
       </mat-form-field>
     </div>
    
     <div class="left" id="div3">
-      <mat-icon (click)="privQuestion('prev')">arrow_circle_left</mat-icon>
-      <mat-icon (click)="nextQuestion('next')">arrow_circle_right</mat-icon> 
-      <span class="spaceL">{{nextI}}/{{arrayLength}}</span>
+      <mat-icon (click)="prevQA()">arrow_circle_left</mat-icon>
+      <mat-icon (click)="nextQA()">arrow_circle_right</mat-icon> 
+      <span class="spaceL" *ngIf="hideMe">{{nextI}}/{{arrayLength}}</span>
     </div>   
-  </div>  
+  </div>  <br>  
+
   <div class="size" >
-    <h2  class="space" ><b></b> {{"Q"+question}}</h2> 
-    <mat-icon id="div1" class="width" (click)="hideAnswer()">visibility_off</mat-icon>
-    <h3 *ngIf="showMe" id="div2"><b>A:</b>{{answer}}</h3>
+    
+    <h2  class="space red" id="div1"><b></b> {{question}} </h2>
+    <mat-icon id="div2" class="position" *ngIf="hideMeI" (click)="hideAnswer()">visibility_off</mat-icon> 
+    
+    
+    <h2 *ngIf="showMe" id="div"><b></b>{{answer}}</h2>
   </div>  
 
   <div class="space">
-      <label>Weightage :</label> 
-      <mat-slider formControlName="weightage" (click)="updateSetting($event)" ngDefaultControl
+      <label>Score :</label> 
+      <mat-slider (click)="updateSetting($event)" ngDefaultControl
       thumbLabel [displayWith]="formatLabel"
       tickInterval="5" step="5" min="0"max="25" aria-label="text" >
       </mat-slider>  
     </div>
 
     <div class="">
-      <div id="div1" class="split1">
+      <!-- <div id="div1" class="split1" >
         <label>Additional Questions </label>    
           <angular-editor id="editor1"  [config]="editorConfig" >
           </angular-editor>    
-      </div>
+      </div> -->
+
       <div id="div2" class="bottom split2">
         <label>Note</label> 
         <angular-editor id="editor2"  [config]="editorConfig1" >

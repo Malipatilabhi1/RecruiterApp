@@ -1,23 +1,44 @@
 <div>
   <mat-toolbar color="primary">
     <!-- <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon"> -->
-      <mat-icon >menu</mat-icon>
+      <mat-icon >menu</mat-icon>  
     <!-- </button> -->
     <span class="space">Recruitment App</span>
-    <span class="example-spacer1"></span>
+    
     <!-- <button mat-icon-button>  -->
-      <div class="dropdown">
-        <button class="dropbtn">Profile</button>
+      
+      <div class="dropdown spaceL">
+        <button class="dropbtn spaceL"><mat-icon >notifications_active</mat-icon></button>
         <div class="dropdown-content">
-          <a href="#">Interviewer</a>
-          <a href="#">Candidate</a>
+          <a href="#"></a>
+          <a href="#"></a>
           <a href="#"></a>
         </div>
       </div>
-       
-      
+
       <span class="example-spacer"></span>
-      <mat-icon>logout</mat-icon>
+      <div class="dropdown">
+        <button class="dropbtn"><mat-icon class="">account_box</mat-icon></button>
+        <div class="dropdown-content">
+          <a href="#"> Interviewer</a>
+          <a href="#"> <mat-icon class="black">logout</mat-icon>Logout</a>
+        </div>
+      </div>
+          
     <!-- </button> -->
   </mat-toolbar>
+
+  <!-- <mat-sidenav-container>
+    <mat-sidenav #sidenav opened="false">
+    <mat-nav-list>
+      <a mat-list-item routerLink="/side" >Q&A section</a>
+      <a mat-list-item routerLink="/dashboard">DashBoard</a>
+    </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <div style="height:88vh">
+        <router-outlet></router-outlet>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container> -->
 </div>

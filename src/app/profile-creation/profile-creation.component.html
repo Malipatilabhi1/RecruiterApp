@@ -1,4 +1,4 @@
-<form [formGroup]="profileForm" class="form-container">
+<form [formGroup]="profileForm" class="form-container" onsubmit="storeData()">
   <mat-card class="adjustable">
     <mat-card-header>
       <mat-card-title>Profile Creation</mat-card-title>
@@ -10,7 +10,7 @@
         </mat-form-field>
       </div>
       <div class="top">
-        <label for="input-file-id" class="resume">Resume:   </label>
+        <label for="input-file-id" class="resume">Resume:</label>
         <input  class="ng-hide" id="input-file-id" multiple type="file" />
         
       </div><hr>
@@ -20,7 +20,14 @@
         </mat-form-field>
       </div>
 
-    <div class="row">
+      <div formArrayName="weightage">
+
+        
+
+      </div>
+
+    <div class="row" formArrayName="weightage">
+
         <div id="div1">
           <mat-form-field >  
           <mat-label> Skill Selection </mat-label>  
@@ -31,22 +38,24 @@
           </mat-select>  
           </mat-form-field>
         </div>
+
       <div class="spaceL" id="div2">
         <button mat-mini-fab color="accent" aria-label="Example icon button with a plus icon">
-          <mat-icon>add</mat-icon>
+          <mat-icon (click)="addNew()">add</mat-icon>
         </button>
       </div>
-      <div class="spaceL" id="div3">
-       
+
+      <div class="spaceL" id="div3" *ngFor="let wet of weightage.controls">
           <mat-slider formControlName="weightage"
             thumbLabel [displayWith]="formatLabel"
             tickInterval="5" step="5" min="0"max="25" aria-label="text">
           </mat-slider>
       </div>
+
     </div> 
      
      <div class="space">
-      <button mat-raised-button color="primary" routerLink="/interviewer-screen" routerLinkActive="active">Save</button>
+      <button mat-raised-button color="primary" type="submit">Save</button>
      </div>
     
     </mat-card-content>

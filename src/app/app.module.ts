@@ -22,6 +22,7 @@ import {MatGridListModule} from '@angular/material/grid-list'
 import { AngularEditorModule } from '@kolkov/angular-editor';
 
 
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -31,6 +32,7 @@ import { ProfileCreationComponent } from './profile-creation/profile-creation.co
 import { InterviewerScreenComponent } from './interviewer-screen/interviewer-screen.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HttpClientModule } from '@angular/common/http';
+import { SidebarContentComponent } from './sidebar-content/sidebar-content.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,8 @@ import { HttpClientModule } from '@angular/common/http';
     HeaderComponent,
     ProfileCreationComponent,
     InterviewerScreenComponent,
-    DashboardComponent
+    DashboardComponent,
+    SidebarContentComponent
   ],
   imports: [
     BrowserModule,
@@ -61,7 +64,8 @@ import { HttpClientModule } from '@angular/common/http';
     ScrollingModule,
     MatGridListModule,
     HttpClientModule,
-    AngularEditorModule
+    AngularEditorModule,
+    
    
   ],
   providers: [],

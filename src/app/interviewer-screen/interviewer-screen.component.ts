@@ -12,43 +12,53 @@ import { FormGroup,FormControl } from '@angular/forms';
 })
 export class InterviewerScreenComponent implements OnInit {
   
-  arr:any=[
-          {Question:'What is TypeScript?',
-          Answer:'TypeScript is a superset of JavaScript that offers excellent consistency. It is highly recommended, as it provides some syntactic sugar and makes the code base more comfortable to understand and maintain.',skillId:2,complexity:'Easy'},
-          {Question:' What is enum?' ,Answer:'An enum is a value type with a set of related named constants often referred to as an enumerator list. The enum keyword is used to declare an enumeration. It is a primitive data type that is user-defined',skillId:2,complexity:'Easy'}, 
-          {Question:'What is the difference between constant and readonly?',
-          Answer:'Const is nothing but "constant", a variable of which the value is constant but at compile time. Its mandatory to assign a value to it. By default, a const is static and we cannot change the value of a const variable throughout the entire program',skillId:2,complexity:'Easy'},
-          {Question:' What is C#? ',Answer:'C# is an object-oriented, type-safe, and managed language that is compiled by .Net framework to generate Microsoft Intermediate Language.',skillId:1,complexity:'Easy'},
-          {Question:'What is the Constructor Chaining ?',Answer:'Constructor chaining is a way to connect two or more classes in a relationship as Inheritance. In Constructor Chaining, every child class constructor is mapped to a parent class Constructor implicitly by base keyword, so when you create an instance of the child class, it will call the parent’s class Constructor. Without it, inheritance is not possible.',skillId:2,complexity:'Medium'},
-          {Question:'What is a Virtual Method?',Answer:'A virtual method is a method that can be redefined in derived classes. A virtual method has an implementation in a base class as well as derived the class. It is used when a methods basic functionality is the same but sometimes more functionality is needed in the derived class. A virtual method is created in the base class that can be overridden in the derived class. We create a virtual method in the base class using the virtual keyword and that method is overridden in the derived class using the override keyword.',skillId:2,complexity:'Medium'},
-          {Question:'What is an object?',Answer:'An object is a class instance that can be used to access class methods. The "New" keyword can be used to construct an object.',skillId:1,complexity:'Easy'},
-          {Question:'Explain the four steps involved in the C# code compilation',Answer:'Four steps of code compilation in C# include'+
-          ' 1.Source code compilation in managed code.2.Newly created code is clubbed with assembly code.3.The Common Language Runtime (CLR) is loaded.4.Assembly execution is done through CLR.',skillId:1,complexity:'Medium'},
-      ];
+  // arr:any=[
+  //         {Question:'What is TypeScript?',
+  //         Answer:'TypeScript is a superset of JavaScript that offers excellent consistency. It is highly recommended, as it provides some syntactic sugar and makes the code base more comfortable to understand and maintain.',skillId:2,complexity:'Easy'},
+  //         {Question:' What is enum?' ,Answer:'An enum is a value type with a set of related named constants often referred to as an enumerator list. The enum keyword is used to declare an enumeration. It is a primitive data type that is user-defined',skillId:2,complexity:'Easy'}, 
+  //         {Question:'What is the difference between constant and readonly?',
+  //         Answer:'Const is nothing but "constant", a variable of which the value is constant but at compile time. Its mandatory to assign a value to it. By default, a const is static and we cannot change the value of a const variable throughout the entire program',skillId:2,complexity:'Easy'},
+  //         {Question:' What is C#? ',Answer:'C# is an object-oriented, type-safe, and managed language that is compiled by .Net framework to generate Microsoft Intermediate Language.',skillId:1,complexity:'Easy'},
+  //         {Question:'What is the Constructor Chaining ?',Answer:'Constructor chaining is a way to connect two or more classes in a relationship as Inheritance. In Constructor Chaining, every child class constructor is mapped to a parent class Constructor implicitly by base keyword, so when you create an instance of the child class, it will call the parent’s class Constructor. Without it, inheritance is not possible.',skillId:2,complexity:'Easy'},
+  //         {Question:'What is a Virtual Method?',Answer:'A virtual method is a method that can be redefined in derived classes. A virtual method has an implementation in a base class as well as derived the class. It is used when a methods basic functionality is the same but sometimes more functionality is needed in the derived class. A virtual method is created in the base class that can be overridden in the derived class. We create a virtual method in the base class using the virtual keyword and that method is overridden in the derived class using the override keyword.',skillId:2,complexity:'Medium'},
+  //         {Question:'What is an object?',Answer:'An object is a class instance that can be used to access class methods. The "New" keyword can be used to construct an object.',skillId:1,complexity:'Easy'},
+  //         {Question:'Explain the four steps involved in the C# code compilation',Answer:'Four steps of code compilation in C# include'+
+  //         ' 1.Source code compilation in managed code.2.Newly created code is clubbed with assembly code.3.The Common Language Runtime (CLR) is loaded.4.Assembly execution is done through CLR.',skillId:1,complexity:'Medium'},
+  //     ];
   
-        Skill:any=[{skillId:2,catname:'Angular'},{skillId:1,catname:'C#'},{skillId:3,catname:'SQL'}]
-        Complexity:any=[{lvlid:1,complexity:'Easy'}, {lvlid:2,complexity:'Medium'}, {lvlid:3,complexity:'Hard'}]
-  // arr: any=[];
-
+        Skill:any=[]
+        Complexity:any=[]
+        arr: any=[];
 
   recruiterData=this.formBuilder.group({
-    category:[''],
+    skillId:[''],
     level:[''],
-    weightage:['']
+   
   });
 
   showMe:boolean=true;
+  hideMe:boolean=false;
+  hideMeI:boolean=false;
   public categoryA:any=[];
   public levelA:any=[];
   nextI=0;
   i=0;
   Today: any=new Date();
   sliderOutput=0;
+  skill=0;
+  complexity=0;
+  public question:any='';
+  public answer:any='';
+  ques:boolean=false;
+  public QunAns:any=[];
 
-  constructor(private formBuilder:FormBuilder,private httpClient:HttpClient){}
+  constructor(
+    private formBuilder:FormBuilder,
+    private httpClient:HttpClient){}
 
   ngOnInit(): void {
-    this.getData();
+    this.getSkills();
+    this.getComplexity();
   }
 
   hideAnswer()
@@ -56,21 +66,16 @@ export class InterviewerScreenComponent implements OnInit {
     this.showMe=!this.showMe;
   }
 
-  // selectedOne()
-  // {
-  //   return this.levelA[this.i];
-  // }
   updateSetting(event:any)
   {
     this.sliderOutput=event.value;
-    // console.log(this.sliderOutput);
   }
-
+  //Note Editor
   editorConfig1:AngularEditorConfig={
       editable: true,
       spellcheck: true,
       height: 'auto',
-      minHeight: '140px',
+      minHeight: '170px',
       maxHeight: 'auto',
       width: '50%',
       minWidth: '0',
@@ -103,13 +108,15 @@ export class InterviewerScreenComponent implements OnInit {
       },
     ] 
   }
+  
+  //Additional QA Editor
   editorConfig:AngularEditorConfig={
     editable: true,
       spellcheck: true,
       height: 'auto',
       minHeight: '100px',
       maxHeight: 'auto',
-      width: '50%',
+      width: 'auto',
       minWidth: '0',
       translate: 'yes',
       enableToolbar: false,
@@ -120,58 +127,86 @@ export class InterviewerScreenComponent implements OnInit {
       defaultFontSize: '',
   }
   
-  
-  getData(){
+  fetchData(id:any,skillId:any,compId:any){
     debugger;
-     this.httpClient.get<any>('http://localhost:3000/qaManager').subscribe(
+    return this.httpClient.post<any>('http://localhost:3000/qaManager', 
+     {
+      id,
+      compId,
+      skillId
+     }).subscribe(
       response=>{
-        this.arr=response;
-        console.log(response);
+       
+        this.arr.push(response);
+        this.question="Q: "+response.Question;
+        this.answer="A: "+response.Answer;
         // console.log(this.arr);
+      }
+    );   
+  }
+
+  getSkills(){
+    debugger;
+    this.httpClient.get<any>('http://localhost:3000/skillsManager').subscribe(
+      response=>{
+        this.Skill=response.data;
+        // console.log(this.Skill);
       }
     );
   }
-  // getLevel(){
-  //   this.httpClient.get<any>('https://recruiterapp-dbb97-default-rtdb.firebaseio.com').subscribe(
-  //     response=>{
-  //       this.level=response;
-  //       console.log(response);
-  //     }
-  //   );
-  // }
+  getComplexity(){
+    
+    this.httpClient.get<any>('http://localhost:3000/ComplexityManager').subscribe(
+      response=>{
+        this.Complexity=response.data;
+        // console.log(this.Complexity);
+      }
+    );
+  }
 
+  onSelectSkill(data:any)
+  {
+   this.skill=data;
+  }
   
 
-  onSelect(data:any)
-  {
-    debugger;
-  //  this.categoryA=this.arr.filter((e:any)=>e.catid==data)
-   this.categoryA=this.arr.filter((e:any)=>e.skillId==data)
+  onSelectComple(data:any){
+    this.complexity=data;
+    let id=this.i.toString();
+    this.fetchData(id,this.skill,data);
+    this.hideMeI=true;
 
-   console.log(this.categoryA);
   }
+  
+  // onDropdown1()
+  // {
+  //   this.nextI=0;
+  //   this.arrayLength=this.arr.length;
+  //   this.question="Q: "+this.arr[0].Question;
+  //   this.answer="A: "+this.arr[0].Answer;
+  //   this.nextI++; 
+  //   this.hideMe=true;
+  // }
+  
 
   arrayLength=0;
 
-  onSelectC(value:any)
-  { 
+  nextQA()
+  {
     debugger;
-    this.nextI=0;
-  //  this.levelA=this.categoryA.filter((e:any)=>e.lvlid==value)
-    this.levelA=this.categoryA.filter((e:any)=>e.complexity==value)
-    
+    this.i++;
+    let id=this.i.toString();
 
-     console.log(this.levelA);
-    this.arrayLength=this.levelA.length;
-    this.question=this.levelA[0].Question;
-    this.answer=this.levelA[0].Answer;
-    this.nextI++;  
+    this.fetchData(id,this.skill,this.complexity);
+    
   }
-  
-    public question:any='';
-    public answer:any='';
-    ques:boolean=false;
-    public QunAns:any=[];
+  prevQA(){
+    debugger;
+    this.i--;
+    console.log(this.arr);
+    this.question ="Q: "+ this.arr[this.i].Question;
+    this.answer = "A: "+this.arr[this.i].Answer;
+  } 
     
   nextQuestion(data:any){
     debugger;
@@ -179,8 +214,8 @@ export class InterviewerScreenComponent implements OnInit {
     {
       if(data === "next"){
         this.i++;
-        this.question = this.levelA[this.i].Question;
-        this.answer = this.levelA[this.i].Answer;
+        this.question ="Q: "+ this.arr[this.i].Question;
+        this.answer = "A: "+this.arr[this.i].Answer;
         this.nextI++;   
       }
     }else{
@@ -190,21 +225,22 @@ export class InterviewerScreenComponent implements OnInit {
 
   privQuestion(data:any)
   {
+    debugger;
     if(data=== "prev"){
       this.ques = true;
       this.i--;
-      this.question = this.levelA[this.i].Question;
-      this.answer = this.levelA[this.i].Answer;
+      
+      this.question ="Q: "+ this.arr[this.i].Question;
+        this.answer = "A: "+this.arr[this.i].Answer;
       this.nextI--;
     }
     this.ques = false;
   }
 
   formatLabel(value:number){
-    
     if(value>=5){
       return "L"+Math.round(value/5);
-      console.log(Math.round(value/5))
+      // console.log(Math.round(value/5))
     }
     // console.log(value/5);
     return value;
