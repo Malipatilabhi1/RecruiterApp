@@ -166,13 +166,16 @@ export class InterviewerScreenComponent implements OnInit {
 
   onSelectSkill(data:any)
   {
+    debugger;
    this.skill=data;
   }
   
 
   onSelectComple(data:any){
     this.complexity=data;
+
     let id=this.i.toString();
+    
     this.fetchData(id,this.skill,data);
     this.hideMeI=true;
 

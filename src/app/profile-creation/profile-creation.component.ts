@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { FormArray } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { FormatWidth } from '@angular/common';
 
 @Component({
   selector: 'app-profile-creation',
@@ -9,32 +12,94 @@ import { FormArray } from '@angular/forms';
 })
 export class ProfileCreationComponent implements OnInit {
 
-  constructor(private formBuilder:FormBuilder) { }
+
+  constructor(private formBuilder:FormBuilder,private httpClient:HttpClient) { 
+    
+  }
 
   ngOnInit(): void {
+    this.getSkills();
   }
+
+  Skill:any=[];
+  skillid:any='';
+  level:any='';
+  
+  // storeData(){
+  //   this.profileForm=new FormGroup({
+  //     name:new FormControl(""),
+  //     message:new FormControl(""),
+  //     Skills: new FormArray([
+  //       new FormGroup({
+  //         skill:new FormControl(''),
+  //         level:new FormControl('')
+  //       })
+  //     ])
+  //   });
+  // }
+
+  // addSkills(){
+  //   const control=<FormArray>this.profileForm.controls['Skills'];
+  //   control.push(
+  //     new FormGroup({
+  //       skill:new FormControl(''),
+  //         level:new FormControl('')
+  //     })
+  //   )
+  // }
 
   profileForm=this.formBuilder.group({
-    name:[''],
-    message:[],
-    skill:[''],
+    name:new FormControl(''),
+    message:new FormControl(''),
+    skillid:new FormControl('')
 
-    weightage:this.formBuilder.array([
-      this.formBuilder.control('')
-    ])
+    // weightage:this.formBuilder.array([
+    //   this.formBuilder.control('')
+    // ])
 
-  })
+  });
+ 
 
-  get weightage(){
-    return this.profileForm.get('weightage') as FormArray;
+  getSkills(){
+    this.httpClient.get<any>('http://localhost:3000/skillsManager').subscribe(
+      response=>{
+        this.Skill=response.data;
+      }
+    );
   }
 
-  addNew(){
-    this.weightage.push(this.formBuilder.control(''));
-  }
-
+  
+  // get weightage():FormArray{
+  //   return this.profileForm.get('weightage') as FormArray;
+  // }
+  
+  // addNew(){
+  //   debugger;
+  //   const Skillset=this.formBuilder.group({
+  //       skillId:new FormControl(''),
+  //       level:new FormControl('')
+  //   })
+  //   this.weightage.push(Skillset);
+   
+  // }
   storeData(){
+    debugger;
+    var Name=this.profileForm.controls['name'].value;
     
+    var message=this.profileForm.controls['message'].value;
+
+    console.log(Name);
+    // console.log(this.profileForm.controls['weightage'].value);
+     
+    console.log(this.profileForm.get(['weightage','skillid']))
+    
+    console.log("skill is: "+this.profileForm.get(['weightage','skillid'])?.value)
+    console.log("skill is: "+this.profileForm.get(['weightage','level'])?.value)
+  }
+
+  onSelectSkill(data:any){
+    debugger;
+    this.skillid=data;
   }
 
   formatLabel(value:number){

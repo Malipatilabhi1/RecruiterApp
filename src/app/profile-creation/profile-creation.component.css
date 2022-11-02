@@ -1,6 +1,19 @@
-
+.padding{
+   padding-top: 3%;
+   padding-left: 3%;
+   padding-bottom: 2%;
+   
+}
+hr{
+   color: black;
+   background-color: black;
+}
+mat-card{
+   background-color:rgba(127, 255, 212, 0.331);
+}
 .full-width{
    width:100%;
+   
 }
 .adjustable{
    width: 50%;
@@ -16,7 +29,7 @@
    display: inline;
 }
 .spaceL{
-   padding-left: 10px;
+   padding-left: 30px;
 }
 mat-slider{
    width:200px;
