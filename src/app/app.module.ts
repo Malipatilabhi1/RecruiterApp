@@ -20,6 +20,7 @@ import {MatListModule } from '@angular/material/list';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import {MatGridListModule} from '@angular/material/grid-list'
 import { AngularEditorModule } from '@kolkov/angular-editor';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -31,6 +32,7 @@ import { ProfileCreationComponent } from './profile-creation/profile-creation.co
 import { InterviewerScreenComponent } from './interviewer-screen/interviewer-screen.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HttpClientModule } from '@angular/common/http';
+import { SidebarContentComponent } from './sidebar-content/sidebar-content.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,8 @@ import { HttpClientModule } from '@angular/common/http';
     HeaderComponent,
     ProfileCreationComponent,
     InterviewerScreenComponent,
-    DashboardComponent
+    DashboardComponent,
+    SidebarContentComponent,
   ],
   imports: [
     BrowserModule,
@@ -62,6 +65,7 @@ import { HttpClientModule } from '@angular/common/http';
     MatGridListModule,
     HttpClientModule,
     AngularEditorModule,
+    NgxPaginationModule,
     
     
    

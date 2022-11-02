@@ -1,21 +1,19 @@
-// import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, NgModel } from '@angular/forms';
-import { AngularEditorConfig } from '@kolkov/angular-editor';
-import { QandAnsServiceService } from '../services/qand-ans-service.service';
-import { FormGroup,FormControl } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
+import { AngularEditorConfig } from '@kolkov/angular-editor';
+
 @Component({
-  selector: 'app-interviewer-screen',
-  templateUrl: './interviewer-screen.component.html',
-  styleUrls: ['./interviewer-screen.component.css']
+  selector: 'app-sidebar-content',
+  templateUrl: './sidebar-content.component.html',
+  styleUrls: ['./sidebar-content.component.css'],
 })
-export class InterviewerScreenComponent implements OnInit {
-  // arr:any=[];
+export class SidebarContentComponent implements OnInit {
  
   Skill:any=[]
   Complexity:any=[]
   arr: any=[];
+  p:any =0;
 
 recruiterData=this.formBuilder.group({
 skillId:[''],
@@ -232,4 +230,5 @@ return "L"+Math.round(value/5);
 // console.log(value/5);
 return value;
 }
+
 }

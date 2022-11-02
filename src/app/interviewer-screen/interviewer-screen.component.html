@@ -1,94 +1,81 @@
-<!-- <div class="split1">
-    <mat-grid-list cols="1" rowHeight="18:111">
-      <mat-grid-tile></mat-grid-tile>
-    </mat-grid-list>
-</div> -->
-
-<div [formGroup]="recruiterdata" class="split2">
-  <mat-card class="adjustable">
-    <mat-card-content>
-      <h1>Interviewer Screen</h1>
-  <div>
-    <div class="spaceL" id="div1">
-      <button mat-raised-button color="primary">Start</button>
-     </div>
-
-  <div id="div2" class="spaceL">
-    <mat-form-field >  
-    <mat-label> Category </mat-label> 
-    <mat-select formControlName="category" (ngModelChange)="onSelect($event)" >
-     <mat-option *ngFor="let x of Category" value="{{x.catid}}" (change)="onSelect($event)" [(ngModel)]="x.catid.value">{{x.catname}}</mat-option>  
-    </mat-select>  
-    </mat-form-field>
-  </div>
-
-  <div id="div3" class="spaceL">
-    <mat-form-field >  
-    <mat-label> Level </mat-label>  
-    <mat-select formControlName="level" (ngModelChange)="onSelectL($event)">
-      <mat-option *ngFor="let x of Level" value="{{x.lvlid}}">{{x.level}}</mat-option>
-    </mat-select>  
-    </mat-form-field>
-  </div>
-  
-</div><hr>
-
-    <div class="">
-        
-        <div class="left">
-          <button mat-mini-fab color="primary" aria-label="Example icon button with a menu icon" >
-            <mat-icon (click)=" onClick('next')">arrow_circle_left</mat-icon>
-          </button>
-
-            <button mat-mini-fab color="primary" aria-label="Example icon button with a menu icon" >
-              <mat-icon (click)=" onClick('previous')">arrow_circle_right</mat-icon>
-            </button>
+<form [formGroup]="recruiterData">
+  <div class="container">
+    <div class="bg-color">
+    <div class="padd">
+      <div class="spaceL" id="div1">
+        <button mat-raised-button color="primary" class="color">Assesment-Start</button>
+      </div>
+      <div id="div2">
+        <Span class="spaceL"><input type="text" placeholder="Assesment-id: 1" disabled> </Span>
+        <span class="spaceL width"><input type="text" placeholder="Assesment-date: {{Today | date:'MMM-dd'}}" disabled></span>
+      </div>
+      <div class="dropdown">
+          <span class="border">Info<mat-icon class="dropbtn">account_box</mat-icon></span> 
+        <div class="dropdown-content">
+          <!-- <a href="#">Candidate</a> -->
+          <a href="#">Name |Id:001</a>
+          <span></span>
         </div>
-
-        <div>
-          <angular-editor id="editor1"  [config]="editorConfig">
-            <!-- <h2 *ngFor="let x of arr">{{x[nextI].Question.value}}</h2>
-            <h4 *ngFor="let x of arr">{{x[nextI].Answer.value}</h4> -->
-            
-          </angular-editor>
-        </div>   
-      </div>
-      
-      
-      <div class="grid2">
-        <div id="div1" class="">    
-          <angular-editor id="editor2"  [config]="editorConfig1"  [(ngModel)]="htmlContent">
-            <!-- <h1>HIII</h1>
-              <p>Hiiii</p> -->
-              hiii
-            </angular-editor>    
-          </div>
-          
-          
-          <div id="div2" >
-            <mat-slider formControlName="weightage"
-            thumbLabel [displayWith]="formatLabel"
-            tickInterval="5" step="5" min="0"max="25" aria-label="text">
-          </mat-slider>
-        </div>
-      </div>
-      <hr>
-      
-      <h2>HTML genrated by user</h2> <br>
-      {{this.htmlContent}}
-      <div class="btn btn-danger" (click)="clickMe()" >click me</div>
-    <div>
-      <div id="div1" class="space">
-        <mat-form-field class="full-width">
-          <textarea formControlName="Qstn" matInput placeholder="Additinal Question"></textarea>
-        </mat-form-field>
-      </div>
-      <div id="div2" class="space">
-        <mat-form-field class="full-width">
-          <textarea formControlName="QAns" matInput placeholder="Answer"></textarea>
-        </mat-form-field>
       </div>
     </div>
-  </mat-card-content>
-  </mat-card>
-</div>
+
+    <div id="div3" class="spaceL">
+      <mat-form-field >  
+      <mat-label> Skill </mat-label> 
+      <mat-select formControlName="skillId" ngDefaultControl (ngModelChange)="onSelectSkill($event)" >
+       <mat-option *ngFor="let x of Skill" value="{{x.skillId}}" (change)="onSelectSkill($event)" >{{x.skillName}}</mat-option>  
+      </mat-select>  
+      </mat-form-field>
+    </div>
+          
+    <div id="div2" class="spaceL">
+      <mat-form-field >  
+        <mat-label> Complexity </mat-label>  
+        <mat-select formControlName="level" ngDefaultControl (ngModelChange)="onSelectComple($event)">
+        <mat-option *ngFor="let x of Complexity" value="{{x.Id}}">{{x.Name}}</mat-option>
+      </mat-select>  
+      </mat-form-field>
+    </div>
+   
+    <div class="left" id="div3">
+      <mat-icon (click)="prevQA()">arrow_circle_left</mat-icon>
+      <mat-icon (click)="nextQA()">arrow_circle_right</mat-icon> 
+      <span class="spaceL" *ngIf="hideMe">{{nextI}}/{{arrayLength}}</span>
+    </div>   
+  </div>  <br>  
+
+  <div class="size" >
+    
+    <h2  class="space red" id="div1"><b></b> {{question}} </h2>
+    <mat-icon id="div2" class="position" *ngIf="hideMeI" (click)="hideAnswer()">visibility_off</mat-icon> 
+    
+    
+    <h2 *ngIf="showMe" id="div"><b></b>{{answer}}</h2>
+  </div>  
+
+  <div class="space">
+      <label>Score :</label> 
+      <mat-slider (click)="updateSetting($event)" ngDefaultControl
+      thumbLabel [displayWith]="formatLabel"
+      tickInterval="5" step="5" min="0"max="25" aria-label="text" >
+      </mat-slider>  
+    </div>
+
+    <div class="">
+      <!-- <div id="div1" class="split1" >
+        <label>Additional Questions </label>    
+          <angular-editor id="editor1"  [config]="editorConfig" >
+          </angular-editor>    
+      </div> -->
+
+      <div id="div2" class="bottom split2">
+        <label>Note</label> 
+        <angular-editor id="editor2"  [config]="editorConfig1" >
+          
+        </angular-editor>    
+    </div>
+  </div><br>
+
+  </div>
+
+</form>
