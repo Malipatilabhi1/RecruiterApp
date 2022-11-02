@@ -50,12 +50,13 @@ export class ProfileCreationComponent implements OnInit {
 
   profileForm=this.formBuilder.group({
     name:new FormControl(''),
+    Phone:new FormControl(''),
+    Experience:new FormControl(''),
     message:new FormControl(''),
-    skillid:new FormControl('')
 
-    // weightage:this.formBuilder.array([
-    //   this.formBuilder.control('')
-    // ])
+    weightage:this.formBuilder.array([
+      this.formBuilder.control('')
+    ])
 
   });
  
@@ -69,30 +70,33 @@ export class ProfileCreationComponent implements OnInit {
   }
 
   
-  // get weightage():FormArray{
-  //   return this.profileForm.get('weightage') as FormArray;
-  // }
+  get weightage():FormArray{
+    return this.profileForm.get('weightage') as FormArray;
+  }
   
-  // addNew(){
-  //   debugger;
-  //   const Skillset=this.formBuilder.group({
-  //       skillId:new FormControl(''),
-  //       level:new FormControl('')
-  //   })
-  //   this.weightage.push(Skillset);
+  addNew(){
+    debugger;
+    const Skillset=this.formBuilder.group({
+        skillId:new FormControl(''),
+        level:new FormControl('')
+    })
+    this.weightage.push(Skillset);
    
-  // }
+  }
   storeData(){
     debugger;
     var Name=this.profileForm.controls['name'].value;
-    
+    var Phone=this.profileForm.controls['Phone'].value;
+    var Experience=this.profileForm.controls['Experience'].value;+" yrs"
     var message=this.profileForm.controls['message'].value;
 
     console.log(Name);
-    // console.log(this.profileForm.controls['weightage'].value);
-     
+    console.log(Phone);
+    console.log(Experience);
+    console.log(message);
+
+    console.log(this.profileForm.controls['weightage'].value);
     console.log(this.profileForm.get(['weightage','skillid']))
-    
     console.log("skill is: "+this.profileForm.get(['weightage','skillid'])?.value)
     console.log("skill is: "+this.profileForm.get(['weightage','level'])?.value)
   }
