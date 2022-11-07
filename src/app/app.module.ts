@@ -33,6 +33,7 @@ import { InterviewerScreenComponent } from './interviewer-screen/interviewer-scr
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HttpClientModule } from '@angular/common/http';
 import { SidebarContentComponent } from './sidebar-content/sidebar-content.component';
+import { SignInPageComponent } from './sign-in-page/sign-in-page.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { SidebarContentComponent } from './sidebar-content/sidebar-content.compo
     InterviewerScreenComponent,
     DashboardComponent,
     SidebarContentComponent,
+    SignInPageComponent,
   ],
   imports: [
     BrowserModule,
