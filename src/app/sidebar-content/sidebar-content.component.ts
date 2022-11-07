@@ -9,65 +9,65 @@ import { AngularEditorConfig } from '@kolkov/angular-editor';
   styleUrls: ['./sidebar-content.component.css'],
 })
 export class SidebarContentComponent implements OnInit {
-  array: any = [
-    {
-      Question: 'What is TypeScript?',
-      Answer:
-        'TypeScript is a superset of JavaScript that offers excellent consistency. It is highly recommended, as it provides some syntactic sugar and makes the code base more comfortable to understand and maintain.',
-      skillId: 2,
-      complexity: 'Easy',
-    },
-    {
-      Question: ' What is enum?',
-      Answer:
-        'An enum is a value type with a set of related named constants often referred to as an enumerator list. The enum keyword is used to declare an enumeration. It is a primitive data type that is user-defined',
-      skillId: 2,
-      complexity: 'Easy',
-    },
-    {
-      Question: 'What is the difference between constant and readonly?',
-      Answer:
-        'Const is nothing but "constant", a variable of which the value is constant but at compile time. Its mandatory to assign a value to it. By default, a const is static and we cannot change the value of a const variable throughout the entire program',
-      skillId: 2,
-      complexity: 'Easy',
-    },
-    {
-      Question: ' What is C#? ',
-      Answer:
-        'C# is an object-oriented, type-safe, and managed language that is compiled by .Net framework to generate Microsoft Intermediate Language.',
-      skillId: 1,
-      complexity: 'Easy',
-    },
-    {
-      Question: 'What is the Constructor Chaining ?',
-      Answer:
-        'Constructor chaining is a way to connect two or more classes in a relationship as Inheritance. In Constructor Chaining, every child class constructor is mapped to a parent class Constructor implicitly by base keyword, so when you create an instance of the child class, it will call the parent’s class Constructor. Without it, inheritance is not possible.',
-      skillId: 2,
-      complexity: 'Easy',
-    },
-    {
-      Question: 'What is a Virtual Method?',
-      Answer:
-        'A virtual method is a method that can be redefined in derived classes. A virtual method has an implementation in a base class as well as derived the class. It is used when a methods basic functionality is the same but sometimes more functionality is needed in the derived class. A virtual method is created in the base class that can be overridden in the derived class. We create a virtual method in the base class using the virtual keyword and that method is overridden in the derived class using the override keyword.',
-      skillId: 2,
-      complexity: 'Medium',
-    },
-    {
-      Question: 'What is an object?',
-      Answer:
-        'An object is a class instance that can be used to access class methods. The "New" keyword can be used to construct an object.',
-      skillId: 1,
-      complexity: 'Easy',
-    },
-    {
-      Question: 'Explain the four steps involved in the C# code compilation',
-      Answer:
-        'Four steps of code compilation in C# include' +
-        ' 1.Source code compilation in managed code.2.Newly created code is clubbed with assembly code.3.The Common Language Runtime (CLR) is loaded.4.Assembly execution is done through CLR.',
-      skillId: 1,
-      complexity: 'Medium',
-    },
-  ];
+  // array: any = [
+  //   {
+  //     Question: 'What is TypeScript?',
+  //     Answer:
+  //       'TypeScript is a superset of JavaScript that offers excellent consistency. It is highly recommended, as it provides some syntactic sugar and makes the code base more comfortable to understand and maintain.',
+  //     skillId: 2,
+  //     complexity: 'Easy',
+  //   },
+  //   {
+  //     Question: ' What is enum?',
+  //     Answer:
+  //       'An enum is a value type with a set of related named constants often referred to as an enumerator list. The enum keyword is used to declare an enumeration. It is a primitive data type that is user-defined',
+  //     skillId: 2,
+  //     complexity: 'Easy',
+  //   },
+  //   {
+  //     Question: 'What is the difference between constant and readonly?',
+  //     Answer:
+  //       'Const is nothing but "constant", a variable of which the value is constant but at compile time. Its mandatory to assign a value to it. By default, a const is static and we cannot change the value of a const variable throughout the entire program',
+  //     skillId: 2,
+  //     complexity: 'Easy',
+  //   },
+  //   {
+  //     Question: ' What is C#? ',
+  //     Answer:
+  //       'C# is an object-oriented, type-safe, and managed language that is compiled by .Net framework to generate Microsoft Intermediate Language.',
+  //     skillId: 1,
+  //     complexity: 'Easy',
+  //   },
+  //   {
+  //     Question: 'What is the Constructor Chaining ?',
+  //     Answer:
+  //       'Constructor chaining is a way to connect two or more classes in a relationship as Inheritance. In Constructor Chaining, every child class constructor is mapped to a parent class Constructor implicitly by base keyword, so when you create an instance of the child class, it will call the parent’s class Constructor. Without it, inheritance is not possible.',
+  //     skillId: 2,
+  //     complexity: 'Easy',
+  //   },
+  //   {
+  //     Question: 'What is a Virtual Method?',
+  //     Answer:
+  //       'A virtual method is a method that can be redefined in derived classes. A virtual method has an implementation in a base class as well as derived the class. It is used when a methods basic functionality is the same but sometimes more functionality is needed in the derived class. A virtual method is created in the base class that can be overridden in the derived class. We create a virtual method in the base class using the virtual keyword and that method is overridden in the derived class using the override keyword.',
+  //     skillId: 2,
+  //     complexity: 'Medium',
+  //   },
+  //   {
+  //     Question: 'What is an object?',
+  //     Answer:
+  //       'An object is a class instance that can be used to access class methods. The "New" keyword can be used to construct an object.',
+  //     skillId: 1,
+  //     complexity: 'Easy',
+  //   },
+  //   {
+  //     Question: 'Explain the four steps involved in the C# code compilation',
+  //     Answer:
+  //       'Four steps of code compilation in C# include' +
+  //       ' 1.Source code compilation in managed code.2.Newly created code is clubbed with assembly code.3.The Common Language Runtime (CLR) is loaded.4.Assembly execution is done through CLR.',
+  //     skillId: 1,
+  //     complexity: 'Medium',
+  //   },
+  // ];
 
   Skill: any = [];
   Complexity: any = [];
@@ -172,10 +172,7 @@ export class SidebarContentComponent implements OnInit {
   fetchData(skillId: any, compId: any) {
     // debugger;
     return this.httpClient
-      .post<any>('http://localhost:3000/qaManager/allQA', {
-        compId,
-        skillId,
-      })
+      .get<any>('http://localhost:3000/qaManager')
       .subscribe((response) => {
         // this.arr.push(response.data);
         this.arr = response.data;
@@ -280,3 +277,30 @@ export class SidebarContentComponent implements OnInit {
     return value;
   }
 }
+
+// if (req.session.isAuthenticated == true) {
+//   res.redirect("http://localhost:4200/inter" );
+
+//   res.status(200).json({
+//     isAuthenticated: req.session.isAuthenticated,
+
+//     username: req.session.account?.username,
+
+//     name: req.session.account?.name,
+
+//   });
+// } else {
+//   res.redirect("http://localhost:4200/dashboard");
+// }
+// //   console.log(req.session)
+// //   res.status(200).json({
+// //         title: 'Recruitment App',
+// //          isAuthenticated: req.session.isAuthenticated,
+// //          username: req.session.account?.username});
+// // ( {
+
+// //       title: 'Recruitment App',
+// //       isAuthenticated: req.session.isAuthenticated,
+// //       username: req.session.account?.username,
+// //   });
+// });
