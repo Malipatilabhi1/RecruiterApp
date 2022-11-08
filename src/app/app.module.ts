@@ -34,6 +34,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { HttpClientModule } from '@angular/common/http';
 import { SidebarContentComponent } from './sidebar-content/sidebar-content.component';
 import { SignInPageComponent } from './sign-in-page/sign-in-page.component';
+import { AssesmentScreenComponent } from './assesment-screen/assesment-screen.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { SignInPageComponent } from './sign-in-page/sign-in-page.component';
     DashboardComponent,
     SidebarContentComponent,
     SignInPageComponent,
+    AssesmentScreenComponent,
   ],
   imports: [
     BrowserModule,
@@ -67,6 +69,7 @@ import { SignInPageComponent } from './sign-in-page/sign-in-page.component';
     MatGridListModule,
     HttpClientModule,
     AngularEditorModule,
+    
     NgxPaginationModule,
     
     
