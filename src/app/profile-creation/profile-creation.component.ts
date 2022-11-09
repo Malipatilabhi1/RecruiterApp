@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import {   FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { FormArray } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
-import { FormatWidth } from '@angular/common';
+import { StepperSelectionEvent } from '@angular/cdk/stepper';
+
 
 @Component({
   selector: 'app-profile-creation',
@@ -12,54 +12,119 @@ import { FormatWidth } from '@angular/common';
 })
 export class ProfileCreationComponent implements OnInit {
 
+  // profileForm:FormGroup;
+  Skill:any=[];
+  CandidateInfo:Object='';
+  // Skill:any=[{skillId:'1',skillName:'C#'},{skillId:'2',skillName:'Angular'},{skillId:'3',skillName:'SQL'},{skillId:'4',skillName:'Azure'}];
 
-  constructor(private formBuilder:FormBuilder,private httpClient:HttpClient) { 
-    
+  constructor(private httpClient:HttpClient,private formBuilder:FormBuilder) {   
   }
 
   ngOnInit(): void {
     this.getSkills();
   }
-
-  Skill:any=[];
-  skillid:any='';
-  level:any='';
   
-  // storeData(){
-  //   this.profileForm=new FormGroup({
-  //     name:new FormControl(""),
-  //     message:new FormControl(""),
-  //     Skills: new FormArray([
-  //       new FormGroup({
-  //         skill:new FormControl(''),
-  //         level:new FormControl('')
-  //       })
-  //     ])
-  //   });
-  // }
 
-  // addSkills(){
-  //   const control=<FormArray>this.profileForm.controls['Skills'];
-  //   control.push(
-  //     new FormGroup({
-  //       skill:new FormControl(''),
-  //         level:new FormControl('')
-  //     })
-  //   )
-  // }
-
-  profileForm=this.formBuilder.group({
-    name:new FormControl(''),
-    Phone:new FormControl(''),
+  profileForm=new FormGroup({
+    Email:new FormControl('',[Validators.required,Validators.email]),
+    name:new FormControl('',Validators.required),
+    Phone:new FormControl('',[Validators.required,Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]),
     Experience:new FormControl(''),
     message:new FormControl(''),
 
-    weightage:this.formBuilder.array([
-      this.formBuilder.control('')
+    Skills:new FormArray([ 
+      new FormGroup({
+        skillId:new FormControl('',Validators.required),
+        level:new FormControl('',Validators.required)
+      })       
     ])
-
   });
- 
+
+//-------------------------------------------------------
+firstFormGroup = this.formBuilder.group({
+  email: ['', Validators.required],
+  name: ['', Validators.required],
+  phone:['', Validators.required],
+  Experience:['']
+});
+secondFormGroup = this.formBuilder.group({
+  message: [''],
+});
+thirdFormGroup = this.formBuilder.group({
+  resume: [''],
+});
+skillFormGroup = new FormGroup({
+  Skills:new FormArray([ 
+    new FormGroup({
+      skillId:new FormControl(['',Validators.required]),
+      level:new FormControl(['',Validators.required])
+    })
+  ])     
+});
+isLinear = false;
+
+storeDatas(){
+
+  // console.log(this.Skills.value)
+  console.log();
+  debugger;
+  var message=this.firstFormGroup.controls['email'].value;
+  var Name=this.firstFormGroup.controls['name'].value;
+  var Phone=this.firstFormGroup.controls['phone'].value;
+  var Experience=this.firstFormGroup.controls['Experience'].value;+" yrs"
+  
+  console.log(this.secondFormGroup.controls['message'].value);
+  console.log(this.thirdFormGroup.controls['resume'].value);
+  console.log(this.skillFormGroup.value)
+  
+
+  this.CandidateInfo=this.profileForm.value;
+  console.log("-----------------------------------------------------------------")
+  console.log(this.CandidateInfo);
+  console.log("-----------------------------------------------------------------")
+
+}
+//--------------------------------------------------
+
+
+
+  get Email(){
+    return this.profileForm.get('Email');
+  }
+  get name(){
+    return this.profileForm.get('name');
+  }
+  get Phone(){
+    return this.profileForm.get('Phone');
+  }
+  // get SkillId(){
+  //   return this.profileForm.get('skillId');
+  // }
+
+  fetchData(data:any){
+    debugger;
+    return this.httpClient.post<any>('url',data
+      // {
+      // name,
+      // Phone,
+      // Emailid,
+      // Experience,
+      // resume,
+      // Skills:{
+      //   skillid,
+      //   complexity
+      // }
+      // }
+     ).subscribe(
+      response=>{
+          
+      }
+    );   
+  }
+
+  // onOpen(){
+  //   debugger
+  // }
 
   getSkills(){
     this.httpClient.get<any>('http://localhost:3000/skillsManager').subscribe(
@@ -70,46 +135,50 @@ export class ProfileCreationComponent implements OnInit {
   }
 
   
-  get weightage():FormArray{
-    return this.profileForm.get('weightage') as FormArray;
+  // get Skills():FormArray{
+  //   return this.profileForm.get('Skills') as FormArray;
+  // }
+  get Skills():FormArray{
+    return this.skillFormGroup.get('Skills') as FormArray;
   }
   
   addNew(){
     debugger;
-    const Skillset=this.formBuilder.group({
-        skillId:new FormControl(''),
-        level:new FormControl('')
-    })
-    this.weightage.push(Skillset);
-   
+    const skill=new FormGroup({
+      skillId:new FormControl(''),
+      level:new FormControl('')
+    })       
+
+    this.Skills.push(skill);
   }
-  storeData(){
-    debugger;
+
+  storeData(data:any){
+
+    // console.log(this.Skills.value)
+    console.log(data);
+    // debugger;
     var Name=this.profileForm.controls['name'].value;
     var Phone=this.profileForm.controls['Phone'].value;
     var Experience=this.profileForm.controls['Experience'].value;+" yrs"
     var message=this.profileForm.controls['message'].value;
-
-    console.log(Name);
-    console.log(Phone);
-    console.log(Experience);
-    console.log(message);
-
-    console.log(this.profileForm.controls['weightage'].value);
-    console.log(this.profileForm.get(['weightage','skillid']))
-    console.log("skill is: "+this.profileForm.get(['weightage','skillid'])?.value)
-    console.log("skill is: "+this.profileForm.get(['weightage','level'])?.value)
+  
+    this.CandidateInfo=this.profileForm.value;
+    console.log("-----------------------------------------------------------------")
+    console.log(this.CandidateInfo);
+    console.log("-----------------------------------------------------------------")
+  
   }
 
   onSelectSkill(data:any){
+
+    debugger;  
+  }
+  pitch(data:any)
+  {
     debugger;
-    this.skillid=data;
+    
   }
 
-  formatLabel(value:number){
-    if(value>=5){
-      return "L"+Math.round(value/5);
-    }
-    return value;
-  }
 }
+
+

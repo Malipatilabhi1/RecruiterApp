@@ -1,96 +1,117 @@
-<form [formGroup]="profileForm" class="form-container" (ngSubmit)="storeData()" class="padding">
-  <mat-card class="adjustable">
-    <mat-card-header>
-      <mat-card-title>Profile Creation</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <div>
-        <mat-form-field class="full-width">
-          <input formControlName="name" matInput placeholder="Name">
-        </mat-form-field>
-      </div>
-      <div>
-        <mat-form-field class="full-width">
-          <input formControlName="Phone" matInput placeholder="Phone">
-        </mat-form-field>
-      </div>
-      <div>
-        <mat-form-field class="full-width">
-          <input formControlName="Experience" matInput placeholder="Experience">
-        </mat-form-field>
-      </div>
-      <div class="top">
-        <label for="input-file-id" class="resume">Resume:</label>
-        <input  class="ng-hide" id="input-file-id" multiple type="file" />
-        
-      </div><hr>
-      <div>
-        <mat-form-field class="full-width">
-          <textarea formControlName="message" matInput placeholder="Message for Interviewer"></textarea>
-        </mat-form-field>
-      </div>
 
 
+<div class="backgroud">
+<mat-card class="adjustable">
+  <mat-card-header>
+    <mat-card-title>Profile Creation</mat-card-title>
+  </mat-card-header>
 
-    <div class="row" formArrayName="weightage">
-      <div class="spaceL" id="div2">
-        <button mat-mini-fab color="accent" aria-label="Example icon button with a plus icon">
-          <mat-icon (click)="addNew()">add</mat-icon>
-        </button>
+<mat-stepper [linear]="isLinear" #stepper>
+  <mat-step [stepControl]="firstFormGroup">
+    <form [formGroup]="firstFormGroup">
+      <ng-template matStepLabel>Basic Details</ng-template>
+      
+      <mat-form-field appearance="fill">
+        <mat-label>EmailId</mat-label>
+        <input matInput placeholder="EmailId" formControlName="email" required>
+      </mat-form-field><br>
+      <mat-form-field appearance="fill">
+        <mat-label>Name</mat-label>
+        <input matInput placeholder="Enter Full Name" formControlName="name" required>
+      </mat-form-field><br>
+      <mat-form-field appearance="fill">
+        <mat-label>Phone</mat-label>
+        <input matInput placeholder="Enter Phone number" formControlName="phone" required>
+      </mat-form-field><br>
+      <mat-form-field appearance="fill">
+        <mat-label>Experience</mat-label>
+        <input matInput placeholder="Enter Experience in years" formControlName="Experience" required>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperNext>Next</button>
       </div>
+    </form>
+  </mat-step>
+  <!-- #docregion label -->
+  <mat-step [stepControl]="secondFormGroup" label="Add a message">
+  <!-- #enddocregion label -->
+    <form [formGroup]="secondFormGroup">
+      <mat-form-field appearance="fill">
+        <mat-label>Message for Interviwer</mat-label>
+        <textarea matInput formControlName="message" placeholder="Enter here...." class="text-box-Size"></textarea>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <!-- #docregion label -->
+  <mat-step [stepControl]="thirdFormGroup" label="Upload Resume">
+    <!-- #enddocregion label -->
+      <form [formGroup]="thirdFormGroup">
+        <div > 
+        <label for="input-file-id" class="resume control-label">Resume:</label>
+          <input  class="ng-hide" formControlName="resume" id="input-file-id" multiple type="file"/> 
+        </div><br>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
 
-      <br>
-        <div formArrayName="weightage" *ngFor="let Skillset of weightage.controls;let i=index" >
+     <!-- #docregion label -->
+  <mat-step [stepControl]="skillFormGroup" label="Add Skills">
+    <!-- #enddocregion label -->
+      <form [formGroup]="skillFormGroup" >
+       
+        <!-- e------------------------------------------------------------------------l -->
+        <div formArrayName="Skills">
+        <ng-container *ngFor="let skill of Skills.controls; let i=index" [formGroupName]="i" >
+        <div id="div1" class="leftspace">
+        <mat-form-field >  
+          <mat-label> Skill </mat-label> 
+          <mat-select formControlName="skillId" id="skillId" ngDefaultControl (ngModelChange)="onSelectSkill($event)" >
+           <mat-option *ngFor="let x of Skill" value="{{x.skillId}}" (change)="onSelectSkill($event)" >{{x.skillName}}</mat-option>  
+          </mat-select>  
+        </mat-form-field>
+      </div>
+      <div id="div2" class="spaceL">
+
+        <mat-slider formControlName="level"
+            thumbLabel (input)="pitch($event)"
+            tickInterval="1" step="1" min="0" max="5" aria-label="text" value="">
+          </mat-slider> 
+        </div>
           
-            <div id="div1">
-            <mat-form-field class="spaceL">  
-            <mat-label> Skill Selection </mat-label>  
-            <mat-select formControlName="skillId" ngDefaultControl  >
-              <mat-option *ngFor="let x of Skill" value="{{x.skillId}}">{{x.skillName}}</mat-option>  
-            </mat-select>    
-            </mat-form-field> 
-            </div>
-
-            <div class="spaceL" id="div2" >
-              <mat-slider formControlName="level" class="spaceL"
-                thumbLabel [displayWith]="formatLabel"
-                tickInterval="5" step="5" min="0"max="25" aria-label="text">
-              </mat-slider>
-            </div>
-        
-        </div>
-    </div> 
-
-    <!-- <div formArrayName="Skills">
-      <div *ngFor="let data of profileForm.get('Skills')['controls']; let i=index"
-      formGroupName="{{i}}">
-      <div class="row pt-2">
-        <div class="col-md-5">
-          <mat-form-field class="spaceL">  
-            <mat-label> Skill Selection </mat-label>  
-            <mat-select formControlName="skill" ngDefaultControl  >
-              <mat-option *ngFor="let x of Skill" value="{{x.skillId}}" >{{x.skillName}}</mat-option>  
-             </mat-select>    
-            </mat-form-field> 
-        </div>
-        <div class="col-md-5">
-          <mat-slider class="spaceL" formControlName="level"
-            thumbLabel [displayWith]="formatLabel"
-            tickInterval="5" step="5" min="0"max="25" aria-label="text">
-          </mat-slider>
-        </div>
+        </ng-container>
+        <div id="div3">
+          <button>
+        <mat-icon (click)="addNew()">add</mat-icon></button>
       </div>
-    </div>
-    </div> -->
-     
-     <div class="space">
-      <button mat-raised-button color="primary" type="submit">Save</button>
-     </div>
-    
-    </mat-card-content>
-  </mat-card>
-</form>
+      </div>
+        <!-- --------------------------------------------------------------------------- -->
+        <div class="leftspace">
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
 
+  <mat-step>
+    <ng-template matStepLabel>Done</ng-template>
+    <p>You are now done.</p>
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button (click)="stepper.reset()">Reset</button>
+
+      <button mat-button (click)="storeDatas()">Submit</button>
+    </div>
+  </mat-step>
+</mat-stepper>
+</mat-card>
+</div>
 
 
 <router-outlet></router-outlet>

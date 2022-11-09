@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule,ReactiveFormsModule  } from '@angular/forms';
+
 import { MatSliderModule } from '@angular/material/slider';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatInputModule } from '@angular/material/input';
@@ -20,6 +20,7 @@ import {MatListModule } from '@angular/material/list';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import {MatGridListModule} from '@angular/material/grid-list'
 import { AngularEditorModule } from '@kolkov/angular-editor';
+import {MatStepperModule} from '@angular/material/stepper';
 
 
 
@@ -33,6 +34,8 @@ import { InterviewerScreenComponent } from './interviewer-screen/interviewer-scr
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HttpClientModule } from '@angular/common/http';
 import { SidebarContentComponent } from './sidebar-content/sidebar-content.component';
+import { SignInPageComponent } from './sign-in-page/sign-in-page.component';
+import { AssesmentScreenComponent } from './assesment-screen/assesment-screen.component';
 
 @NgModule({
   declarations: [
@@ -42,9 +45,12 @@ import { SidebarContentComponent } from './sidebar-content/sidebar-content.compo
     ProfileCreationComponent,
     InterviewerScreenComponent,
     DashboardComponent,
-    SidebarContentComponent
+    SidebarContentComponent,
+    SignInPageComponent,
+    AssesmentScreenComponent
   ],
   imports: [
+    
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -65,6 +71,8 @@ import { SidebarContentComponent } from './sidebar-content/sidebar-content.compo
     MatGridListModule,
     HttpClientModule,
     AngularEditorModule,
+    MatStepperModule,
+    
     
    
   ],

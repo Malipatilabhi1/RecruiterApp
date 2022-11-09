@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, NgModel } from '@angular/forms';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { FormGroup,FormControl } from '@angular/forms';
+import { bindCallback } from 'rxjs';
+import { ElementRef } from '@angular/core';
 
 
 @Component({
@@ -26,9 +28,10 @@ export class InterviewerScreenComponent implements OnInit {
   //         ' 1.Source code compilation in managed code.2.Newly created code is clubbed with assembly code.3.The Common Language Runtime (CLR) is loaded.4.Assembly execution is done through CLR.',skillId:1,complexity:'Medium'},
   //     ];
   
-        Skill:any=[]
-        Complexity:any=[]
+        Skill:any=[];
+        Complexity:any=[];
         arr: any=[];
+        
 
   recruiterData=this.formBuilder.group({
     skillId:[''],
@@ -38,12 +41,12 @@ export class InterviewerScreenComponent implements OnInit {
 
   showMe:boolean=true;
   hideMe:boolean=false;
-  hideMeI:boolean=false;
+  // hideMeI:boolean=true;
   public categoryA:any=[];
   public levelA:any=[];
   nextI=0;
   i=0;
-  Today: any=new Date();
+  Today: any;
   sliderOutput=0;
   skill=0;
   complexity=0;
@@ -51,15 +54,23 @@ export class InterviewerScreenComponent implements OnInit {
   public answer:any='';
   ques:boolean=false;
   public QunAns:any=[];
+  keywordzz:any='';
 
   constructor(
     private formBuilder:FormBuilder,
-    private httpClient:HttpClient){}
+    private httpClient:HttpClient,
+    private elementRef: ElementRef){}
 
   ngOnInit(): void {
-    this.getSkills();
-    this.getComplexity();
+    this.Sample();
+    this.getQueAns();
+    // this.getSkills();
+    // this.getComplexity();
   }
+  ngAfterViewInit() {
+    this.elementRef.nativeElement.ownerDocument
+        .body.style.backgroundColor = 'rgba(255, 228, 196, 0.32)';
+}
 
   hideAnswer()
   {
@@ -77,15 +88,17 @@ export class InterviewerScreenComponent implements OnInit {
       height: 'auto',
       minHeight: '170px',
       maxHeight: 'auto',
-      width: '50%',
+      width: '100%',
       minWidth: '0',
-      translate: 'yes',
+      translate: 'no',
       enableToolbar: true,
       showToolbar: true,
       placeholder: 'Enter text here...',
       defaultParagraphSeparator: '',
       defaultFontName: '',
       defaultFontSize: '',
+
+      
       fonts: [
         {class: 'arial', name: 'Arial'},
         {class: 'times-new-roman', name: 'Times New Roman'},
@@ -106,6 +119,14 @@ export class InterviewerScreenComponent implements OnInit {
         class: 'titleText',
         tag: 'h1',
       },
+    ],
+    uploadUrl: 'v1/image',
+    uploadWithCredentials: false,
+    sanitize: false,
+    toolbarPosition: 'top',
+    toolbarHiddenButtons: [
+      ['bold', 'italic'],
+      ['fontSize']
     ] 
   }
   
@@ -126,20 +147,97 @@ export class InterviewerScreenComponent implements OnInit {
       defaultFontName: '',
       defaultFontSize: '',
   }
-  
-  fetchData(id:any,skillId:any,compId:any){
+
+  Sample()
+  {
+    // this.question="Q: "+this.arr[0].Question;
+    // this.answer="A: "+this.arr[0].Answer;
+    // this.hideMeI=true;
+  }
+  Asid:any='';
+  Name:any;
+  Email:any;
+  CId:any;
+  arrayLength=0;
+
+  assesmentStart()
+  {
     debugger;
-    return this.httpClient.post<any>('http://localhost:3000/qaManager', 
-     {
-      id,
-      compId,
-      skillId
-     }).subscribe(
+    this.question="Q: "+this.arr[0].Question;
+    this.answer="A: "+this.arr[0].Answer;
+    this.hideMe=true;
+    
+    this.nextI=1;
+    this.arrayLength=this.arr.length;
+    this.profile();
+    this.keywordload();
+    this.skildata();
+    
+  }
+  profile(){
+    this.Asid='001';
+    this.Today=new Date();
+    this.CId='005545';
+    this.Name='Abhishek';
+    this.Email='Abhishek1@jktech.com';
+  }
+  skill1:any='';
+  complexity1:any='';
+  skill2:any='';
+  complexity2:any='';
+  skill3:any='';
+  complexity3:any='';
+
+  skildata()
+  {
+    this.skill1='C#',
+    this.complexity1='Medium';
+  this.skill2='Angular';
+  this.complexity2='Easy';
+  this.skill3='SQL';
+  this.complexity3='Easy';
+
+  }
+  keywordsArray:any=[
+    {keyword:'automatically releases the memory space'},
+    {keyword:'execute independently'},
+    {keyword:'objects cant be instantiated'},
+    {keyword:'public: accesse from anywhere,      static: instance creation is not necessary,      void:modifier, specify the return type '},
+    {keyword:'overridden,  virtual keyword,  Override keyword'},
+    {keyword:'exception handling, No matter if the exception code with excecute'},
+    {keyword:'restriction,  inherited,  sealed modifier'},
+    {keyword:''},
+    {keyword:'interfaces expect different data, '},
+    {keyword:'group of threads,  without interfering ,  principal threads operation'}
+  ];
+  keywordload(){
+    this.keywordzz=this.keywordsArray[0].keyword;
+  }
+
+  getQueAns(){
+    debugger;
+    this.httpClient.get<any>('http://localhost:3000/qaManager').subscribe(
+      response=>{
+        this.arr=response.data;
+        console.log(this.arr); 
+      }
+    );
+  }
+  //fetch data from db
+  fetchData(){
+    debugger;
+    return this.httpClient.post<any>('url',{} 
+    //  {
+    //   profileid,
+    //   AssementDate,
+      
+    //  }
+     ).subscribe(
       response=>{
        
-        this.arr.push(response);
-        this.question="Q: "+response.Question;
-        this.answer="A: "+response.Answer;
+        // this.arr.push(response);
+        // this.question="Q: "+response.Question;
+        // this.answer="A: "+response.Answer;
         // console.log(this.arr);
       }
     );   
@@ -150,10 +248,11 @@ export class InterviewerScreenComponent implements OnInit {
     this.httpClient.get<any>('http://localhost:3000/skillsManager').subscribe(
       response=>{
         this.Skill=response.data;
-        // console.log(this.Skill);
+        // console.log(this.Skill); 
       }
     );
   }
+  
   getComplexity(){
     
     this.httpClient.get<any>('http://localhost:3000/ComplexityManager').subscribe(
@@ -175,9 +274,9 @@ export class InterviewerScreenComponent implements OnInit {
     this.complexity=data;
 
     let id=this.i.toString();
-    
-    this.fetchData(id,this.skill,data);
-    this.hideMeI=true;
+
+    // this.fetchData(id,this.skill,data);
+    // this.hideMeI=true;
 
   }
   
@@ -192,15 +291,14 @@ export class InterviewerScreenComponent implements OnInit {
   // }
   
 
-  arrayLength=0;
-
+  
   nextQA()
   {
     debugger;
     this.i++;
     let id=this.i.toString();
 
-    this.fetchData(id,this.skill,this.complexity);
+    // this.fetchData(id,this.skill,this.complexity);
     
   }
   prevQA(){
@@ -209,21 +307,23 @@ export class InterviewerScreenComponent implements OnInit {
     console.log(this.arr);
     this.question ="Q: "+ this.arr[this.i].Question;
     this.answer = "A: "+this.arr[this.i].Answer;
+   
   } 
     
   nextQuestion(data:any){
     debugger;
-    if(this.nextI<this.arrayLength)
-    {
+    // if(this.nextI<this.arrayLength)
+    // {
       if(data === "next"){
         this.i++;
         this.question ="Q: "+ this.arr[this.i].Question;
         this.answer = "A: "+this.arr[this.i].Answer;
+        this.keywordzz=this.keywordsArray[this.i].keyword;
         this.nextI++;   
       }
-    }else{
-      alert("No More Questions")
-    } 
+    // }else{
+    //   alert("No More Questions")
+    // } 
   }
 
   privQuestion(data:any)
@@ -235,6 +335,7 @@ export class InterviewerScreenComponent implements OnInit {
       
       this.question ="Q: "+ this.arr[this.i].Question;
         this.answer = "A: "+this.arr[this.i].Answer;
+        this.keywordzz=this.keywordsArray[this.i].keyword;
       this.nextI--;
     }
     this.ques = false;
