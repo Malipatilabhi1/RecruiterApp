@@ -32,20 +32,48 @@
       </div>
     </form>
   </mat-step>
-  <!-- #docregion label -->
-  <mat-step [stepControl]="secondFormGroup" label="Add a message">
+
+
+<!-- #docregion label -->
+<mat-step [stepControl]="skillFormGroup" label="Add Skills">
   <!-- #enddocregion label -->
-    <form [formGroup]="secondFormGroup">
-      <mat-form-field appearance="fill">
-        <mat-label>Message for Interviwer</mat-label>
-        <textarea matInput formControlName="message" placeholder="Enter here...." class="text-box-Size"></textarea>
+    <form [formGroup]="skillFormGroup" >
+     
+    
+      <div formArrayName="Skills">
+      <ng-container *ngFor="let skill of Skills.controls; let i=index" [formGroupName]="i" >
+      <div id="div1" class="leftspace">
+      <mat-form-field >  
+        <mat-label> Skill </mat-label> 
+        <mat-select formControlName="skillId" id="skillId" ngDefaultControl (ngModelChange)="onSelectSkill($event)" >
+         <mat-option *ngFor="let x of Skill" value="{{x.skillId}}" (change)="onSelectSkill($event)" >{{x.skillName}}</mat-option>  
+        </mat-select>  
       </mat-form-field>
-      <div>
+    </div>
+    <div id="div2" class="spaceL">
+
+      <mat-slider formControlName="level"
+          thumbLabel (input)="pitch($event)"
+          tickInterval="1" step="1" min="0" max="5" aria-label="text" value="">
+        </mat-slider> 
+      </div>
+        
+      </ng-container>
+      <div id="div3">
+        <button>
+      <mat-icon (click)="addNew()">add</mat-icon></button>
+    </div>
+    </div>
+      
+      <div class="leftspace">
         <button mat-button matStepperPrevious>Back</button>
         <button mat-button matStepperNext>Next</button>
       </div>
     </form>
   </mat-step>
+
+
+ 
   <!-- #docregion label -->
   <mat-step [stepControl]="thirdFormGroup" label="Upload Resume">
     <!-- #enddocregion label -->
@@ -60,45 +88,22 @@
         </div>
       </form>
     </mat-step>
-
-     <!-- #docregion label -->
-  <mat-step [stepControl]="skillFormGroup" label="Add Skills">
+  <!-- e------------------------------------------------------------------------l -->
+      <!-- #docregion label -->
+  <mat-step [stepControl]="secondFormGroup" label="Add a message">
     <!-- #enddocregion label -->
-      <form [formGroup]="skillFormGroup" >
-       
-        <!-- e------------------------------------------------------------------------l -->
-        <div formArrayName="Skills">
-        <ng-container *ngFor="let skill of Skills.controls; let i=index" [formGroupName]="i" >
-        <div id="div1" class="leftspace">
-        <mat-form-field >  
-          <mat-label> Skill </mat-label> 
-          <mat-select formControlName="skillId" id="skillId" ngDefaultControl (ngModelChange)="onSelectSkill($event)" >
-           <mat-option *ngFor="let x of Skill" value="{{x.skillId}}" (change)="onSelectSkill($event)" >{{x.skillName}}</mat-option>  
-          </mat-select>  
+      <form [formGroup]="secondFormGroup">
+        <mat-form-field appearance="fill">
+          <mat-label>Message for Interviwer</mat-label>
+          <textarea matInput formControlName="message" placeholder="Enter here...." class="text-box-Size"></textarea>
         </mat-form-field>
-      </div>
-      <div id="div2" class="spaceL">
-
-        <mat-slider formControlName="level"
-            thumbLabel (input)="pitch($event)"
-            tickInterval="1" step="1" min="0" max="5" aria-label="text" value="">
-          </mat-slider> 
-        </div>
-          
-        </ng-container>
-        <div id="div3">
-          <button>
-        <mat-icon (click)="addNew()">add</mat-icon></button>
-      </div>
-      </div>
-        <!-- --------------------------------------------------------------------------- -->
-        <div class="leftspace">
+        <div>
           <button mat-button matStepperPrevious>Back</button>
           <button mat-button matStepperNext>Next</button>
         </div>
       </form>
     </mat-step>
-
+<!-- --------------------------------------------------------------------------- -->
   <mat-step>
     <ng-template matStepLabel>Done</ng-template>
     <p>You are now done.</p>

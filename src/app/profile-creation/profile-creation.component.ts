@@ -25,22 +25,23 @@ export class ProfileCreationComponent implements OnInit {
   }
   
 
-  profileForm=new FormGroup({
-    Email:new FormControl('',[Validators.required,Validators.email]),
-    name:new FormControl('',Validators.required),
-    Phone:new FormControl('',[Validators.required,Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]),
-    Experience:new FormControl(''),
-    message:new FormControl(''),
+  // profileForm=new FormGroup({
+  //   Email:new FormControl('',[Validators.required,Validators.email]),
+  //   name:new FormControl('',Validators.required),
+  //   Phone:new FormControl('',[Validators.required,Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]),
+  //   Experience:new FormControl(''),
+  //   message:new FormControl(''),
 
-    Skills:new FormArray([ 
-      new FormGroup({
-        skillId:new FormControl('',Validators.required),
-        level:new FormControl('',Validators.required)
-      })       
-    ])
-  });
+  //   Skills:new FormArray([ 
+  //     new FormGroup({
+  //       skillId:new FormControl('',Validators.required),
+  //       level:new FormControl('',Validators.required)
+  //     })       
+  //   ])
+  // });
 
 //-------------------------------------------------------
+
 firstFormGroup = this.formBuilder.group({
   email: ['', Validators.required],
   name: ['', Validators.required],
@@ -64,7 +65,6 @@ skillFormGroup = new FormGroup({
 isLinear = false;
 
 storeDatas(){
-
   // console.log(this.Skills.value)
   console.log();
   debugger;
@@ -77,8 +77,6 @@ storeDatas(){
   console.log(this.thirdFormGroup.controls['resume'].value);
   console.log(this.skillFormGroup.value)
   
-
-  this.CandidateInfo=this.profileForm.value;
   console.log("-----------------------------------------------------------------")
   console.log(this.CandidateInfo);
   console.log("-----------------------------------------------------------------")
@@ -88,20 +86,22 @@ storeDatas(){
 
 
 
-  get Email(){
-    return this.profileForm.get('Email');
-  }
-  get name(){
-    return this.profileForm.get('name');
-  }
-  get Phone(){
-    return this.profileForm.get('Phone');
-  }
+  // get Email(){
+  //   return this.profileForm.get('Email');
+  // }
+  // get name(){
+  //   return this.profileForm.get('name');
+  // }
+  // get Phone(){
+  //   return this.profileForm.get('Phone');
+  // }
   // get SkillId(){
   //   return this.profileForm.get('skillId');
   // }
 
-  fetchData(data:any){
+
+  // Pass profile data to backend
+  sendData(data:any){
     debugger;
     return this.httpClient.post<any>('url',data
       // {
@@ -122,10 +122,7 @@ storeDatas(){
     );   
   }
 
-  // onOpen(){
-  //   debugger
-  // }
-
+  
   getSkills(){
     this.httpClient.get<any>('http://localhost:3000/skillsManager').subscribe(
       response=>{
@@ -134,10 +131,6 @@ storeDatas(){
     );
   }
 
-  
-  // get Skills():FormArray{
-  //   return this.profileForm.get('Skills') as FormArray;
-  // }
   get Skills():FormArray{
     return this.skillFormGroup.get('Skills') as FormArray;
   }
@@ -152,22 +145,22 @@ storeDatas(){
     this.Skills.push(skill);
   }
 
-  storeData(data:any){
+  // storeData(data:any){
 
-    // console.log(this.Skills.value)
-    console.log(data);
-    // debugger;
-    var Name=this.profileForm.controls['name'].value;
-    var Phone=this.profileForm.controls['Phone'].value;
-    var Experience=this.profileForm.controls['Experience'].value;+" yrs"
-    var message=this.profileForm.controls['message'].value;
+  //   // console.log(this.Skills.value)
+  //   console.log(data);
+  //   // debugger;
+  //   var Name=this.profileForm.controls['name'].value;
+  //   var Phone=this.profileForm.controls['Phone'].value;
+  //   var Experience=this.profileForm.controls['Experience'].value;+" yrs"
+  //   var message=this.profileForm.controls['message'].value;
   
-    this.CandidateInfo=this.profileForm.value;
-    console.log("-----------------------------------------------------------------")
-    console.log(this.CandidateInfo);
-    console.log("-----------------------------------------------------------------")
+  //   this.CandidateInfo=this.profileForm.value;
+  //   console.log("-----------------------------------------------------------------")
+  //   console.log(this.CandidateInfo);
+  //   console.log("-----------------------------------------------------------------")
   
-  }
+  // }
 
   onSelectSkill(data:any){
 

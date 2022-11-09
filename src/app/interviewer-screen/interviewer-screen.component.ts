@@ -28,17 +28,9 @@ export class InterviewerScreenComponent implements OnInit {
   //         ' 1.Source code compilation in managed code.2.Newly created code is clubbed with assembly code.3.The Common Language Runtime (CLR) is loaded.4.Assembly execution is done through CLR.',skillId:1,complexity:'Medium'},
   //     ];
   
-        Skill:any=[];
-        Complexity:any=[];
-        arr: any=[];
-        
-
-  recruiterData=this.formBuilder.group({
-    skillId:[''],
-    level:[''],
-   
-  });
-
+  Skill:any=[];
+  Complexity:any=[];
+  arr: any=[];      
   showMe:boolean=true;
   hideMe:boolean=false;
   // hideMeI:boolean=true;
@@ -62,26 +54,29 @@ export class InterviewerScreenComponent implements OnInit {
     private elementRef: ElementRef){}
 
   ngOnInit(): void {
-    this.Sample();
-    this.getQueAns();
-    // this.getSkills();
-    // this.getComplexity();
+    this.getQueAns(); //call api 
   }
-  ngAfterViewInit() {
+
+  recruiterData=this.formBuilder.group({
+    skillId:[''],
+    level:[''],  
+  });
+
+  ngAfterViewInit() {   //background color
     this.elementRef.nativeElement.ownerDocument
         .body.style.backgroundColor = 'rgba(255, 228, 196, 0.32)';
 }
-
+//for hiding answer
   hideAnswer()
   {
     this.showMe=!this.showMe;
   }
-
+  //slider value
   updateSetting(event:any)
   {
     this.sliderOutput=event.value;
   }
-  //Note Editor
+  //text-Editor for "Note"
   editorConfig1:AngularEditorConfig={
       editable: true,
       spellcheck: true,
@@ -96,9 +91,7 @@ export class InterviewerScreenComponent implements OnInit {
       placeholder: 'Enter text here...',
       defaultParagraphSeparator: '',
       defaultFontName: '',
-      defaultFontSize: '',
-
-      
+      defaultFontSize: '',      
       fonts: [
         {class: 'arial', name: 'Arial'},
         {class: 'times-new-roman', name: 'Times New Roman'},
@@ -130,36 +123,13 @@ export class InterviewerScreenComponent implements OnInit {
     ] 
   }
   
-  //Additional QA Editor
-  editorConfig:AngularEditorConfig={
-    editable: true,
-      spellcheck: true,
-      height: 'auto',
-      minHeight: '100px',
-      maxHeight: 'auto',
-      width: 'auto',
-      minWidth: '0',
-      translate: 'yes',
-      enableToolbar: false,
-      showToolbar: false,
-      placeholder: 'Enter text here...',
-      defaultParagraphSeparator: '',
-      defaultFontName: '',
-      defaultFontSize: '',
-  }
-
-  Sample()
-  {
-    // this.question="Q: "+this.arr[0].Question;
-    // this.answer="A: "+this.arr[0].Answer;
-    // this.hideMeI=true;
-  }
   Asid:any='';
   Name:any;
   Email:any;
   CId:any;
   arrayLength=0;
 
+  //Assessment start button // for Hard coded data
   assesmentStart()
   {
     debugger;
@@ -174,6 +144,7 @@ export class InterviewerScreenComponent implements OnInit {
     this.skildata();
     
   }
+  //display candidate profile // hardcoded data
   profile(){
     this.Asid='001';
     this.Today=new Date();
@@ -188,6 +159,7 @@ export class InterviewerScreenComponent implements OnInit {
   skill3:any='';
   complexity3:any='';
 
+//candidate skill // hardcoded data
   skildata()
   {
     this.skill1='C#',
@@ -196,8 +168,9 @@ export class InterviewerScreenComponent implements OnInit {
   this.complexity2='Easy';
   this.skill3='SQL';
   this.complexity3='Easy';
-
   }
+
+  //key words array
   keywordsArray:any=[
     {keyword:'automatically releases the memory space'},
     {keyword:'execute independently'},
@@ -210,10 +183,12 @@ export class InterviewerScreenComponent implements OnInit {
     {keyword:'interfaces expect different data, '},
     {keyword:'group of threads,  without interfering ,  principal threads operation'}
   ];
+  //to display the keywords
   keywordload(){
     this.keywordzz=this.keywordsArray[0].keyword;
   }
 
+  //fetching question and ans from backend
   getQueAns(){
     debugger;
     this.httpClient.get<any>('http://localhost:3000/qaManager').subscribe(
@@ -223,7 +198,8 @@ export class InterviewerScreenComponent implements OnInit {
       }
     );
   }
-  //fetch data from db
+
+  //fetch data from db //duplicate method for upcomming api
   fetchData(){
     debugger;
     return this.httpClient.post<any>('url',{} 
@@ -243,64 +219,54 @@ export class InterviewerScreenComponent implements OnInit {
     );   
   }
 
-  getSkills(){
-    debugger;
-    this.httpClient.get<any>('http://localhost:3000/skillsManager').subscribe(
-      response=>{
-        this.Skill=response.data;
-        // console.log(this.Skill); 
-      }
-    );
-  }
+
+  // getSkills(){
+  //   debugger;
+  //   this.httpClient.get<any>('http://localhost:3000/skillsManager').subscribe(
+  //     response=>{
+  //       this.Skill=response.data;
+  //       // console.log(this.Skill); 
+  //     }
+  //   );
+  // }
   
-  getComplexity(){
+  // getComplexity(){
     
-    this.httpClient.get<any>('http://localhost:3000/ComplexityManager').subscribe(
-      response=>{
-        this.Complexity=response.data;
-        // console.log(this.Complexity);
-      }
-    );
-  }
+  //   this.httpClient.get<any>('http://localhost:3000/ComplexityManager').subscribe(
+  //     response=>{
+  //       this.Complexity=response.data;
+  //       // console.log(this.Complexity);
+  //     }
+  //   );
+  // }
 
-  onSelectSkill(data:any)
-  {
-    debugger;
-   this.skill=data;
-  }
-  
-
-  onSelectComple(data:any){
-    this.complexity=data;
-
-    let id=this.i.toString();
-
-    // this.fetchData(id,this.skill,data);
-    // this.hideMeI=true;
-
-  }
-  
-  // onDropdown1()
+  // onSelectSkill(data:any)
   // {
-  //   this.nextI=0;
-  //   this.arrayLength=this.arr.length;
-  //   this.question="Q: "+this.arr[0].Question;
-  //   this.answer="A: "+this.arr[0].Answer;
-  //   this.nextI++; 
-  //   this.hideMe=true;
+  //   debugger;
+  //  this.skill=data;
   // }
   
 
+  // onSelectComple(data:any){
+  //   this.complexity=data;
+
+  //   let id=this.i.toString();
+
+  //   // this.fetchData(id,this.skill,data);
+  //   // this.hideMeI=true;
+
+  // }
   
+  
+  //duplicate method for right arrow //it use when we have api
   nextQA()
   {
     debugger;
     this.i++;
     let id=this.i.toString();
-
-    // this.fetchData(id,this.skill,this.complexity);
-    
+    // this.fetchData(id,this.skill,this.complexity); 
   }
+  //duplicate method for left arrow //it use when we have api
   prevQA(){
     debugger;
     this.i--;
@@ -310,6 +276,7 @@ export class InterviewerScreenComponent implements OnInit {
    
   } 
     
+  //for fetching next Q/A right arrow //hardcoded value
   nextQuestion(data:any){
     debugger;
     // if(this.nextI<this.arrayLength)
@@ -326,6 +293,7 @@ export class InterviewerScreenComponent implements OnInit {
     // } 
   }
 
+  //for fetching previous Q/A left arrow //hardcoded value
   privQuestion(data:any)
   {
     debugger;
@@ -341,6 +309,7 @@ export class InterviewerScreenComponent implements OnInit {
     this.ques = false;
   }
 
+  //slider value
   formatLabel(value:number){
     if(value>=5){
       return "L"+Math.round(value/5);

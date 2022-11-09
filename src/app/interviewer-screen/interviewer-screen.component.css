@@ -46,10 +46,16 @@ input{
 
 button{
   color: #fff;
-  background-color:rgb(230, 71, 14);
+  background-color: rgb(48, 169, 128);
+  
   border: none;
   border-radius: 30px;
   height: 26px;
+}
+.endbutton{
+  margin-left: 85%;
+  margin-bottom: 1%;
+  background-color:rgb(230, 71, 14);
 }
 .border
 {
