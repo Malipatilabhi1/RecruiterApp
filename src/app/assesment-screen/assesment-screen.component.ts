@@ -10,6 +10,7 @@ export class AssesmentScreenComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    
   }
 
 }
