@@ -90,11 +90,16 @@
     color: aliceblue;
     border: none;
     border-radius: 5px;
-    margin-left: 62%;
+    margin-left: 50%;
   }
   .container{
     margin-top: 6%;
   }
   mat-card{
     margin: 3%;
+  }
+  h1{
+    padding-left: 1%;
+    text-decoration: solid;
+    color:darkred;
   }
