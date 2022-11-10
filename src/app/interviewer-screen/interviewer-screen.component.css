@@ -42,7 +42,9 @@ input{
   margin-left: 6%;
   position:sticky;
 }
-
+.lefts{
+  padding-left: 2px;
+}
 
 button{
   color: #fff;

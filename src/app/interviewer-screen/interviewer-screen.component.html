@@ -52,28 +52,7 @@
         <mat-icon (click)="privQuestion('prev')" class="margintop">arrow_circle_left</mat-icon>
         <mat-icon (click)="nextQuestion('next')" class="margintop">arrow_circle_right</mat-icon>  
       </div> 
-    </div> 
- 
-
-    <!-- <div id="div3" class="spaceL">
-      <mat-form-field >  
-      <mat-label> Skill </mat-label> 
-      <mat-select formControlName="skillId" ngDefaultControl (ngModelChange)="onSelectSkill($event)" >
-       <mat-option *ngFor="let x of Skill" value="{{x.skillId}}" (change)="onSelectSkill($event)" >{{x.skillName}}</mat-option>  
-      </mat-select>  
-      </mat-form-field>
-    </div>
-
-    <div id="div2" class="spaceL">
-      <mat-form-field >  
-        <mat-label> Complexity </mat-label>  
-        <mat-select formControlName="level" ngDefaultControl (ngModelChange)="onSelectComple($event)">
-        <mat-option *ngFor="let x of Complexity" value="{{x.Id}}">{{x.Name}}</mat-option>
-      </mat-select>  
-      </mat-form-field>
-    </div> -->
-   
-    
+    </div>   
 
   <div class="size" >   
     <h2  class="space red" id="div1"> {{question}} </h2>
@@ -81,13 +60,16 @@
     <h3 *ngIf="showMe" id="div"><b></b>{{answer}}</h3>
   </div>  <br>
 <div>
+  
   <div class="space" id="div1">
+    
       <label>Score :</label> 
-      <mat-slider (click)="updateSetting($event)" ngDefaultControl
-      thumbLabel [displayWith]="formatLabel"
-      tickInterval="5" step="5" min="0"max="25" aria-label="text" >
+      <mat-slider (click)="updateSetting(value)" ngDefaultControl formControlName="score"
+      [(ngModel)]="value"
+      tickInterval="1" step="1" min="0"max="3" aria-label="text" >
       </mat-slider>  
     </div>
+    <label class="space" *ngIf="resume">{{ScoreData}}</label>
     <div id="div2" >
       <label for="">Key Words :</label>
      {{keywordzz}}
@@ -97,7 +79,7 @@
 
       <div id="div2" >
         <label>Note</label> 
-        <angular-editor id="editor2" placeholder="Enter Here......" [config]="editorConfig1" >
+        <angular-editor id="editor2" placeholder="Enter Here......" [config]="editorConfig1" formControlName="note">
           
         </angular-editor>    
     </div>
@@ -106,7 +88,7 @@
 
   
     <mat-card-footer>
-      <button class="endbutton">End-Assesment</button>
+      <button class="endbutton" (click)="saveData()">End-Assesment</button>
     </mat-card-footer>
   </mat-card>
  </div>

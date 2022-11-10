@@ -11,7 +11,7 @@ const routes: Routes = [
    {path:'dashboard',component:DashboardComponent},
   {path:'profile-creation',component:ProfileCreationComponent},
   {path:'sidebar',component:SidebarContentComponent},
-  {path:'',component:SignInPageComponent},
+  {path:'a',component:SignInPageComponent},
   {path:'Assessment',component:InterviewerScreenComponent},
   {path:'Candidate',component:AssesmentScreenComponent}
 ];

@@ -47,6 +47,7 @@ export class InterviewerScreenComponent implements OnInit {
   ques:boolean=false;
   public QunAns:any=[];
   keywordzz:any='';
+  value = 0;
 
   constructor(
     private formBuilder:FormBuilder,
@@ -58,8 +59,8 @@ export class InterviewerScreenComponent implements OnInit {
   }
 
   recruiterData=this.formBuilder.group({
-    skillId:[''],
-    level:[''],  
+   score:(''),
+   note:('')
   });
 
   ngAfterViewInit() {   //background color
@@ -71,10 +72,21 @@ export class InterviewerScreenComponent implements OnInit {
   {
     this.showMe=!this.showMe;
   }
+  ScoreData:any='';
   //slider value
   updateSetting(event:any)
   {
+    debugger
     this.sliderOutput=event.value;
+    this.resume=true;
+    if(event==1)
+    {
+      this.ScoreData='Beginner';
+    }else if(event==2){
+      this.ScoreData='Intermediate';
+    }else{
+      this.ScoreData='Expert';
+    }
   }
   //text-Editor for "Note"
   editorConfig1:AngularEditorConfig={
@@ -175,7 +187,7 @@ export class InterviewerScreenComponent implements OnInit {
     {keyword:'automatically releases the memory space'},
     {keyword:'execute independently'},
     {keyword:'objects cant be instantiated'},
-    {keyword:'public: accesse from anywhere,      static: instance creation is not necessary,      void:modifier, specify the return type '},
+    {keyword:'accesse from anywhere, instance creation is not necessary'},
     {keyword:'overridden,  virtual keyword,  Override keyword'},
     {keyword:'exception handling, No matter if the exception code with excecute'},
     {keyword:'restriction,  inherited,  sealed modifier'},
@@ -286,13 +298,21 @@ export class InterviewerScreenComponent implements OnInit {
         this.question ="Q: "+ this.arr[this.i].Question;
         this.answer = "A: "+this.arr[this.i].Answer;
         this.keywordzz=this.keywordsArray[this.i].keyword;
-        this.nextI++;   
+        this.nextI++;
+        this.updateData();
+        this.value=0;
+        this.ScoreData='';
+
+
       }
     // }else{
     //   alert("No More Questions")
     // } 
   }
-
+  flush(){
+    this.Score='';
+    this.Note='';
+  }
   //for fetching previous Q/A left arrow //hardcoded value
   privQuestion(data:any)
   {
@@ -308,14 +328,27 @@ export class InterviewerScreenComponent implements OnInit {
     }
     this.ques = false;
   }
+  ScoreA:any=[];
+  NoteA:any=[];
+  Score:any='';
+  Note:any='';
 
+  updateData(){
+      debugger;
+    var Score=this.recruiterData.controls['score'].value;
+    var Note=this.recruiterData.controls['note'].value;
+    this.ScoreA.push(Score);
+    this.NoteA.push(Note);
+  }
+  saveData(){
+    console.log('Score value: '+this.ScoreA);
+    console.log('Note: '+this.NoteA);
+  }
+  resume:boolean=false;
   //slider value
-  formatLabel(value:number){
-    if(value>=5){
-      return "L"+Math.round(value/5);
-      // console.log(Math.round(value/5))
-    }
-    // console.log(value/5);
-    return value;
+  formatLabel(){
+    
+    
+    
   }
 }
