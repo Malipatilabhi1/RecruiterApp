@@ -33,9 +33,27 @@ export class AssesmentScreenComponent implements OnInit {
       response=>{
         this.arr=response.data;
         this.skillA=response.data.skills;
-        console.log(this.arr);     
+        console.log(this.arr);
+        this.filterCandidate()     
       }
     );
+  }
+  Farr:any=[];
+  Rarr:any=[];
+
+  filterCandidate(){
+    for(let i=0;i<=this.arr.length;i++){
+      if(i<=3)
+      {
+        this.Farr.push(this.arr[i]);
+        
+      }else{
+        this.Rarr.push(this.arr[i]);
+        
+      }
+    }
+    console.log(this.Farr);
+    console.log(this.Rarr);
   }
   
 

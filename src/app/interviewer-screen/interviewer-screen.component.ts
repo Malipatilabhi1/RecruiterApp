@@ -140,6 +140,7 @@ export class InterviewerScreenComponent implements OnInit {
   Email:any;
   CId:any;
   arrayLength=0;
+  data:any='';
 
   //Assessment start button // for Hard coded data
   assesmentStart()
@@ -159,10 +160,11 @@ export class InterviewerScreenComponent implements OnInit {
   //display candidate profile // hardcoded data
   profile(){
     this.Asid='001';
+    // this.Today=new Date();
     this.Today=new Date();
     this.CId='005545';
-    this.Name='Abhishek';
-    this.Email='Abhishek1@jktech.com';
+    this.Name='Guruprasad';
+    this.Email='guruprasad@jktech.com';
   }
   skill1:any='';
   complexity1:any='';
@@ -184,16 +186,32 @@ export class InterviewerScreenComponent implements OnInit {
 
   //key words array
   keywordsArray:any=[
-    {keyword:'automatically releases the memory space'},
-    {keyword:'execute independently'},
-    {keyword:'objects cant be instantiated'},
-    {keyword:'accesse from anywhere, instance creation is not necessary'},
-    {keyword:'overridden,  virtual keyword,  Override keyword'},
-    {keyword:'exception handling, No matter if the exception code with excecute'},
-    {keyword:'restriction,  inherited,  sealed modifier'},
+    {keyword:'Its mandatory to assign a value to it'},
+    {keyword:'Different dimensions and size.'},
+    {keyword:'Collection of similar types of data.'},
+    {keyword:'comprises elements of type array.'},
+    {keyword:'uesd for treating an object as an array.'},
+    {keyword:'Execute independently of the primary.'},
+    {keyword:'Easy to use and can be added to the toolbox.'},
+    {keyword:'Angular provides several out of the box built-in features.'},
+    {keyword:'value type with a set of related named constant.'},
+    {keyword:'storing of data in a file'},
     {keyword:''},
-    {keyword:'interfaces expect different data, '},
-    {keyword:'group of threads,  without interfering ,  principal threads operation'}
+    {keyword:''},
+    {keyword:''},
+    {keyword:''},
+    {keyword:''},
+    {keyword:''},
+    // {keyword:'automatically releases the memory space'},
+    // {keyword:'execute independently'},
+    // {keyword:'objects cant be instantiated'},
+    // {keyword:'accesse from anywhere, instance creation is not necessary'},
+    // {keyword:'overridden,  virtual keyword,  Override keyword'},
+    // {keyword:'exception handling, No matter if the exception code with excecute'},
+    // {keyword:'restriction,  inherited,  sealed modifier'},
+    // {keyword:''},
+    // {keyword:'interfaces expect different data, '},
+    // {keyword:'group of threads,  without interfering ,  principal threads operation'}
   ];
   //to display the keywords
   keywordload(){
@@ -313,10 +331,11 @@ export class InterviewerScreenComponent implements OnInit {
     // {
       if(data === "next"){
         this.i++;
+        this.nextI++;
         this.question ="Q: "+ this.arr[this.i].Question;
         this.answer = "A: "+this.arr[this.i].Answer;
         this.keywordzz=this.keywordsArray[this.i].keyword;
-        this.nextI++;
+       
         this.updateData();
         this.value=0;
         this.ScoreData='';

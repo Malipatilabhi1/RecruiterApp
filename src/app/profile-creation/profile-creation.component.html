@@ -59,13 +59,21 @@
           tickInterval="1" step="1" min="0" max="5" aria-label="text" value="">
         </mat-slider> 
     </div> -->
-    <div id="div2" class="leftspace">
+    <!-- <div id="div2" class="leftspace">
       <mat-form-field class="width">  
         <mat-label> Complexity </mat-label>
         <mat-select formControlName="skillId" id="skillId" ngDefaultControl (ngModelChange)="onSelectSkill($event)" >
          <mat-option *ngFor="let x of Skill" value="{{x.skillId}}" (change)="onSelectSkill($event)" >{{x.skillName}}</mat-option>  
         </mat-select>  
       </mat-form-field>
+      </div><br> -->
+      <div id="div2" class="leftspace">
+        <mat-form-field class="width">
+          <mat-label> Complexity </mat-label>
+          <mat-select formControlName="level" ngDefaultControl >
+          <mat-option *ngFor="let x of Complexity" value="{{x.cmpId}}">{{x.Name}}</mat-option>
+        </mat-select>
+        </mat-form-field>
       </div><br>
         
       </ng-container>

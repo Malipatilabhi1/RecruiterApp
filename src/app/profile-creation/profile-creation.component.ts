@@ -15,6 +15,7 @@ export class ProfileCreationComponent implements OnInit {
 
   // profileForm:FormGroup;
   Skill:any=[];
+  Complexity:any=[];
   CandidateInfo:Object='';
   // Skill:any=[{skillId:'1',skillName:'C#'},{skillId:'2',skillName:'Angular'},{skillId:'3',skillName:'SQL'},{skillId:'4',skillName:'Azure'}];
 
@@ -23,6 +24,7 @@ export class ProfileCreationComponent implements OnInit {
 
   ngOnInit(): void {
     this.getSkills();
+    this.getComplexity();
   }
   
   ngAfterViewInit() {   //background color
@@ -125,7 +127,14 @@ storeDatas(){
       }
     );   
   }
-
+  getComplexity() {
+    this.httpClient
+      .get<any>('http://localhost:3000/ComplexityManager')
+      .subscribe((response) => {
+        this.Complexity = response.data;
+        // console.log(this.Complexity);
+      });
+  }
   
   getSkills(){
     this.httpClient.get<any>('http://localhost:3000/skillsManager').subscribe(

@@ -96,10 +96,27 @@
   .container{
     margin-top: 5%;
   }
-  mat-card{
+  .size{
     margin: 3%;
     width: 90%;
+    box-shadow: 0px 0px 10px 0px #aeabab,
+    0 1px 1px 0 #9f9999,
+    0 1px 3px 0 #a8a0a0;
   }
+  .col-size{
+    margin: 0.5%;
+    padding-bottom: 37px;
+    height: 10px;
+    box-shadow: 0px 0px 10px 0px #9b9b9b,
+    0 1px 1px 0 #9b9b9b,
+    0 1px 3px 0 #9b9b9b;
+    
+  }
+  /* mat-card{
+    box-shadow: 0px 0px 10px 0px #9b9b9b,
+    0 1px 1px 0 #9b9b9b,
+    0 1px 3px 0 #9b9b9b;
+  } */
   h1{
     padding-left: 1%;
     text-decoration: solid;

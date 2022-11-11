@@ -37,6 +37,7 @@ export class SidebarContentComponent implements OnInit {
     private httpClient: HttpClient
   ) {}
   ngOnInit(): void {
+    
     this.getSkills();
     this.getComplexity();
   }
@@ -59,7 +60,7 @@ export class SidebarContentComponent implements OnInit {
       });
   }
   getSkills() {
-    // debugger;
+     debugger;
     this.httpClient
       .get<any>('http://localhost:3000/skillsManager')
       .subscribe((response) => {
@@ -67,6 +68,7 @@ export class SidebarContentComponent implements OnInit {
       });
   }
   getComplexity() {
+    debugger;
     this.httpClient
       .get<any>('http://localhost:3000/ComplexityManager')
       .subscribe((response) => {
