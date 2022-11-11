@@ -1,4 +1,4 @@
-<form [formGroup]="recruiterdata" class="">
+<!-- <form [formGroup]="recruiterdata" class="">
     <div class="container">
       <h1 style="font-weight: bolder; color: darkgrey">
         Question & Answer Section
@@ -51,21 +51,79 @@
         <div class="size" *ngIf="ques">
           <table class="table table-hover table-bordered">
             <thead class="thead">
-              <!-- <th scope="col">#</th> -->
+             
               <th scope="col" style="font-size: 20px; color:black; padding: 17px;">Question</th>
               <th scope="col" style="font-size: 20px; color:black; padding: 17px;">Answer</th>
             </thead>
             <tbody>
               <tr  class="info" *ngFor="let item of levelA">
-                <!-- <th scope="row"></th> -->
+                
                 <td style="font-weight: bold; text-align: center;">{{ item.Question }}</td>
                 <td style="font-weight: bold; padding: 17px;">{{ item.Answer }}</td>
               </tr>
             </tbody>
           </table>
-          <!-- <h2  class="space" ><b>Q:</b> {{question}}</h2>
-          <mat-icon id="div1" (click)="hideAnswer()">visibility_off</mat-icon>
-          <h4 *ngIf="showMe" id="div2"><b>A:</b>{{answer}}</h4> -->
+          
+        </div>
+      </div>
+      <br />
+    </div>
+  </form> -->
+
+  <form [formGroup]="recruiterData" class="">
+    <div class="container">
+      <h1 style="font-weight: bolder; color: darkgrey">
+        Question & Answer Section
+      </h1>
+      <div>
+        <h2 style="color: blue; padding-left: 5px">
+          Choose Skill and Complexity to View Question
+        </h2>
+        <div id="div3" class="spaceL">
+          <mat-form-field >
+          <mat-label> Skill </mat-label>
+          <mat-select formControlName="skillId" ngDefaultControl (ngModelChange)="onSelectSkill($event)" >
+           <mat-option *ngFor="let x of Skill" value="{{x.skillId}}"(change)="onSelectSkill($event)"  >{{x.skillName}}</mat-option>
+          </mat-select>
+          </mat-form-field>
+        </div>
+        <div id="div2" class="spaceL">
+          <mat-form-field >
+            <mat-label> Complexity </mat-label>
+            <mat-select formControlName="level" ngDefaultControl (ngModelChange)="onSelectComple($event)">
+            <mat-option *ngFor="let x of Complexity" value="{{x.cmpId}}">{{x.Name}}</mat-option>
+          </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <div>
+        <div class="size"  >
+          <!-- <mat-card> -->
+          <!-- <table class="table table-hover table-bordered"> -->
+            <mat-card style="overflow-y:scroll;height: 50vh;box-shadow: 2px;border: 3px;border-color: black;" >
+              <mat-card-header class="fixed">
+            <thead class="thead">
+              <!-- <th scope="col">#</th> -->
+              <tr>
+              <th scope="col" style="font-size: 20px; color:black;padding:20px;text-align: center;">Question</th>
+              <th scope="col" style="font-size: 20px; color:black;padding-left:500px;padding-right:364px;text-align: center;">Answer</th>
+            </tr>
+            </thead>
+          </mat-card-header>
+          <mat-card-content >
+            <tbody class="table-striped">
+                <tr  class="info" *ngFor="let item of arr  | paginate: { itemsPerPage: 5, currentPage: p }">
+                  <!-- <th scope="row"></th> -->
+                  <td style="font-weight: bold; text-align: center; border-right: 2px;">{{ item.Question }}</td>
+                  <td style="font-weight: bold; padding: 17px; text-align: center;">{{ item.Answer }}</td>
+                </tr>
+            </tbody>
+          </mat-card-content>
+          </mat-card>
+          <br>
+
+          <pagination-controls (pageChange)="p = $event"></pagination-controls>
+          
         </div>
       </div>
       <br />

@@ -11,22 +11,22 @@
 
       <div class="spaceL" id="div2">
         <!-- <Span><input class="spaceL" type="text" placeholder="Assesment-id: 1" disabled> </Span> -->
-        <span>Assessment-id:{{Asid}}</span>
+        <span>Assessment-Id:{{Asid}}</span>
 
       </div>
 
       <div class="spaceL" id="div3">
         <!-- <span><input  type="text" placeholder="Assesment-date: {{Today | date:'MMM-dd'}}" disabled></span> -->
-        <span>Assesment-date: {{Today | date:'MMM-dd'}}</span>
+        <span>Date: {{Today | date:'MMM-dd'}}</span>
       </div>
 
       <div  class="dropdown div" id="div4">
-          CandidateInfo<mat-icon class="dropbtn">account_box</mat-icon>
+          <mat-icon class="dropbtn">account_box</mat-icon>
           <div class="dropdown-content">
           <!-- <a href="#">Candidate</a> -->
           <mat-card>
-          <span href="#"><b>Id : {{   CId }}</b></span><br>
-          <span href="#"><b>Name : {{ Name}}</b></span><br>
+          <span href="#"><b>Id : {{  Sid }}</b></span><br>
+          <span href="#"><b>Name : {{ Sname}}</b></span><br>
           <span><b>{{Email}}</b></span>
           <span></span>
         </mat-card>
@@ -34,13 +34,12 @@
       </div>
 
       <div  class="dropdown div spaceL" id="div5">
-        SkillInfo<mat-icon class="dropbtn"></mat-icon>
+        Skills<mat-icon class="dropbtn"></mat-icon>
         <div class="dropdown-content">
         <!-- <a href="#">Candidate</a> -->
         <mat-card>
-        <span href="#">Skill: <b>{{skill1}}</b>    Complexity:<b>{{complexity1}}</b></span><hr>
-        <span href="#">Skill:  <b>{{skill2}}</b>      Complexity:<b>{{complexity2}}</b></span><hr>
-        <span href="#">Skill:<b>{{skill3}}</b>      Complexity:<b>{{complexity3}}</b></span>
+        <!-- <span *ngFor="let value of SSkills">{{value.ski}}</span><hr> -->
+        
         
         <span></span>
       </mat-card>

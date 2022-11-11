@@ -10,10 +10,11 @@ import { SignInPageComponent } from './sign-in-page/sign-in-page.component';
 const routes: Routes = [
    {path:'dashboard',component:DashboardComponent},
   {path:'profile-creation',component:ProfileCreationComponent},
-  {path:'sidebar',component:SidebarContentComponent},
+  {path:'QASection',component:SidebarContentComponent},
   {path:'a',component:SignInPageComponent},
   {path:'Assessment',component:InterviewerScreenComponent},
-  {path:'Candidate',component:AssesmentScreenComponent}
+  {path:'Candidate-Info',component:AssesmentScreenComponent},
+
 ];
 
 @NgModule({

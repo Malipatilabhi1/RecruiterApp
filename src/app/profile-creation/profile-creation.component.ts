@@ -3,6 +3,7 @@ import {   FormBuilder, FormControl, FormGroup, Validators } from '@angular/form
 import { FormArray } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
+import { ElementRef } from '@angular/core';
 
 
 @Component({
@@ -17,14 +18,17 @@ export class ProfileCreationComponent implements OnInit {
   CandidateInfo:Object='';
   // Skill:any=[{skillId:'1',skillName:'C#'},{skillId:'2',skillName:'Angular'},{skillId:'3',skillName:'SQL'},{skillId:'4',skillName:'Azure'}];
 
-  constructor(private httpClient:HttpClient,private formBuilder:FormBuilder) {   
+  constructor(private httpClient:HttpClient,private formBuilder:FormBuilder,private elementRef: ElementRef) {   
   }
 
   ngOnInit(): void {
     this.getSkills();
   }
   
-
+  ngAfterViewInit() {   //background color
+    this.elementRef.nativeElement.ownerDocument
+        .body.style.backgroundColor = 'rgba(255, 228, 196, 0.32)';
+}
   // profileForm=new FormGroup({
   //   Email:new FormControl('',[Validators.required,Validators.email]),
   //   name:new FormControl('',Validators.required),
@@ -46,7 +50,7 @@ firstFormGroup = this.formBuilder.group({
   email: ['', Validators.required],
   name: ['', Validators.required],
   phone:['', Validators.required],
-  Experience:['']
+  experience:['']
 });
 secondFormGroup = this.formBuilder.group({
   message: [''],
@@ -58,7 +62,7 @@ skillFormGroup = new FormGroup({
   Skills:new FormArray([ 
     new FormGroup({
       skillId:new FormControl(['',Validators.required]),
-      level:new FormControl(['',Validators.required])
+      complexity:new FormControl(['',Validators.required])
     })
   ])     
 });
@@ -71,7 +75,7 @@ storeDatas(){
   var message=this.firstFormGroup.controls['email'].value;
   var Name=this.firstFormGroup.controls['name'].value;
   var Phone=this.firstFormGroup.controls['phone'].value;
-  var Experience=this.firstFormGroup.controls['Experience'].value;+" yrs"
+  var Experience=this.firstFormGroup.controls['experience'].value;+" yrs"
   
   console.log(this.secondFormGroup.controls['message'].value);
   console.log(this.thirdFormGroup.controls['resume'].value);

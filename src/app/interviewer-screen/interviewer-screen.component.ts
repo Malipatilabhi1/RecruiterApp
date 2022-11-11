@@ -201,14 +201,32 @@ export class InterviewerScreenComponent implements OnInit {
   }
 
   //fetching question and ans from backend
+  // getQueAns(){
+  //   debugger;
+  //   this.httpClient.get<any>('http://localhost:3000/qaManager').subscribe(
+  //     response=>{
+  //       this.arr=response.data;
+  //       console.log(this.arr); 
+  //     }
+  //   );
+  // }
   getQueAns(){
     debugger;
-    this.httpClient.get<any>('http://localhost:3000/qaManager').subscribe(
+    this.httpClient.post<any>('http://localhost:3000/assessmentStagingManager',{}).subscribe(
       response=>{
         this.arr=response.data;
         console.log(this.arr); 
       }
     );
+  }
+  Sid:any='';
+  Sname:any='';
+  SSkills:any=[];
+  catchData(id:any,name:any,skills:any)
+  {
+    this.Sid=id;
+    this.Sname=name;
+    this.SSkills=skills;
   }
 
   //fetch data from db //duplicate method for upcomming api

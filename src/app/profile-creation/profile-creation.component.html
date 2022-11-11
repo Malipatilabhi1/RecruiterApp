@@ -8,8 +8,8 @@
 
 <mat-stepper [linear]="isLinear" #stepper>
   <mat-step [stepControl]="firstFormGroup">
-    <form [formGroup]="firstFormGroup">
-      <ng-template matStepLabel>Basic Details</ng-template>
+    <form [formGroup]="firstFormGroup" class="">
+      <ng-template matStepLabel>Basic Info</ng-template>
       
       <mat-form-field appearance="fill">
         <mat-label>EmailId</mat-label>
@@ -25,49 +25,59 @@
       </mat-form-field><br>
       <mat-form-field appearance="fill">
         <mat-label>Experience</mat-label>
-        <input matInput placeholder="Enter Experience in years" formControlName="Experience" required>
+        <input matInput placeholder="Enter Experience in years" formControlName="experience" required>
       </mat-form-field>
-      <div>
-        <button mat-button matStepperNext>Next</button>
+      <div class="basic-info-button">
+        <button mat-button matStepperNext  class="green">Next</button>
       </div>
     </form>
   </mat-step>
 
 
 <!-- #docregion label -->
-<mat-step [stepControl]="skillFormGroup" label="Add Skills">
+<mat-step [stepControl]="skillFormGroup" label="Skills">
   <!-- #enddocregion label -->
     <form [formGroup]="skillFormGroup" >
      
     
       <div formArrayName="Skills">
+        
       <ng-container *ngFor="let skill of Skills.controls; let i=index" [formGroupName]="i" >
+
       <div id="div1" class="leftspace">
-      <mat-form-field >  
+      <mat-form-field class="width">  
         <mat-label> Skill </mat-label> 
         <mat-select formControlName="skillId" id="skillId" ngDefaultControl (ngModelChange)="onSelectSkill($event)" >
          <mat-option *ngFor="let x of Skill" value="{{x.skillId}}" (change)="onSelectSkill($event)" >{{x.skillName}}</mat-option>  
         </mat-select>  
       </mat-form-field>
     </div>
-    <div id="div2" class="spaceL">
+    <!-- <div id="div2" class="spaceL">
 
-      <mat-slider formControlName="level"
+      <mat-slider formControlName="complexity"
           thumbLabel (input)="pitch($event)"
           tickInterval="1" step="1" min="0" max="5" aria-label="text" value="">
         </mat-slider> 
-      </div>
+    </div> -->
+    <div id="div2" class="leftspace">
+      <mat-form-field class="width">  
+        <mat-label> Complexity </mat-label>
+        <mat-select formControlName="skillId" id="skillId" ngDefaultControl (ngModelChange)="onSelectSkill($event)" >
+         <mat-option *ngFor="let x of Skill" value="{{x.skillId}}" (change)="onSelectSkill($event)" >{{x.skillName}}</mat-option>  
+        </mat-select>  
+      </mat-form-field>
+      </div><br>
         
       </ng-container>
-      <div id="div3">
-        <button>
-      <mat-icon (click)="addNew()">add</mat-icon></button>
+      <div id="div3" class="spaceL">
+        <button 
+      (click)="addNew()">Add-Skills</button>
     </div>
     </div>
       
-      <div class="leftspace">
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext>Next</button>
+      <div class="skills-buttons">
+        <button mat-button matStepperPrevious class="color2">Back</button>
+        <button mat-button matStepperNext class="green">Next</button>
       </div>
     </form>
   </mat-step>
@@ -82,36 +92,36 @@
         <label for="input-file-id" class="resume control-label">Resume:</label>
           <input  class="ng-hide" formControlName="resume" id="input-file-id" multiple type="file"/> 
         </div><br>
-        <div>
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext>Next</button>
+        <div class="resume-buttons">
+          <button mat-button matStepperPrevious class="color2">Back</button>
+          <button mat-button matStepperNext class="green">Next</button>
         </div>
       </form>
     </mat-step>
   <!-- e------------------------------------------------------------------------l -->
       <!-- #docregion label -->
-  <mat-step [stepControl]="secondFormGroup" label="Add a message">
+  <mat-step [stepControl]="secondFormGroup" label="Add a Note">
     <!-- #enddocregion label -->
       <form [formGroup]="secondFormGroup">
         <mat-form-field appearance="fill">
           <mat-label>Message for Interviwer</mat-label>
           <textarea matInput formControlName="message" placeholder="Enter here...." class="text-box-Size"></textarea>
         </mat-form-field>
-        <div>
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext>Next</button>
+        <div class="message-buttons">
+          <button mat-button matStepperPrevious class="color2">Back</button>
+          <button mat-button matStepperNext class="green">Next</button>
         </div>
       </form>
     </mat-step>
 <!-- --------------------------------------------------------------------------- -->
   <mat-step>
     <ng-template matStepLabel>Done</ng-template>
-    <p>You are now done.</p>
-    <div>
-      <button mat-button matStepperPrevious>Back</button>
-      <button mat-button (click)="stepper.reset()">Reset</button>
+    <h1>You are now done.</h1>
+    <div class="done-buttons">
+      <button mat-button matStepperPrevious class="color2">Back</button>
+      <button mat-button (click)="stepper.reset()" class="red">Reset</button>
 
-      <button mat-button (click)="storeDatas()">Submit</button>
+      <button mat-button (click)="storeDatas()" class="green">Submit</button>
     </div>
   </mat-step>
 </mat-stepper>
