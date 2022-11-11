@@ -8,25 +8,36 @@ import { Router } from '@angular/router';
   styleUrls: ['./assesment-screen.component.css'],
 })
 export class AssesmentScreenComponent implements OnInit {
-  arr: any = [];
-  constructor(private _http: HttpClient, private _navigate:Router) {}
+  // arr: any = [];
+  constructor(private _http: HttpClient, private _navigate: Router) {}
 
-  ngOnInit(): void {}
-
-  gettingDataFromDatabase() {
-    this._http.get('').subscribe(
-      (res) => {
-        console.log(res);
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+  ngOnInit(): void {
+    this.getCandidates();
   }
 
-  startAssesment(){
+  arr: any = [];
+  skillA: any = [];
+
+  getCandidates() {
+    debugger;
+    this._http
+      .get<any>('http://localhost:3000/profileManager')
+      .subscribe((response) => {
+        this.arr = response.data;
+        this.skillA = response.data.skills;
+        console.log(this.arr);
+        localStorage.setItem('value', JSON.stringify(this.arr));
+      });
+  }
+
+  sendData(id: any, name: any, skillarray: any) {
+    debugger;
+    // this.dfs.Intermediate(id,name,skillarray);
+    this._http.post('', {}).subscribe((response) => {});
+  }
+
+  startAssesment() {
     this._navigate.navigate(['inter']);
-    console.log("clicked");
-    
+    console.log('clicked');
   }
 }

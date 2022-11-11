@@ -16,6 +16,7 @@ export class InterviewerScreenComponent implements OnInit {
   Skill: any = [];
   Complexity: any = [];
   arr: any = [];
+  setdata:any=[];
 
   recruiterData = this.formBuilder.group({
     skillId: [''],
@@ -46,12 +47,21 @@ export class InterviewerScreenComponent implements OnInit {
   ngOnInit(): void {
     this.getSkills();
     this.getComplexity();
+    this.get();
+   
+
   }
 
   hideAnswer() {
     this.showMe = !this.showMe;
   }
-
+  get() {
+    
+      this.setdata= JSON.parse(localStorage.getItem("value")!);
+      console.log(this.setdata);
+      
+   
+  }
   updateSetting(event: any) {
     this.sliderOutput = event.value;
   }
