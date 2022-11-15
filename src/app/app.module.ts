@@ -21,6 +21,7 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
 import {MatGridListModule} from '@angular/material/grid-list'
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import {NgxPaginationModule} from 'ngx-pagination';
+import {MatStepperModule} from '@angular/material/stepper';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -69,6 +70,7 @@ import { AssesmentScreenComponent } from './assesment-screen/assesment-screen.co
     MatGridListModule,
     HttpClientModule,
     AngularEditorModule,
+    MatStepperModule,
     
     NgxPaginationModule,
     

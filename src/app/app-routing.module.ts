@@ -14,6 +14,8 @@ const routes: Routes = [
   { path: 'sign', component: SignInPageComponent },
   { path: 'inter', component: InterviewerScreenComponent },
   { path: 'asses', component: AssesmentScreenComponent },
+  { path: 'prof', component: ProfileCreationComponent },
+
 
   { path: '', component: InterviewerScreenComponent },
 ];
