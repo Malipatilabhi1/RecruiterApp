@@ -134,6 +134,36 @@ export class InterviewerScreenComponent implements OnInit {
     // this.fetchData(id,this.skill,this.complexity); 
   }
 
+  // nextQA()
+  // {
+  //   debugger;
+  //   let canId=this.CId;
+  //   let RowandQuestion_number=this.RowandQuestion_number;
+  //   let score=this.recruiterData.controls['score'].value;
+  //   let notes=this.recruiterData.controls['note'].value;
+    
+  //   this.httpClient.post<any>('http://localhost:3000/assessmentStagingManager/saveData',
+  //   {
+  //     canId,
+  //     RowandQuestion_number,
+  //     score,
+  //     notes
+  //   }).subscribe(
+  //     response=>{ 
+  //       console.log(response);     
+  //       this.i++;
+  //       this.updateData();
+  //       this.getQueAns(this.CId,this.i);
+  //       this.keywordzz=this.keywordsArray[this.i].keyword;
+  //     },  
+  //   );
+
+
+    
+  //   // let id=this.i.toString();
+  //   // this.fetchData(id,this.skill,this.complexity); 
+  // }
+
   //duplicate method for left arrow //it use when we have api
   prevQA(){
     debugger;

@@ -13,6 +13,7 @@ export class SidebarContentComponent implements OnInit {
   Complexity: any = [];
   arr: any = [];
   p: any = 0;
+  
   recruiterData = this.formBuilder.group({
     skillId: [''],
     level: [''],

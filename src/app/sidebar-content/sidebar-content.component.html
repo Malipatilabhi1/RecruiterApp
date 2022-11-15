@@ -173,12 +173,14 @@
           </mat-card-header>
           <mat-card-content >
             <tbody class="table-striped">
-                <tr  class="info" *ngFor="let item of arr  | paginate: { itemsPerPage: 5, currentPage: p }">
+                <tr  class="info" *ngFor="let item of arr  | paginate: { itemsPerPage: 5, currentPage: p  }">
                   <!-- <th scope="row"></th> -->
-                 <b> {{ item.Question }} </b><i class="arrow up"></i>
+                  <mat-icon class="float" (click)="hideAnswer()">keyboard_arrow_down</mat-icon>
+                 <b> {{ item.Question }} </b><i class="arrow up" *ngIf="hideMe" (click)="hideAnswer()"></i>
                   <br>
+                  
                  <b> Answer: </b>
-                 <br><span class="collapsible active">{{ item.Answer }} </span> 
+                 <br><span *ngIf="showMe" class="collapsible active color">{{ item.Answer }} </span><br> <br>
                 </tr>
             </tbody>
           </mat-card-content>

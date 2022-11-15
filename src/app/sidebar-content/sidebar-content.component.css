@@ -284,8 +284,16 @@ form{
   /* background-color: #c4c4c4; */
   cursor: s-resize;
 }
-
-
+#div1,#div2{
+  display: inline;
+}
+.float{
+  float: right;
+  
+}
+.color{
+  color: rgba(32, 32, 211, 0.89);
+}
 
 .collapsible:after {
         /* Unicode character for "plus" sign (+) */
