@@ -1,15 +1,14 @@
 .dropbtn {
   background-color:transparent;
-  color: rgb(111, 107, 107);
-  /* padding: 16px; */
-  font-size: 16px;
+  color: rgba(57, 57, 182, 0.842);
+  font-size: 20px;
   border: none;
-  padding-top: 10px;
+  /* padding-top: 10px; */
 }
 
 .dropdown {
   position: relative;
-  /* display: inline-block; */
+  display: inline-block;
 }
 .dropdown-content {
   display: none;
@@ -31,7 +30,9 @@
 .dropdown:hover .dropdown-content {display: block;}
 
 /* .dropdown:hover .dropbtn {background-color: #a7a9a7;} */
-.spaceNew{
+
+
+ /* .spaceNew{
   padding:4%;
 }
 input{
@@ -97,8 +98,6 @@ button{
  .container-fluid{
   padding-top: 1%;
   background: white;
-  /* background-color: rgba(255, 255, 255, 0.571); */
-  /* width: 70%; */
   margin-left: 0.5%;
   margin-right: 25%; 
  }
@@ -145,4 +144,107 @@ mat-slider{
 }
 .top{
   border: solid 1px black;
+} 
+.float{
+  float:right;
+} */
+/* .container{
+ 
+} */
+
+.skills{
+ margin-left: 4%;
+}
+.toolbar{
+  vertical-align: middle;
+}
+label{
+  color: rgba(57, 57, 182, 0.842);
+}
+.slider{
+  width: 200px;
+}
+.pageNumber{
+  float: right;
+}
+.margin{
+  float:right;
+  padding-top: 6px;
+}
+.profile{
+  font-size: 12px !important;
+  padding-top: 6px;
+  
+}
+
+.borderC{
+  border-color: #ea5455;
+}
+.color-size{
+  margin-left: 1%;
+  font-size: 12px !important;
+  background-color: rgba(169, 169, 169, 0.658);
+  padding: 2px;
+  border-radius: 2px;
+}
+.size{
+  height: 260px;
+ 
+}
+mat-card{
+  margin: 10px;
+}
+button{
+  color: white;
+  background-color:rgba(57, 57, 182, 0.842);
+  border: none;
+  border-radius: 3px;
+  height: 27px;
+  
+}
+#div1,#div2,#div3,#div4,#div5{
+  display: inline;
+} 
+.spaceL{
+  padding-right: 30px;
+}
+.spaceleft{
+  padding-left: 1%;
+}
+.red
+{
+  color: brown;
+}
+.position{
+  float: right;
+  font-size: 20px;
+ }
+ .btn{
+  position:relative;
+  text-align: center;
+  border: 1px solid transparent;
+  padding: 0.786rem 1.5rem;
+  border-radius: 0.358rem;
+  box-shadow: 0 1px 20px 1px #ea5455!important;
+  font-weight: 500;
+  display: inline-block;
+  vertical-align: middle;
+  user-select: none;
+  font-size: 1rem;
+  line-height: 1;
+ }
+ 
+.btn-danger {
+  color: #fff!important;
+  border-color: #ea5455!important;
+  background-color: #ea5455!important;
+}
+.end-assesment{
+  position: fixed;
+    bottom: 3%;
+    left: 80%;
+    float: right;
+} 
+.btn .end-assesment{
+  box-shadow: 0 1px 20px 1px #ea5455!important;
 }

@@ -22,6 +22,7 @@ import {MatGridListModule} from '@angular/material/grid-list'
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import {MatStepperModule} from '@angular/material/stepper';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { RichTextEditorAllModule } from '@syncfusion/ej2-angular-richtexteditor';
 
 
 
@@ -73,7 +74,8 @@ import { AssesmentScreenComponent } from './assesment-screen/assesment-screen.co
     HttpClientModule,
     AngularEditorModule,
     MatStepperModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    RichTextEditorAllModule
     
    
   ],

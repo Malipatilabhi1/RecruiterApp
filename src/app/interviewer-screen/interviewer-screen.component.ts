@@ -5,6 +5,7 @@ import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { FormGroup,FormControl } from '@angular/forms';
 import { bindCallback } from 'rxjs';
 import { ElementRef } from '@angular/core';
+import { DataFileService } from '../data-file.service';
 
 
 @Component({
@@ -14,7 +15,7 @@ import { ElementRef } from '@angular/core';
 })
 export class InterviewerScreenComponent implements OnInit {
   
-  // arr:any=[
+  // newArry:any=[
   //         {Question:'What is TypeScript?',
   //         Answer:'TypeScript is a superset of JavaScript that offers excellent consistency. It is highly recommended, as it provides some syntactic sugar and makes the code base more comfortable to understand and maintain.',skillId:2,complexity:'Easy'},
   //         {Question:' What is enum?' ,Answer:'An enum is a value type with a set of related named constants often referred to as an enumerator list. The enum keyword is used to declare an enumeration. It is a primitive data type that is user-defined',skillId:2,complexity:'Easy'}, 
@@ -28,16 +29,16 @@ export class InterviewerScreenComponent implements OnInit {
   //         ' 1.Source code compilation in managed code.2.Newly created code is clubbed with assembly code.3.The Common Language Runtime (CLR) is loaded.4.Assembly execution is done through CLR.',skillId:1,complexity:'Medium'},
   //     ];
   
-  Skill:any=[];
-  Complexity:any=[];
+  
+  // Complexity:any=[];
   arr: any=[];      
   showMe:boolean=true;
   hideMe:boolean=false;
   // hideMeI:boolean=true;
-  public categoryA:any=[];
-  public levelA:any=[];
+  // public categoryA:any=[];
+  // public levelA:any=[];
   nextI=0;
-  i=0;
+  i=1;
   Today: any;
   sliderOutput=0;
   skill=0;
@@ -48,30 +49,124 @@ export class InterviewerScreenComponent implements OnInit {
   public QunAns:any=[];
   keywordzz:any='';
   value = 0;
+  candidate:any=[];
+  candidateSkill:any=[];
+  p: any = 0;
+
+  recruiterData=this.formBuilder.group({
+    score:(''),
+    note:('')
+   });
 
   constructor(
     private formBuilder:FormBuilder,
     private httpClient:HttpClient,
-    private elementRef: ElementRef){}
+    private elementRef: ElementRef,
+    private dfs:DataFileService){}
 
   ngOnInit(): void {
-    this.getQueAns(); //call api 
+     //call api 
+    this.getCandidateDetails();
   }
 
-  recruiterData=this.formBuilder.group({
-   score:(''),
-   note:('')
-  });
+  getCandidateDetails(){
+    debugger
+    this.candidate=this.dfs.arr;
+    this.profile();
+    console.log(this.candidate)
+  }
+  Asid:any='';
+  CName:any;
+  Email:any;
+  CId:any;
+  arrayLength=0;
+  data:any='';
 
-  ngAfterViewInit() {   //background color
-    this.elementRef.nativeElement.ownerDocument
-        .body.style.backgroundColor = 'rgba(255, 228, 196, 0.32)';
-}
+  profile(){
+    this.Asid='001';
+    this.Today=this.candidate.Date;
+    this.CId=this.candidate.canId;
+    this.CName=this.candidate.canName;
+    this.candidateSkill=this.candidate.skills;  
+  }
+  
+  canId=2;
+  RowandQuestion_number=1;
+  newArry:any=[];
+  getQueAns(canId:any,RowandQuestion_number:any){
+    debugger;
+    try{
+    this.httpClient.post<any>('http://localhost:3000/assessmentStagingManager',
+    {
+    canId,
+    RowandQuestion_number
+    }).subscribe(
+      response=>{      
+          this.newArry=response.data;
+          console.log(this.newArry); 
+      }
+    );
+  }catch{
+     ("Error")
+  }
+  }
+
+  //Assessment start button 
+  assesmentStart()
+  {
+    debugger;
+    this.getQueAns(this.CId,this.RowandQuestion_number);
+    this.hideMe=true;
+    this.keywordload();
+    // this.keywordload();  
+  }
+
+  
+  //duplicate method for right arrow //it use when we have api
+  nextQA()
+  {
+    debugger;
+    this.i++;
+    this.updateData();
+    this.getQueAns(this.CId,this.i);
+    this.keywordzz=this.keywordsArray[this.i].keyword;
+    // let id=this.i.toString();
+    // this.fetchData(id,this.skill,this.complexity); 
+  }
+
+  //duplicate method for left arrow //it use when we have api
+  prevQA(){
+    debugger;
+    this.i--;
+    this.getQueAns(this.CId,this.i);
+    // console.log(this.arr);
+    // this.question ="Q: "+ this.arr[this.i].Question;
+    // this.answer = "A: "+this.arr[this.i].Answer;
+  } 
+
+  ScoreA:any=[];
+  NoteA:any=[];
+  Score:any='';
+  Note:any='';
+
+  updateData(){
+      debugger;
+    var Score=this.recruiterData.controls['score'].value;
+    var Note=this.recruiterData.controls['note'].value;
+    this.ScoreA.push(Score);
+    this.NoteA.push(Note);
+  }
+  saveData(){
+    console.log('Score value: '+this.ScoreA);
+    console.log('Note: '+this.NoteA);
+  }
+
 //for hiding answer
   hideAnswer()
   {
     this.showMe=!this.showMe;
   }
+
   ScoreData:any='';
   //slider value
   updateSetting(event:any)
@@ -88,17 +183,18 @@ export class InterviewerScreenComponent implements OnInit {
       this.ScoreData='Expert';
     }
   }
+
   //text-Editor for "Note"
   editorConfig1:AngularEditorConfig={
       editable: true,
       spellcheck: true,
       height: 'auto',
-      minHeight: '170px',
+      minHeight: '150px',
       maxHeight: 'auto',
       width: '100%',
       minWidth: '0',
       translate: 'no',
-      enableToolbar: true,
+      enableToolbar: false,
       showToolbar: true,
       placeholder: 'Enter text here...',
       defaultParagraphSeparator: '',
@@ -128,44 +224,18 @@ export class InterviewerScreenComponent implements OnInit {
     uploadUrl: 'v1/image',
     uploadWithCredentials: false,
     sanitize: false,
-    toolbarPosition: 'top',
+    toolbarPosition: 'bottom',
     toolbarHiddenButtons: [
       ['bold', 'italic'],
       ['fontSize']
     ] 
   }
   
-  Asid:any='';
-  Name:any;
-  Email:any;
-  CId:any;
-  arrayLength=0;
-  data:any='';
+  
 
-  //Assessment start button // for Hard coded data
-  assesmentStart()
-  {
-    debugger;
-    this.question="Q: "+this.arr[0].Question;
-    this.answer="A: "+this.arr[0].Answer;
-    this.hideMe=true;
-    
-    this.nextI=1;
-    this.arrayLength=this.arr.length;
-    this.profile();
-    this.keywordload();
-    this.skildata();
-    
-  }
+  
   //display candidate profile // hardcoded data
-  profile(){
-    this.Asid='001';
-    // this.Today=new Date();
-    this.Today=new Date();
-    this.CId='005545';
-    this.Name='Guruprasad';
-    this.Email='guruprasad@jktech.com';
-  }
+  
   skill1:any='';
   complexity1:any='';
   skill2:any='';
@@ -197,7 +267,7 @@ export class InterviewerScreenComponent implements OnInit {
     {keyword:'value type with a set of related named constant.'},
     {keyword:'storing of data in a file'},
     {keyword:''},
-    {keyword:''},
+    {keyword:''}, 
     {keyword:''},
     {keyword:''},
     {keyword:''},
@@ -228,15 +298,20 @@ export class InterviewerScreenComponent implements OnInit {
   //     }
   //   );
   // }
-  getQueAns(){
-    debugger;
-    this.httpClient.post<any>('http://localhost:3000/assessmentStagingManager',{}).subscribe(
-      response=>{
-        this.arr=response.data;
-        console.log(this.arr); 
-      }
-    );
-  }
+  // canId=2;
+  // RowandQuestion_number=1;
+  // getQueAns(canId:any,RowandQuestion_number:any){
+  //   debugger;
+  //   this.httpClient.post<any>('http://localhost:3000/assessmentStagingManager',{
+  //   canId,
+  //   RowandQuestion_number
+  //   }).subscribe(
+  //     response=>{
+  //       this.arr=response.data;
+  //       console.log(this.arr); 
+  //     }
+  //   );
+  // }
   Sid:any='';
   Sname:any='';
   SSkills:any=[];
@@ -306,23 +381,7 @@ export class InterviewerScreenComponent implements OnInit {
   // }
   
   
-  //duplicate method for right arrow //it use when we have api
-  nextQA()
-  {
-    debugger;
-    this.i++;
-    let id=this.i.toString();
-    // this.fetchData(id,this.skill,this.complexity); 
-  }
-  //duplicate method for left arrow //it use when we have api
-  prevQA(){
-    debugger;
-    this.i--;
-    console.log(this.arr);
-    this.question ="Q: "+ this.arr[this.i].Question;
-    this.answer = "A: "+this.arr[this.i].Answer;
-   
-  } 
+  
     
   //for fetching next Q/A right arrow //hardcoded value
   nextQuestion(data:any){
@@ -365,27 +424,12 @@ export class InterviewerScreenComponent implements OnInit {
     }
     this.ques = false;
   }
-  ScoreA:any=[];
-  NoteA:any=[];
-  Score:any='';
-  Note:any='';
-
-  updateData(){
-      debugger;
-    var Score=this.recruiterData.controls['score'].value;
-    var Note=this.recruiterData.controls['note'].value;
-    this.ScoreA.push(Score);
-    this.NoteA.push(Note);
-  }
-  saveData(){
-    console.log('Score value: '+this.ScoreA);
-    console.log('Note: '+this.NoteA);
-  }
+  
   resume:boolean=false;
   //slider value
-  formatLabel(){
-    
-    
-    
-  }
+
+  ngAfterViewInit() {   //background color
+    this.elementRef.nativeElement.ownerDocument
+        .body.style.backgroundColor = 'rgba(255, 228, 196, 0.32)';
+}
 }

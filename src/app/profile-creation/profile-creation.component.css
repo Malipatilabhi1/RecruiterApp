@@ -14,7 +14,7 @@ mat-card{
 }
 
 .spaceL{
-   padding-left: 5%;
+   padding-left: 53%;
 }
 .leftspace{
    margin-left: 8%;
@@ -39,6 +39,7 @@ mat-card{
 }
 .basic-info-button{
     margin-left: 84%;
+    /* font-size: medium; */
 }
 .skills-buttons{
    margin-left: 78%;
@@ -59,25 +60,25 @@ mat-card{
 button{
    margin: 3%;
 }
-/* .green
+ .green
 {
    background-color: green;
    color: aliceblue;
    border-radius: 3px;
-   border-color: none;
+   border-color: green;
 }
 .color2{
    background-color: rgb(10, 12, 108);
    color: aliceblue;
    border-radius: 3px;
-   border-color: none;
+   border-color: blue;
 }
 .red{
    background-color:red;
    color: aliceblue;
    border-radius: 3px;
-   border-color: none;
-} */
+   border-color: red;;
+} 
 
 /* .padding{
    padding-top: 1%;

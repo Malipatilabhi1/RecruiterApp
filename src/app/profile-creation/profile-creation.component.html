@@ -1,152 +1,144 @@
 
 
 <div class="backgroud">
-<mat-card class="adjustable">
-  <mat-card-header>
-    <mat-card-title>Profile Creation</mat-card-title>
-  </mat-card-header>
-
-<mat-stepper [linear]="isLinear" #stepper>
-  <mat-step [stepControl]="firstFormGroup">
-    <form [formGroup]="firstFormGroup" class="">
-      <ng-template matStepLabel>Basic Info</ng-template>
-      
-      <mat-form-field appearance="fill">
-        <mat-label>EmailId</mat-label>
-        <input matInput placeholder="EmailId" formControlName="email" required>
-      </mat-form-field><br>
-      <mat-form-field appearance="fill">
-        <mat-label>Name</mat-label>
-        <input matInput placeholder="Enter Full Name" formControlName="name" required>
-      </mat-form-field><br>
-      <mat-form-field appearance="fill">
-        <mat-label>Phone</mat-label>
-        <input matInput placeholder="Enter Phone number" formControlName="phone" required>
-      </mat-form-field><br>
-      <mat-form-field appearance="fill">
-        <mat-label>Experience</mat-label>
-        <input matInput placeholder="Enter Experience in years" formControlName="experience" required>
-      </mat-form-field>
-      <div class="basic-info-button">
-        <button mat-button matStepperNext  class="green">Next</button>
-      </div>
-    </form>
-  </mat-step>
-
-
-<!-- #docregion label -->
-<mat-step [stepControl]="skillFormGroup" label="Skills">
-  <!-- #enddocregion label -->
-    <form [formGroup]="skillFormGroup" >
-     
+  <mat-card class="adjustable">
+    <mat-card-header>
+      <mat-card-title>Profile Creation</mat-card-title>
+    </mat-card-header>
     
-      <div formArrayName="Skills">
+  <mat-stepper [linear]="isLinear" #stepper>
+    <mat-step [stepControl]="firstFormGroup">
+      <form [formGroup]="firstFormGroup" class="">
+        <ng-template matStepLabel>Basic Info</ng-template>
         
-      <ng-container *ngFor="let skill of Skills.controls; let i=index" [formGroupName]="i" >
-
-      <div id="div1" class="leftspace">
-      <mat-form-field class="width">  
-        <mat-label> Skill </mat-label> 
-        <mat-select formControlName="skillId" id="skillId" ngDefaultControl (ngModelChange)="onSelectSkill($event)" >
-         <mat-option *ngFor="let x of Skill" value="{{x.skillId}}" (change)="onSelectSkill($event)" >{{x.skillName}}</mat-option>  
-        </mat-select>  
-      </mat-form-field>
-    </div>
-    <!-- <div id="div2" class="spaceL">
-
-      <mat-slider formControlName="complexity"
-          thumbLabel (input)="pitch($event)"
-          tickInterval="1" step="1" min="0" max="5" aria-label="text" value="">
-        </mat-slider> 
-    </div> -->
-    <!-- <div id="div2" class="leftspace">
-      <mat-form-field class="width">  
-        <mat-label> Complexity </mat-label>
-        <mat-select formControlName="skillId" id="skillId" ngDefaultControl (ngModelChange)="onSelectSkill($event)" >
-         <mat-option *ngFor="let x of Skill" value="{{x.skillId}}" (change)="onSelectSkill($event)" >{{x.skillName}}</mat-option>  
-        </mat-select>  
-      </mat-form-field>
-      </div><br> -->
-      <div id="div2" class="leftspace">
-        <mat-form-field class="width">
-          <mat-label> Complexity </mat-label>
-          <mat-select formControlName="level" ngDefaultControl >
-          <mat-option *ngFor="let x of Complexity" value="{{x.cmpId}}">{{x.Name}}</mat-option>
-        </mat-select>
-        </mat-form-field>
-      </div><br>
-        
-      </ng-container>
-      <div id="div3" class="spaceL">
-        <button 
-      (click)="addNew()">Add-Skills</button>
-    </div>
-    </div>
-      
-      <div class="skills-buttons">
-        <button mat-button matStepperPrevious class="color2">Back</button>
-        <button mat-button matStepperNext class="green">Next</button>
-      </div>
-    </form>
-  </mat-step>
-
-
- 
-  <!-- #docregion label -->
-  <mat-step [stepControl]="thirdFormGroup" label="Upload Resume">
-    <!-- #enddocregion label -->
-      <form [formGroup]="thirdFormGroup">
-        <div > 
-        <label for="input-file-id" class="resume control-label">Resume:</label>
-          <input  class="ng-hide" formControlName="resume" id="input-file-id" multiple type="file"/> 
-        </div><br>
-        <div class="resume-buttons">
-          <button mat-button matStepperPrevious class="color2">Back</button>
-          <button mat-button matStepperNext class="green">Next</button>
-        </div>
-      </form>
-    </mat-step>
-  <!-- e------------------------------------------------------------------------l -->
-      <!-- #docregion label -->
-  <mat-step [stepControl]="secondFormGroup" label="Add a Note">
-    <!-- #enddocregion label -->
-      <form [formGroup]="secondFormGroup">
         <mat-form-field appearance="fill">
-          <mat-label>Message for Interviwer</mat-label>
-          <textarea matInput formControlName="message" placeholder="Enter here...." class="text-box-Size"></textarea>
+          <mat-label>EmailId</mat-label>
+          <input matInput placeholder="EmailId" formControlName="email" required>
+        </mat-form-field><br>
+        <mat-form-field appearance="fill">
+          <mat-label>Name</mat-label>
+          <input matInput placeholder="Enter Full Name" formControlName="name" required>
+        </mat-form-field><br>
+        <mat-form-field appearance="fill">
+          <mat-label>Phone</mat-label>
+          <input matInput placeholder="Enter Phone number" formControlName="phone" required>
+        </mat-form-field><br>
+        <mat-form-field appearance="fill">
+          <mat-label>Experience</mat-label>
+          <input matInput placeholder="Enter Experience in years" formControlName="experience" required>
         </mat-form-field>
-        <div class="message-buttons">
+        <div class="basic-info-button">
+          <button mat-button matStepperNext  class="green">Next</button>
+        </div>
+      </form>
+    </mat-step>
+  
+  
+  <!-- #docregion label -->
+  <mat-step [stepControl]="skillFormGroup" label="Skills">
+    <!-- #enddocregion label -->
+      <form [formGroup]="skillFormGroup" >
+       
+      
+        <div formArrayName="Skills">
+          
+        <ng-container *ngFor="let skill of Skills.controls; let i=index" [formGroupName]="i" >
+  
+        <div id="div1" class="leftspace">
+        <mat-form-field class="width">  
+          <mat-label> Skill </mat-label> 
+          <mat-select formControlName="skillId" id="skillId" ngDefaultControl (ngModelChange)="onSelectSkill($event)" >
+           <mat-option *ngFor="let x of Skill" value="{{x.skillId}}" (change)="onSelectSkill($event)" >{{x.skillName}}</mat-option>  
+          </mat-select>  
+        </mat-form-field>
+      </div>
+      <!-- <div id="div2" class="spaceL">
+  
+        <mat-slider formControlName="complexity"
+            thumbLabel (input)="pitch($event)"
+            tickInterval="1" step="1" min="0" max="5" aria-label="text" value="">
+          </mat-slider> 
+      </div> -->
+      <div id="div2" class="leftspace">
+        <mat-form-field class="width">  
+          <mat-label> Complexity </mat-label>
+          <mat-select formControlName="cmpId" id="cmpId" ngDefaultControl (ngModelChange)="onSelectSkill($event)" >
+           <mat-option *ngFor="let x of Complexity" value="{{x.cmpId}}" (change)="onSelectSkill($event)" >{{x.Skilllevel}}</mat-option>  
+          </mat-select>  
+        </mat-form-field>
+        </div><br>
+          
+        </ng-container>
+        <div id="div3" class="spaceL">
+          <button 
+        (click)="addNew()">Add-Skills</button>
+      </div>
+      </div>
+        
+        <div class="skills-buttons">
           <button mat-button matStepperPrevious class="color2">Back</button>
           <button mat-button matStepperNext class="green">Next</button>
         </div>
       </form>
     </mat-step>
-<!-- --------------------------------------------------------------------------- -->
-  <mat-step>
-    <ng-template matStepLabel>Done</ng-template>
-    <h1>You are now done.</h1>
-    <div class="done-buttons">
-      <button mat-button matStepperPrevious class="color2">Back</button>
-      <button mat-button (click)="stepper.reset()" class="red">Reset</button>
-
-      <button mat-button (click)="storeDatas()" class="green">Submit</button>
-    </div>
-  </mat-step>
-</mat-stepper>
-</mat-card>
-</div>
-
-
-<router-outlet></router-outlet>
-
-
-
-
-
-
-
-
-
   
-
- 
+  
+   
+    <!-- #docregion label -->
+    <mat-step [stepControl]="thirdFormGroup" label="Upload Resume">
+      <!-- #enddocregion label -->
+        <form [formGroup]="thirdFormGroup">
+          <div > 
+          <label for="input-file-id" class="resume control-label">Resume:</label>
+            <input  class="ng-hide" formControlName="resume" id="input-file-id" multiple type="file"/> 
+          </div><br>
+          <div class="resume-buttons">
+            <button mat-button matStepperPrevious class="color2">Back</button>
+            <button mat-button matStepperNext class="green">Next</button>
+          </div>
+        </form>
+      </mat-step>
+    <!-- e------------------------------------------------------------------------l -->
+        <!-- #docregion label -->
+    <mat-step [stepControl]="secondFormGroup" label="Add a Note">
+      <!-- #enddocregion label -->
+        <form [formGroup]="secondFormGroup">
+          <mat-form-field appearance="fill">
+            <mat-label>Message for Interviwer</mat-label>
+            <textarea matInput formControlName="message" placeholder="Enter here...." class="text-box-Size"></textarea>
+          </mat-form-field>
+          <div class="message-buttons">
+            <button mat-button matStepperPrevious class="color2">Back</button>
+            <button mat-button matStepperNext class="green">Next</button>
+          </div>
+        </form>
+      </mat-step>
+  <!-- --------------------------------------------------------------------------- -->
+    <mat-step>
+      <ng-template matStepLabel>Done</ng-template>
+      <h1>You are now done.</h1>
+      <div class="done-buttons">
+        <button mat-button matStepperPrevious class="color2">Back</button>
+        <button mat-button (click)="stepper.reset()" class="red">Reset</button>
+  
+        <button mat-button (click)="storeDatas()" class="green" >Submit</button>
+      </div>
+    </mat-step>
+  </mat-stepper>
+  </mat-card>
+  </div>
+  
+  
+  <router-outlet></router-outlet>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+    
+  
+   

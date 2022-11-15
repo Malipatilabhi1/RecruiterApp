@@ -70,7 +70,10 @@
   width: 90%;
   padding-left: 5%;
  /* } */
- .split1{
+
+/* second----------------------------------------------------- */
+ 
+ /* .split1{
   height: 10%;
   width: 40%;
   position: fixed;  
@@ -89,13 +92,7 @@
   padding-right: 40%;
   padding-bottom: 40%;
 }
-/* .container {
-  border: 2px solid #ccc;
-  background-color: #eee;
-  border-radius: 5px;
-  padding: 16px;
-  margin: 16px 0
-} */
+
 .container{
  border: 2px solid #ccc;
 }
@@ -119,8 +116,7 @@ mat-slider{
  padding-right: 30px;
 }
 .table-bordered{
-  /* border-width: 10px; */
-  /* outline-width: 10px; */
+ 
   column-width: 30px;
 }
 .tr{
@@ -130,14 +126,14 @@ mat-slider{
   border: 1px solid rgb(255, 217, 192);
    border-collapse: collapse; 
    width: auto;
- }
+ } */
  /* .th{
   position: relative;
   left: 20px;
   border: 1px solid rgb(255, 217, 192);
    border-collapse: collapse;
  }    */
- .td{
+ /* .td{
   border-right: 1px solid black;
  }
  form{
@@ -147,7 +143,7 @@ mat-slider{
    background-size: cover;
    background-attachment: fixed;
    height: 100%;
- }
+ } */
  /* table{
   width: 90%;
   padding: 20px;
@@ -156,6 +152,166 @@ mat-slider{
   height: 30px;
  }  */
 /* 
+h2,p{
+  padding-left: 9%;
+}
+.grid2{
+  padding-top: 4%;
+}
+.space{
+  padding-right: 50px;
+}
+table{
+  padding-left: 16%;
+  padding-right: 16%;
+  width:80%  
+}
+.adjustable
+{
+ padding-left:2%;
+ width: 80%;
+ background-color: rgba(140, 138, 138, 0.048);
+}
+hr{
+ background-color: rgba(8, 0, 0, 0);
+ border-radius: 2px;
+}
+.size
+{
+ border: black 4px;
+} */
+
+/*-------------------------- third */
+
+/* mat-grid-tile {
+   background: rgb(217, 238, 244);
+ }
+ .form{
+  align-items: center;
+  border: solid 2px;
+  width: 90%;
+  padding-left: 5%;
+ /* } */
+ .split1{
+  height: 10%;
+  width: 40%;
+  position: fixed;  
+  z-index: 1;
+  left: 0;
+  overflow-x: hidden;
+  padding-top: 40%;
+}
+.split2{
+  height: 10%;
+  width: 50%;
+  position: fixed;  
+  z-index: 1;
+  right: 0;
+  overflow-x: hidden;
+  padding-right: 40%;
+  padding-bottom: 90%;
+}
+/* .container {
+  border: 2px solid #ccc;
+  background-color: #eee;
+  border-radius: 5px;
+  padding: 16px;
+  margin: 16px 0
+} */
+.container{
+ border: 2px solid #ccc;
+}
+#div1,#div2,#div3,#div4{
+ display: inline;
+}
+.spaceL{
+ padding-left: 30px;
+ width: 40px;
+}
+h1{
+ text-align: center;
+}
+.left{
+ padding-left: 85%;
+}
+.flotleft{
+  float: left;
+}
+mat-slider{
+ width:200px;
+}
+.space{
+ padding-right: 30px;
+}
+.table-bordered{
+  /* border-width: 10px; */
+  /* outline-width: 10px; */
+  column-width: 20px;
+}
+form{
+  background-color:rgba(245, 237, 224, 0.32);
+   background-position: center;
+   background-repeat: no-repeat;
+   background-size: cover;
+   background-attachment: fixed;
+   height: 100%;
+ }
+ div.b {
+  text-align: left;
+  /* position: relative;
+  left:20px; */
+}
+
+.collapsible {
+  /* background-color: #ccc;
+  color: black; */
+  cursor: s-resize;
+  padding: 2px;
+  margin: 0;
+  margin-top: 10px;
+  padding-left: 10px;
+  width: 100%;
+  height: 25px;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.active,
+.collapsible:hover {
+  /* background-color: #c4c4c4; */
+  cursor: s-resize;
+}
+
+
+
+.collapsible:after {
+        /* Unicode character for "plus" sign (+) */
+  font-size: 13px;
+  color: black;
+  float: right;
+  margin-right: 5px;
+
+}
+.arrow {
+  border: solid black;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+  float: right;
+}
+.up {
+  transform: rotate(-135deg);
+  -webkit-transform: rotate(-135deg);
+}
+
+/* table, th, td ,tr{
+  border: 3px solid rgb(255, 217, 192);
+  /* border-collapse: collapse;
+}*/
+/*
 h2,p{
   padding-left: 9%;
 }

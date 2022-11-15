@@ -84,7 +84,9 @@
     color: rgb(19, 158, 19);
     font-size: medium;
   } */
-
+.gap{
+  float: left;
+}
   button{
     background-color: rgb(37, 142, 37);
     color: aliceblue;
