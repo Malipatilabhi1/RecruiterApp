@@ -33,6 +33,14 @@
 
 label{
   color: rgba(57, 57, 182, 0.842);
+  /* color: green; */
+}
+.slider{
+  height: 200px;
+  margin-right: 14px;
+}
+.QANumber{
+  float: right;
 }
  /* .spaceNew{
   padding:4%;
@@ -158,13 +166,6 @@ mat-slider{
  margin-left: 4%;
 }
 
-
-.slider{
-  width: 200px;
-}
-.pageNumber{
-  float: right;
-}
 .margin{
   float:right;
   padding-top: 6px;
@@ -174,14 +175,16 @@ mat-slider{
   padding-top: 6px;
   
 }
-
+.profiledata{
+  float: right;
+}
 .borderC{
   border-color: #ea5455;
 }
 .color-size{
   margin-left: 2px;
   font-size: 12px !important;
-  background-color: rgba(169, 169, 169, 0.658);
+  padding-top: 13px;
   padding: 1px;
   border-radius: 2px;
   

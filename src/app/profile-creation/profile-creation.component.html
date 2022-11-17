@@ -47,8 +47,8 @@
         <div id="div1" class="leftspace">
         <mat-form-field class="width">  
           <mat-label> Skill </mat-label> 
-          <mat-select formControlName="skillId" id="skillId" ngDefaultControl (ngModelChange)="onSelectSkill($event)" >
-           <mat-option *ngFor="let x of Skill" value="{{x.skillId}}" (change)="onSelectSkill($event)" >{{x.skillName}}</mat-option>  
+          <mat-select formControlName=skillId id='skillId' ngDefaultControl (ngModelChange)="onSelectSkill($event)" >
+           <mat-option *ngFor="let x of Skill" value={{x.skillId}} (change)="onSelectSkill($event)" >{{x.skillName}}</mat-option>  
           </mat-select>  
         </mat-form-field>
       </div>

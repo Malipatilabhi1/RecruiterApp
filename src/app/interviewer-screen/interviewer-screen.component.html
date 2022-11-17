@@ -18,7 +18,7 @@
       <div id="div1">
         <div  class="dropdown profiledata" >
           <!-- <mat-icon class="dropbtn profile"></mat-icon> -->
-          <label class="dropbtn color-size">Profile</label>
+          <label class="dropbtn color-size"><mat-icon>account_box</mat-icon></label>
           <div class="dropdown-content">
           <mat-card>
           <span href="#"><b>Id : {{  CId }}</b></span><br>
@@ -54,11 +54,12 @@
      
   </div>
   
+  
   <div class="col-lg-9">
     <mat-card class="size">
       <div class="size" *ngFor="let data of newArry| paginate: { itemsPerPage: 1, currentPage: p }" >
         <h3  class="red" id="div1"><b> {{newArry[0].Question}}</b> </h3>
-        <span class="pageNumber">{{newArry[0].currentRecordId}}/{{newArry[0].lastRecordId}}</span>
+        <span class="QANumber">{{newArry[0].currentRecordId}}/{{newArry[0].lastRecordId}}</span>
         <span id="div2"><mat-icon id="div1" class="position" *ngIf="hideMe" (click)="hideAnswer()">keyboard_arrow_down</mat-icon></span><br>
         <h3 *ngIf="showMe" id="div"><b></b>{{newArry[0].Answer}}</h3>
       </div> 
@@ -68,16 +69,22 @@
 
   <div class="col-lg-3 ">
     <mat-card class="size">
-      <!-- <label class="red align">Candidate Information</label><br> -->
-    
-      <div>
-        <label>Score :</label> 
-          <mat-slider (click)="updateSetting(value)" ngDefaultControl formControlName="score"
-            [(ngModel)]="value" class="slider"
-            tickInterval="1" step="1" min="0"max="3" aria-label="text" >
-          </mat-slider>  
+      <div class="col-lg-7" *ngFor="let data of newArry">
+        <label>Skill:</label>
+        <h4> {{data.skillName}}</h4>
+        <label>Complexity: </label>
+        <h4>{{data.Name}}</h4>
       </div>
-      <label class="space" *ngIf="resume">{{ScoreData}}</label>
+      <div class="col-lg-5">
+        <div>
+          <label>Score :</label> <br>
+            <mat-slider (click)="updateSetting(value)" ngDefaultControl formControlName="score"
+              [(ngModel)]="value" class="slider"  thumbLabel [vertical]="true"
+              tickInterval="1" step="1" min="0"max="10" aria-label="text" >
+            </mat-slider>  
+        </div>
+        <!-- <label class="space" *ngIf="resume">{{sliderOutput}}</label> -->
+      </div>
     </mat-card>
   </div>
 

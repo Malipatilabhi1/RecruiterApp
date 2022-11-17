@@ -16,8 +16,19 @@ export class DataFileService {
     this.arr=data;
   }
 
+  sendData(emailId:any,phone:any,name:any,experience:any,skills:number)
+  {
+    return this._http.post('http://localhost:3000/candidateManager/saveData',{
+      emailId,
+      phone,
+      name,
+      experience,
+      skills
+    })
 
-  sendingCandidateDataToServer() {
+  }
+
+  sendingCandidateDataToServer(emailId:any,phone:any,name:any,experience:any,skills:number) {
     this._http
       .post('http://localhost:3000/candidateManager', {
         emailId: ProfileCreationComponent.Email,

@@ -8,6 +8,7 @@ import { ElementRef } from '@angular/core';
 import { DataFileService } from '../data-file.service';
 
 
+
 @Component({
   selector: 'app-interviewer-screen',
   templateUrl: './interviewer-screen.component.html',
@@ -34,9 +35,6 @@ export class InterviewerScreenComponent implements OnInit {
   arr: any=[];      
   showMe:boolean=true;
   hideMe:boolean=false;
-  // hideMeI:boolean=true;
-  // public categoryA:any=[];
-  // public levelA:any=[];
   nextI=0;
   i=1;
   Today: any;
@@ -83,7 +81,7 @@ export class InterviewerScreenComponent implements OnInit {
   data:any='';
 
   profile(){
-    this.Asid='001';
+    this.Asid=1;
     this.Today=this.candidate.Date;
     this.CId=this.candidate.canId;
     this.CName=this.candidate.canName;
@@ -92,7 +90,9 @@ export class InterviewerScreenComponent implements OnInit {
   
   canId=2;
   RowandQuestion_number=1;
+  note_value=1;
   newArry:any=[];
+
   getQueAns(canId:any,RowandQuestion_number:any){
     debugger;
     try{
@@ -103,6 +103,7 @@ export class InterviewerScreenComponent implements OnInit {
     }).subscribe(
       response=>{      
           this.newArry=response.data;
+          // this.arr.push(this.newArry);
           console.log(this.newArry); 
       }
     );
@@ -123,72 +124,85 @@ export class InterviewerScreenComponent implements OnInit {
 
   
   //duplicate method for right arrow //it use when we have api
-  nextQA()
-  {
-    debugger;
-    this.i++;
-    this.updateData();
-    this.getQueAns(this.CId,this.i);
-    this.keywordzz=this.keywordsArray[this.i].keyword;
-    // let id=this.i.toString();
-    // this.fetchData(id,this.skill,this.complexity); 
-  }
-
   // nextQA()
   // {
   //   debugger;
-  //   let canId=this.CId;
-  //   let RowandQuestion_number=this.RowandQuestion_number;
-  //   let score=this.recruiterData.controls['score'].value;
-  //   let notes=this.recruiterData.controls['note'].value;
-    
-  //   this.httpClient.post<any>('http://localhost:3000/assessmentStagingManager/saveData',
-  //   {
-  //     canId,
-  //     RowandQuestion_number,
-  //     score,
-  //     notes
-  //   }).subscribe(
-  //     response=>{ 
-  //       console.log(response);     
-  //       this.i++;
-  //       this.updateData();
-  //       this.getQueAns(this.CId,this.i);
-  //       this.keywordzz=this.keywordsArray[this.i].keyword;
-  //     },  
-  //   );
-
-
-    
+  //   this.i++;
+  //   this.updateData();
+  //   this.getQueAns(this.CId,this.i);
+  //   this.keywordzz=this.keywordsArray[this.i].keyword;
   //   // let id=this.i.toString();
   //   // this.fetchData(id,this.skill,this.complexity); 
   // }
+  datastoring_response:any='';
+  nextQA()
+  {
+    debugger;
+    let canId=this.CId;
+    let RowandQuestion_number=this.i;
+    let score=this.recruiterData.controls['score'].value;
+    let notes=this.recruiterData.controls['note'].value;
+      
+    this.httpClient.post<any>('http://localhost:3000/assessmentStagingManager/saveData',
+    {
+      canId,
+      RowandQuestion_number,
+      score,
+      notes
+    }).subscribe(
+      response=>{
+        this.datastoring_response=response.status;
+        console.log(response);     
+        this.i++;
+        this.updateData();     
+        this.getQueAns(this.CId,this.i);
+        this.keywordzz=this.keywordsArray[this.i].keyword;    
+      },  
+    );
+  }
 
   //duplicate method for left arrow //it use when we have api
   prevQA(){
     debugger;
     this.i--;
     this.getQueAns(this.CId,this.i);
-    // console.log(this.arr);
-    // this.question ="Q: "+ this.arr[this.i].Question;
-    // this.answer = "A: "+this.arr[this.i].Answer;
+    console.log("abhi------------------")
+    // this.update();
   } 
-
   ScoreA:any=[];
   NoteA:any=[];
   Score:any='';
   Note:any='';
 
+  update(){
+    this.recruiterData.controls['score']=this.newArry.score;
+    this.recruiterData.controls['note']=this.newArry.Note;
+    console.log(this.recruiterData.controls['score'].value);
+  }
   updateData(){
       debugger;
     var Score=this.recruiterData.controls['score'].value;
     var Note=this.recruiterData.controls['note'].value;
     this.ScoreA.push(Score);
     this.NoteA.push(Note);
+    this.recruiterData.reset();
   }
+status:any="closed";
   saveData(){
-    console.log('Score value: '+this.ScoreA);
-    console.log('Note: '+this.NoteA);
+    debugger;
+    let status=this.status;
+    let canId=this.CId;
+    let assessmentId=this.Asid;
+    this.httpClient.post<any>('http://localhost:3000/assessmentManager/endAssessment',
+    {
+      status,
+      canId,
+      assessmentId
+    }).subscribe(
+      response=>{
+        alert(response.status); 
+        console.log(response);
+      })
   }
 
 //for hiding answer
@@ -202,16 +216,8 @@ export class InterviewerScreenComponent implements OnInit {
   updateSetting(event:any)
   {
     debugger
-    this.sliderOutput=event.value;
-    this.resume=true;
-    if(event==1)
-    {
-      this.ScoreData='Beginner';
-    }else if(event==2){
-      this.ScoreData='Intermediate';
-    }else{
-      this.ScoreData='Expert';
-    }
+    this.sliderOutput=event;
+    this.resume=true; 
   }
 
   //text-Editor for "Note"
@@ -266,23 +272,23 @@ export class InterviewerScreenComponent implements OnInit {
   
   //display candidate profile // hardcoded data
   
-  skill1:any='';
-  complexity1:any='';
-  skill2:any='';
-  complexity2:any='';
-  skill3:any='';
-  complexity3:any='';
+  // skill1:any='';
+  // complexity1:any='';
+  // skill2:any='';
+  // complexity2:any='';
+  // skill3:any='';
+  // complexity3:any='';
 
 //candidate skill // hardcoded data
-  skildata()
-  {
-    this.skill1='C#',
-    this.complexity1='Medium';
-  this.skill2='Angular';
-  this.complexity2='Easy';
-  this.skill3='SQL';
-  this.complexity3='Easy';
-  }
+  // skildata()
+  // {
+  //   this.skill1='C#',
+  //   this.complexity1='Medium';
+  // this.skill2='Angular';
+  // this.complexity2='Easy';
+  // this.skill3='SQL';
+  // this.complexity3='Easy';
+  // }
 
   //key words array
   keywordsArray:any=[
@@ -313,6 +319,7 @@ export class InterviewerScreenComponent implements OnInit {
     // {keyword:'interfaces expect different data, '},
     // {keyword:'group of threads,  without interfering ,  principal threads operation'}
   ];
+
   //to display the keywords
   keywordload(){
     this.keywordzz=this.keywordsArray[0].keyword;
@@ -342,35 +349,20 @@ export class InterviewerScreenComponent implements OnInit {
   //     }
   //   );
   // }
-  Sid:any='';
-  Sname:any='';
-  SSkills:any=[];
-  catchData(id:any,name:any,skills:any)
-  {
-    this.Sid=id;
-    this.Sname=name;
-    this.SSkills=skills;
-  }
+
+  // Sid:any='';
+  // Sname:any='';
+  // SSkills:any=[];
+
+  // catchData(id:any,name:any,skills:any)
+  // {
+  //   this.Sid=id;
+  //   this.Sname=name;
+  //   this.SSkills=skills;
+  // }
 
   //fetch data from db //duplicate method for upcomming api
-  fetchData(){
-    debugger;
-    return this.httpClient.post<any>('url',{} 
-    //  {
-    //   profileid,
-    //   AssementDate,
-      
-    //  }
-     ).subscribe(
-      response=>{
-       
-        // this.arr.push(response);
-        // this.question="Q: "+response.Question;
-        // this.answer="A: "+response.Answer;
-        // console.log(this.arr);
-      }
-    );   
-  }
+  
 
 
   // getSkills(){
@@ -414,46 +406,41 @@ export class InterviewerScreenComponent implements OnInit {
   
     
   //for fetching next Q/A right arrow //hardcoded value
-  nextQuestion(data:any){
-    debugger;
-    // if(this.nextI<this.arrayLength)
-    // {
-      if(data === "next"){
-        this.i++;
-        this.nextI++;
-        this.question ="Q: "+ this.arr[this.i].Question;
-        this.answer = "A: "+this.arr[this.i].Answer;
-        this.keywordzz=this.keywordsArray[this.i].keyword;
+
+  // nextQuestion(data:any){
+  //   debugger;
+    
+  //     if(data === "next"){
+  //       this.i++;
+  //       this.nextI++;
+  //       this.question ="Q: "+ this.arr[this.i].Question;
+  //       this.answer = "A: "+this.arr[this.i].Answer;
+  //       this.keywordzz=this.keywordsArray[this.i].keyword;
        
-        this.updateData();
-        this.value=0;
-        this.ScoreData='';
-
-
-      }
-    // }else{
-    //   alert("No More Questions")
-    // } 
-  }
+  //       this.updateData();
+  //       this.value=0;
+  //       this.ScoreData='';
+  //     }
+  // }
   flush(){
     this.Score='';
     this.Note='';
   }
   //for fetching previous Q/A left arrow //hardcoded value
-  privQuestion(data:any)
-  {
-    debugger;
-    if(data=== "prev"){
-      this.ques = true;
-      this.i--;
+  // privQuestion(data:any)
+  // {
+  //   debugger;
+  //   if(data=== "prev"){
+  //     this.ques = true;
+  //     this.i--;
       
-      this.question ="Q: "+ this.arr[this.i].Question;
-        this.answer = "A: "+this.arr[this.i].Answer;
-        this.keywordzz=this.keywordsArray[this.i].keyword;
-      this.nextI--;
-    }
-    this.ques = false;
-  }
+  //     this.question ="Q: "+ this.arr[this.i].Question;
+  //       this.answer = "A: "+this.arr[this.i].Answer;
+  //       this.keywordzz=this.keywordsArray[this.i].keyword;
+  //     this.nextI--;
+  //   }
+  //   this.ques = false;
+  // }
   
   resume:boolean=false;
   //slider value

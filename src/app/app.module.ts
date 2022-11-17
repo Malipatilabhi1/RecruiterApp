@@ -17,6 +17,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatListModule } from '@angular/material/list';
+
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import {MatGridListModule} from '@angular/material/grid-list'
 import { AngularEditorModule } from '@kolkov/angular-editor';
@@ -75,7 +76,8 @@ import { AssesmentScreenComponent } from './assesment-screen/assesment-screen.co
     AngularEditorModule,
     MatStepperModule,
     NgxPaginationModule,
-    RichTextEditorAllModule
+    RichTextEditorAllModule,
+    
     
    
   ],

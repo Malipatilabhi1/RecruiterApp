@@ -43,6 +43,7 @@ export class AssesmentScreenComponent implements OnInit {
   }
   Farr:any=[];
   Rarr:any=[];
+  statuss:any="closed";
 
   filterCandidate(){
     for(let i=0;i<=this.arr.length;i++){

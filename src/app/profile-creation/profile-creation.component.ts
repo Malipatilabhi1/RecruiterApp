@@ -82,39 +82,52 @@ export class ProfileCreationComponent implements OnInit {
   skillFormGroup = new FormGroup({
     Skills: new FormArray([
       new FormGroup({
-        skillId: new FormControl(['', Validators.required]),
-        cmpId: new FormControl(['', Validators.required]),
+        skillId: new FormControl<number[]>([0]),
+        cmpId: new FormControl<number[]>([0]),
       }),
     ]),
   });
   isLinear = false;
 
+  email:any;
+  name:any;
+  phone:any;
+  experience:any;
+  SkillA:any=[];
+  
   storeDatas() {
     debugger;
-    this.pArray =this.skillFormGroup.value.Skills;
+    // this.pArray=this.skillFormGroup.value.Skills;
+    this.SkillA =this.skillFormGroup.value.Skills;
     // console.log(this.Skills.value)
     console.log();
     // debugger;
-    ProfileCreationComponent.Email = this.firstFormGroup.controls['email'].value;
-    ProfileCreationComponent.Name = this.firstFormGroup.controls['name'].value;
-    ProfileCreationComponent.PhoneNo = this.firstFormGroup.controls['phone'].value;
-    ProfileCreationComponent.Experiance = this.firstFormGroup.controls['experience'].value;
-    +' yrs';
 
-    console.log(this.secondFormGroup.controls['message'].value);
-    console.log(this.thirdFormGroup.controls['resume'].value);
-    console.log(this.firstFormGroup.controls['email'].value);
-    console.log(this.firstFormGroup.controls['name'].value);
-    console.log(this.firstFormGroup.controls['phone'].value);
+    this.email= this.firstFormGroup.controls['email'].value;
+    this.name = this.firstFormGroup.controls['name'].value;
+    this.phone = this.firstFormGroup.controls['phone'].value;
+    this.experience= this.firstFormGroup.controls['experience'].value;
+
+    // ProfileCreationComponent.Email= this.firstFormGroup.controls['email'].value;
+    // ProfileCreationComponent.Name = this.firstFormGroup.controls['name'].value;
+    // ProfileCreationComponent.PhoneNo = this.firstFormGroup.controls['phone'].value;
+    // ProfileCreationComponent.Experiance= this.firstFormGroup.controls['experience'].value;
+
+
+    // console.log(this.secondFormGroup.controls['message'].value);
+    // console.log(this.thirdFormGroup.controls['resume'].value);
+    // console.log(this.firstFormGroup.controls['email'].value);
+    // console.log(this.firstFormGroup.controls['name'].value);
+    // console.log(this.firstFormGroup.controls['phone'].value);
 
 
     
-    ProfileCreationComponent.sID1 = this.pArray[0].skillId;
-    ProfileCreationComponent.sID2 = this.pArray[1].skillId;
-    ProfileCreationComponent.sID3 = this.pArray[2].skillId;
-    ProfileCreationComponent.cId1 = this.pArray[0].cmpId;
-    ProfileCreationComponent.cId2 = this.pArray[1].cmpId;
-    ProfileCreationComponent.cId3 = this.pArray[2].cmpId;
+    // ProfileCreationComponent.sID1 = this.pArray[0].skillId;
+    // ProfileCreationComponent.sID2 = this.pArray[1].skillId;
+    // ProfileCreationComponent.sID3 = this.pArray[2].skillId;
+    // ProfileCreationComponent.cId1 = this.pArray[0].cmpId;
+    // ProfileCreationComponent.cId2 = this.pArray[1].cmpId;
+    // ProfileCreationComponent.cId3 = this.pArray[2].cmpId;
     
     // console.log(this.sID1);
     // console.log(this.cId1);
@@ -130,15 +143,14 @@ export class ProfileCreationComponent implements OnInit {
     // console.log(this.pArray[2].skillId);
     // console.log(this.pArray[2].cmpId);
     
+    // this._Pservice.sendingCandidateDataToServer(ProfileCreationComponent.Email,ProfileCreationComponent.PhoneNo,ProfileCreationComponent.PhoneNo,ProfileCreationComponent.Experiance,this.pArray)
     
-    console.log(
-      '-----------------------------------------------------------------'
-      );
-      console.log(this.CandidateInfo);
-      console.log(
-        '-----------------------------------------------------------------'
-        );
-        this._Pservice.sendingCandidateDataToServer();
+    this._Pservice.sendData(this.email,this.phone,this.name,this.experience,this.SkillA).subscribe(response=>
+      {
+        console.log(response);
+      }
+      )
+       
       }
   //--------------------------------------------------
 
@@ -193,7 +205,6 @@ export class ProfileCreationComponent implements OnInit {
         console.log(this.Skill);
       });
   }
-
   get Skills(): FormArray {
     return this.skillFormGroup.get('Skills') as FormArray;
   }
@@ -201,8 +212,8 @@ export class ProfileCreationComponent implements OnInit {
   addNew() {
     // debugger;
     const skill = new FormGroup({
-      skillId: new FormControl(''),
-      cmpId: new FormControl(''),
+      skillId: new FormControl<number>(0),
+      cmpId: new FormControl<number>(0),
     });
 
     this.Skills.push(skill);
