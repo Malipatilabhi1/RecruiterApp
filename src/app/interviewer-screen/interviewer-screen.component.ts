@@ -47,6 +47,7 @@ export class InterviewerScreenComponent implements OnInit {
   public QunAns:any=[];
   keywordzz:any='';
   value = 0;
+  value1='';
   candidate:any=[];
   candidateSkill:any=[];
   p: any = 0;
@@ -104,7 +105,8 @@ export class InterviewerScreenComponent implements OnInit {
       response=>{      
           this.newArry=response.data;
           // this.arr.push(this.newArry);
-          console.log(this.newArry); 
+          console.log(this.newArry);
+          this.update();
       }
     );
   }catch{
@@ -166,8 +168,6 @@ export class InterviewerScreenComponent implements OnInit {
     debugger;
     this.i--;
     this.getQueAns(this.CId,this.i);
-    console.log("abhi------------------")
-    // this.update();
   } 
   ScoreA:any=[];
   NoteA:any=[];
@@ -175,9 +175,10 @@ export class InterviewerScreenComponent implements OnInit {
   Note:any='';
 
   update(){
-    this.recruiterData.controls['score']=this.newArry.score;
-    this.recruiterData.controls['note']=this.newArry.Note;
-    console.log(this.recruiterData.controls['score'].value);
+    this.value=this.newArry[0].score;
+    this.value1=this.newArry[0].Note;
+    // this.value=this.recruiterData.controls['score'].value;
+    // this.recruiterData.controls['note']=this.newArry.Note;
   }
   updateData(){
       debugger;

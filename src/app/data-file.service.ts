@@ -28,42 +28,42 @@ export class DataFileService {
 
   }
 
-  sendingCandidateDataToServer(emailId:any,phone:any,name:any,experience:any,skills:number) {
-    this._http
-      .post('http://localhost:3000/candidateManager', {
-        emailId: ProfileCreationComponent.Email,
+  // sendingCandidateDataToServer(emailId:any,phone:any,name:any,experience:any,skills:number) {
+  //   this._http
+  //     .post('http://localhost:3000/candidateManager', {
+  //       emailId: ProfileCreationComponent.Email,
 
-        phone: ProfileCreationComponent.PhoneNo,
+  //       phone: ProfileCreationComponent.PhoneNo,
 
-        name: ProfileCreationComponent.Name,
+  //       name: ProfileCreationComponent.Name,
 
-        experience: ProfileCreationComponent.Experiance,
+  //       experience: ProfileCreationComponent.Experiance,
 
-        skills: [
-          {
-            skillId: ProfileCreationComponent.sID1,
+  //       skills: [
+  //         {
+  //           skillId: ProfileCreationComponent.sID1,
 
-            cmpId: ProfileCreationComponent.cId1,
-          },
-          {
-            skillId: ProfileCreationComponent.sID2,
+  //           cmpId: ProfileCreationComponent.cId1,
+  //         },
+  //         {
+  //           skillId: ProfileCreationComponent.sID2,
 
-            cmpId: ProfileCreationComponent.cId2,
-          },
-          {
-            skillId: ProfileCreationComponent.sID3,
+  //           cmpId: ProfileCreationComponent.cId2,
+  //         },
+  //         {
+  //           skillId: ProfileCreationComponent.sID3,
 
-            cmpId: ProfileCreationComponent.cId3,
-          },
-        ],
-      })
-      .subscribe(
-        (res) => {
-          console.log(res);
-        },
-        (error) => {
-          console.warn(error);
-        }
-      );
-  }
+  //           cmpId: ProfileCreationComponent.cId3,
+  //         },
+  //       ],
+  //     })
+  //     .subscribe(
+  //       (res) => {
+  //         console.log(res);
+  //       },
+  //       (error) => {
+  //         console.warn(error);
+  //       }
+  //     );
+  // }
 }

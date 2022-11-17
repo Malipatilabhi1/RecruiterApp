@@ -16,6 +16,7 @@ export class AssesmentScreenComponent implements OnInit {
 
   arr: any = [];
   skillA:any=[];
+  buttonDisabled:boolean;
   constructor(
      private http: HttpClient,
      private _navigate:Router,
@@ -46,18 +47,7 @@ export class AssesmentScreenComponent implements OnInit {
   statuss:any="closed";
 
   filterCandidate(){
-    for(let i=0;i<=this.arr.length;i++){
-      if(i<=3)
-      {
-        this.Farr.push(this.arr[i]);
-        
-      }else{
-        this.Rarr.push(this.arr[i]);
-        
-      }
-    }
-    // console.log(this.Farr);
-    // console.log(this.Rarr);
+    
   }
   
 
@@ -77,4 +67,9 @@ export class AssesmentScreenComponent implements OnInit {
   //   this._navigate.navigate(['inter']);
   //   console.log("clicked"); 
   // }
+
+
+
+
+  
 }

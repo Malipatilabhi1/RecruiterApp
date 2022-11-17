@@ -18,7 +18,7 @@
       <div id="div1">
         <div  class="dropdown profiledata" >
           <!-- <mat-icon class="dropbtn profile"></mat-icon> -->
-          <label class="dropbtn color-size"><mat-icon>account_box</mat-icon></label>
+          <label class="dropbtn color-size" ><mat-icon >account_box</mat-icon></label>
           <div class="dropdown-content">
           <mat-card>
           <span href="#"><b>Id : {{  CId }}</b></span><br>
@@ -76,11 +76,14 @@
         <h4>{{data.Name}}</h4>
       </div>
       <div class="col-lg-5">
+        
         <div>
           <label>Score :</label> <br>
-            <mat-slider (click)="updateSetting(value)" ngDefaultControl formControlName="score"
-              [(ngModel)]="value" class="slider"  thumbLabel [vertical]="true"
+            <mat-slider (click)="updateSetting(value)"  formControlName="score"
+            [(ngModel)]="value"
+              class="slider"  thumbLabel [vertical]="true"
               tickInterval="1" step="1" min="0"max="10" aria-label="text" >
+              <input matSliderThumb >
             </mat-slider>  
         </div>
         <!-- <label class="space" *ngIf="resume">{{sliderOutput}}</label> -->
@@ -91,7 +94,7 @@
   <div class="col-lg-8">
     <mat-card>
       <div>
-        <angular-editor id="editor2" placeholder="Note" [config]="editorConfig1" formControlName="note">    
+        <angular-editor id="editor2" placeholder="Note" [config]="editorConfig1" formControlName="note"  [(ngModel)]="value1">    
         </angular-editor>    
     </div>
     </mat-card>
