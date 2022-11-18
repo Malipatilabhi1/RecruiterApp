@@ -4,6 +4,26 @@ import { Router } from '@angular/router';
 import{FormBuilder} from '@angular/forms';
 import { DataFileService } from '../data-file.service';
 import { Pipe,PipeTransform } from '@angular/core';
+// import {MatDialog} from '@angular/material'
+
+
+// import {
+//   ApexAxisChartSeries,
+//   ApexChart,
+//   ChartComponent,
+//   ApexDataLabels,
+//   ApexXAxis,
+//   ApexPlotOptions
+// } from "ng-apexcharts";
+
+
+// export type ChartOptions = {
+//   series: ApexAxisChartSeries;
+//   chart: ApexChart;
+//   dataLabels: ApexDataLabels;
+//   plotOptions: ApexPlotOptions;
+//   xaxis: ApexXAxis;
+// }; 
 
 @Component({
   selector: 'app-assesment-screen',
@@ -23,10 +43,68 @@ export class AssesmentScreenComponent implements OnInit {
      private fb:FormBuilder,
      private dfs:DataFileService,
     
-     ) {}
+     
+    
+     ) {
+    //   this.chartOptions = {
+    //     series: [
+    //       {
+    //         name: "",
+    //         data: [
+    //           1,
+    //           2,
+    //           3,
+    //           4,
+    //           5,
+    //           6,
+    //           7,
+    //           8,
+    //           9,
+    //           10,
+    //           11,
+    //           12,
+    //           13,
+    //           14,
+    //           15,
+    //           16,
+    //           17,
+    //           18,
+    //           19
+    //         ]
+    //       }
+    //     ],
+    //     chart: {
+    //       type: "bar",
+    //       height: 350
+    //     },
+    //     plotOptions: {
+    //       bar: {
+    //         horizontal: true
+    //       }
+    //     },
+    //     dataLabels: {
+    //       enabled: false
+    //     },
+    //     xaxis: {
+    //       categories: [
+    //         "ANGULAR(0-100%)",
+    //         "C#(0-100%)",
+    //         "OOPS(0-100%)",
+    //         "REACT(0-100%)",
+    //         ".NET(0-100%)",
+    //         "PYTHON(0-100%)"
+    //       ]
+    //     }
+    //   };
+    // }
+      
+     }  
 
+  
+  
   ngOnInit(): void {
     this.getCandidates();
+    
   }
   
 
@@ -54,22 +132,29 @@ export class AssesmentScreenComponent implements OnInit {
   sendData(data:any){
     debugger;
     this.dfs.Intermediate(data);
-    
-      
-    // .subscribe(
-    //   response=>{
-        
-    //   }
-    // )
   }
 
-  // startAssesment(){
-  //   this._navigate.navigate(['inter']);
-  //   console.log("clicked"); 
+  delete(){
+    
+  }
+  // openDialog(): void {
+  //   const dialogRef = this.dialog.open(editForm, {
+  //     width: '250px',
+  //     data: {},
+  //   });
+  //     dialogRef.afterClosed().subscribe(result => {
+  //     console.log('The dialog was closed');
+  //     // this.animal = result;
+  //   });
   // }
 
 
-
-
-  
 }
+
+// @Component({
+//   selector: 'editForm',
+//   templateUrl: 'editForm.html',
+// })
+// export class editForm{
+
+// }

@@ -84,31 +84,33 @@
     color: rgb(19, 158, 19);
     font-size: medium;
   } */
+
 .gap{
   float: left;
 }
 button:disabled {
   background-color:#9b9b9b;
 }
-  button{
+ button{
     background-color: rgb(37, 142, 37);
     color: aliceblue;
     border: none;
     border-radius: 5px;
     margin-top: 52% !important;
-    margin-left: 20%;
+    margin-left: 2%;
+    width: 124px;
   }
   .container{
-    margin-top: 5%;
+    margin-top: 5%; 
   }
   .size{
     margin: 3%;
-    width: 90%;
+    /* width: 90%; */
     box-shadow: 0px 0px 10px 0px #aeabab,
     0 1px 1px 0 #9f9999,
     0 1px 3px 0 #a8a0a0;
   }
-  .col-size{
+  /* .col-size{
     margin: 0.5%;
     padding-bottom: 37px;
     height: 10px;
@@ -116,11 +118,6 @@ button:disabled {
     0 1px 1px 0 #9b9b9b,
     0 1px 3px 0 #9b9b9b;
     
-  }
-  /* mat-card{
-    box-shadow: 0px 0px 10px 0px #9b9b9b,
-    0 1px 1px 0 #9b9b9b,
-    0 1px 3px 0 #9b9b9b;
   } */
   h1{
     padding-left: 1%;
@@ -131,21 +128,25 @@ button:disabled {
     background-color:transparent;
     color: rgb(111, 107, 107);
     /* padding: 16px; */
-    font-size: 16px;
+    font-size: 14px;
     border: none;
-    padding-top: 10px;
+    padding: none;
+    margin: none;
+    /* margin-left: 4% !important;
+    float: right !important; */
+    /* padding-top: 10px; */
   }
   
   .dropdown {
     position: relative;
     display: inline-block;
-    text-align: end;
-    margin-left: 72%;
+    /* text-align: end; */
+    /* margin-left: 10% !important; */
   }
   .dropdown-content {
     display: none;
     position: absolute;
-    right: 0;
+    /* right: 0; */
     background-color: #fdfbfb;
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
@@ -160,3 +161,10 @@ button:disabled {
   .dropdown-content a:hover {background-color: rgb(251, 247, 247);}
   
   .dropdown:hover .dropdown-content {display: block;}
+  
+  .threeDots{
+    float: right;
+  }
+  #menu{
+    height: 200px;
+  }

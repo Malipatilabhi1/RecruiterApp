@@ -6,6 +6,7 @@ import { FormGroup,FormControl } from '@angular/forms';
 import { bindCallback } from 'rxjs';
 import { ElementRef } from '@angular/core';
 import { DataFileService } from '../data-file.service';
+import {formatDate } from '@angular/common';
 
 
 
@@ -37,7 +38,7 @@ export class InterviewerScreenComponent implements OnInit {
   hideMe:boolean=false;
   nextI=0;
   i=1;
-  Today: any;
+  Today: Date=new Date();
   sliderOutput=0;
   skill=0;
   complexity=0;
@@ -51,6 +52,7 @@ export class InterviewerScreenComponent implements OnInit {
   candidate:any=[];
   candidateSkill:any=[];
   p: any = 0;
+  CurrentTime:any;
 
   recruiterData=this.formBuilder.group({
     score:(''),
@@ -61,11 +63,23 @@ export class InterviewerScreenComponent implements OnInit {
     private formBuilder:FormBuilder,
     private httpClient:HttpClient,
     private elementRef: ElementRef,
-    private dfs:DataFileService){}
-
+    private dfs:DataFileService,
+    ){
+      
+      
+    }
+    hour:any;
+    min:any;
+    sec:any;
+    Time:any;
   ngOnInit(): void {
      //call api 
+     let now: Date = new Date();
     this.getCandidateDetails();
+    
+    this.Time=now.getHours()+':'+now.getMinutes()+':'+now.getSeconds();
+    console.log(now);  
+    this.ExtractDate=this.Today.getMonth()+'/'+this.Today.getDate()+'/'+this.Today.getFullYear();
   }
 
   getCandidateDetails(){
@@ -80,12 +94,15 @@ export class InterviewerScreenComponent implements OnInit {
   CId:any;
   arrayLength=0;
   data:any='';
+  status:any;
+ExtractDate:any;
 
   profile(){
     this.Asid=1;
-    this.Today=this.candidate.Date;
+    // this.Today=this.candidate.Date;
     this.CId=this.candidate.canId;
     this.CName=this.candidate.canName;
+    this.status=this.candidate.Candidatestatus;
     this.candidateSkill=this.candidate.skills;  
   }
   
@@ -94,17 +111,18 @@ export class InterviewerScreenComponent implements OnInit {
   note_value=1;
   newArry:any=[];
 
-  getQueAns(canId:any,RowandQuestion_number:any){
+  getQueAns(canId:any,recld:any,Date:any,starttime:any,Candidatestatus:any,skills:any){
     debugger;
     try{
-    this.httpClient.post<any>('http://localhost:3000/assessmentStagingManager',
+    this.httpClient.post<any>('http://localhost:3000/randomizationManager',
     {
     canId,
-    RowandQuestion_number
+    recld,Date,starttime,Candidatestatus,skills
     }).subscribe(
       response=>{      
           this.newArry=response.data;
           // this.arr.push(this.newArry);
+          console.log(response);
           console.log(this.newArry);
           this.update();
       }
@@ -118,7 +136,7 @@ export class InterviewerScreenComponent implements OnInit {
   assesmentStart()
   {
     debugger;
-    this.getQueAns(this.CId,this.RowandQuestion_number);
+    this.getQueAns(this.CId,this.RowandQuestion_number,this.ExtractDate,this.Time,this.status,this.candidateSkill);
     this.hideMe=true;
     this.keywordload();
     // this.keywordload();  
@@ -157,7 +175,7 @@ export class InterviewerScreenComponent implements OnInit {
         console.log(response);     
         this.i++;
         this.updateData();     
-        this.getQueAns(this.CId,this.i);
+        this.getQueAns(this.CId,this.i,this.ExtractDate,this.Time,this.status,this.candidateSkill);
         this.keywordzz=this.keywordsArray[this.i].keyword;    
       },  
     );
@@ -167,7 +185,7 @@ export class InterviewerScreenComponent implements OnInit {
   prevQA(){
     debugger;
     this.i--;
-    this.getQueAns(this.CId,this.i);
+    this.getQueAns(this.CId,this.i,this.ExtractDate,this.Time,this.status,this.candidateSkill);
   } 
   ScoreA:any=[];
   NoteA:any=[];
@@ -188,7 +206,7 @@ export class InterviewerScreenComponent implements OnInit {
     this.NoteA.push(Note);
     this.recruiterData.reset();
   }
-status:any="closed";
+
   saveData(){
     debugger;
     let status=this.status;

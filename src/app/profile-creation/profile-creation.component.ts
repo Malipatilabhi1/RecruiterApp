@@ -1,5 +1,8 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, ElementRef, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, 
+  Input, OnInit, OnChanges, Output, SimpleChanges, ElementRef } from '@angular/core';
+  import { ActivatedRoute } from '@angular/router';
+
 import {
   FormArray,
   FormBuilder,
@@ -7,42 +10,84 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { DataFileService } from '../data-file.service'; 
+import { DataFileService } from '../data-file.service';
+import { FormData } from '../form-data'; 
 
 @Component({
   selector: 'app-profile-creation',
   templateUrl: './profile-creation.component.html',
   styleUrls: ['./profile-creation.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ProfileCreationComponent implements OnInit {
+export class ProfileCreationComponent implements OnInit{
+
+  // @Input() valu: FormData;
+  // @Output() submitted = new EventEmitter<FormData>();
+
+  // ngOnChanges(changes: SimpleChanges) {
+  //   if (changes.valu?.currentValue) {
+  //     this.form?.patchValue(this.valu);
+  //   }
+  // }
+
+  // submit() {
+  //   this.submitted.emit(this.form.getRawValue());
+  //   this.form.reset();
+  // }
   // profileForm:FormGroup;
- pArray:any=[];
- public static sID1:any;
- public static sID2:any;
- public static sID3:any;
- public static cId1:any;
- public static cId2:any;
- public static cId3:any;
   Skill: any = [];
   Complexity: any = [];
   CandidateInfo: Object = '';
-  public static Name: any='';
-  public static PhoneNo:any ='';
-  public static Email:any='';
-  public static Experiance:any=''; 
-  
+  CandidateDetails:any=[];
+  form:FormGroup;
   // Skill:any=[{skillId:'1',skillName:'C#'},{skillId:'2',skillName:'Angular'},{skillId:'3',skillName:'SQL'},{skillId:'4',skillName:'Azure'}];
 
   constructor(
     private _http: HttpClient,
     private formBuilder: FormBuilder,
     private elementRef: ElementRef,
-    private _Pservice: DataFileService
+    private dfs: DataFileService,
+    private router:ActivatedRoute,
   ) {}
+Cname:any;
+Cemail:any;
+Cphone:any;
+Cexperience:any;
+Cskills:any=[];
 
   ngOnInit(): void {
     this.getSkills();
     this.getComplexity();
+    this.CandidateDetails=this.dfs.arr;
+    this.Cname=this.CandidateDetails.canName;
+    this.Cemail=this.CandidateDetails.EmailId;
+    this.Cphone=this.CandidateDetails.canPhone;
+    this.Cexperience=this.CandidateDetails.canExperience;
+    this.Cskills=this.CandidateDetails.skills;
+    console.log(this.CandidateDetails);
+
+    this.firstFormGroup = this.formBuilder.group({
+      email:new FormControl (this.Cemail),
+      name: new FormControl(this.Cname),
+      phone: new FormControl(this.Cphone),
+      experience: new FormControl(this.Cexperience),
+      age:new FormControl()
+    });
+    this.secondFormGroup = this.formBuilder.group({
+      message: [''],
+    });
+    this.thirdFormGroup = this.formBuilder.group({
+      resume: [''],
+    });
+    this.skillFormGroup = new FormGroup({
+      Skills: new FormArray([
+        new FormGroup({
+          skillId: new FormControl<number[]>([]),
+          cmpId: new FormControl<number[]>([]),
+        }),
+      ]),
+    });
+
   }
 
   ngAfterViewInit() {
@@ -71,7 +116,8 @@ export class ProfileCreationComponent implements OnInit {
     email: ['', Validators.required],
     name: ['', Validators.required],
     phone: ['', Validators.required],
-    experience: [''],
+    experience: ['',Validators.required],
+    age:['']
   });
   secondFormGroup = this.formBuilder.group({
     message: [''],
@@ -99,10 +145,7 @@ export class ProfileCreationComponent implements OnInit {
     debugger;
     // this.pArray=this.skillFormGroup.value.Skills;
     this.SkillA =this.skillFormGroup.value.Skills;
-    // console.log(this.Skills.value)
-    console.log();
-    // debugger;
-
+    
     this.email= this.firstFormGroup.controls['email'].value;
     this.name = this.firstFormGroup.controls['name'].value;
     this.phone = this.firstFormGroup.controls['phone'].value;
@@ -134,8 +177,6 @@ export class ProfileCreationComponent implements OnInit {
     // console.log(this.sID3);
     // console.log(this.cId3);
     
-    
-    
     // console.log(this.pArray[0].skillId);
     // console.log(this.pArray[0].cmpId);
     // console.log(this.pArray[1].skillId);
@@ -145,7 +186,7 @@ export class ProfileCreationComponent implements OnInit {
     
     // this._Pservice.sendingCandidateDataToServer(ProfileCreationComponent.Email,ProfileCreationComponent.PhoneNo,ProfileCreationComponent.PhoneNo,ProfileCreationComponent.Experiance,this.pArray)
     
-    this._Pservice.sendData(this.email,this.phone,this.name,this.experience,this.SkillA).subscribe(response=>
+    this.dfs.sendData(this.email,this.phone,this.name,this.experience,this.SkillA).subscribe(response=>
       {
         console.log(response);
       }
@@ -193,7 +234,7 @@ export class ProfileCreationComponent implements OnInit {
       .get<any>('http://localhost:3000/ComplexityManager')
       .subscribe((response) => {
         this.Complexity = response.data;
-        console.log(this.Complexity);
+        // console.log(this.Complexity);
       });
   }
 
@@ -202,7 +243,7 @@ export class ProfileCreationComponent implements OnInit {
       .get<any>('http://localhost:3000/skillsManager')
       .subscribe((response) => {
         this.Skill = response.data;
-        console.log(this.Skill);
+        // console.log(this.Skill);
       });
   }
   get Skills(): FormArray {
@@ -217,7 +258,7 @@ export class ProfileCreationComponent implements OnInit {
     });
 
     this.Skills.push(skill);
-    console.log(skill);
+    // console.log(skill);
     
   }
 
