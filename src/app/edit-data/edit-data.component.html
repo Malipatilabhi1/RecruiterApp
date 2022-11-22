@@ -1,0 +1,73 @@
+<!-- <p>Assessment Result Data</p> -->
+<div class="container">
+    <h2>Edit Profile</h2>
+    <form class="form-horizontal" [formGroup]="recruiterData">
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="email">Email:</label>
+          <div class="col-sm-4">
+            <input type="email" class="form-control" formControlName="email" id="email" placeholder="Enter email" name="email">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="pwd">Name:</label>
+          <div class="col-sm-4">          
+            <input type="text" class="form-control" formControlName="name" id="pwd" placeholder="Enter name" name="pwd">
+          </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="email">Phone:</label>
+            <div class="col-sm-4">
+              <input type="phone" class="form-control" formControlName="phone" id="email" placeholder="Enter phone number" name="email">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="email">Experience:</label>
+            <div class="col-sm-4">
+              <input type="number" class="form-control" formControlName="experience" id="email" placeholder="Enter experience" name="email">
+            </div>
+          </div>
+          <!-- <div class="form-group">
+            <label class="control-label col-sm-2" for="email">Date:</label>
+            <div class="col-sm-4">
+              <input type="number" class="form-control" formControlName="date" id="email" placeholder="Enter date" name="email">
+            </div>
+          </div> -->
+          <div [formGroup]="skillFormGroup">
+          <div class="form-group"  *ngFor="let y of lengthA">
+
+            <div id="div1" class="leftspace">
+              <mat-form-field class="width">  
+                <mat-label> Skill </mat-label> 
+                <mat-select formControlName=skillId id='skillId' ngDefaultControl  [(value)]="Skill[y].skillId">
+                 <mat-option *ngFor="let x of Skill" value={{x.skillId}}  >{{x.skillId}}</mat-option>  
+                </mat-select>  
+              </mat-form-field>
+            </div>
+            
+            <div id="div2" class="left">
+              <mat-form-field class="width">  
+                <mat-label> Complexity </mat-label>
+                <mat-select formControlName="cmpId" id="cmpId" ngDefaultControl  >
+                 <mat-option *ngFor="let x of Complexity" value="{{x.cmpId}}" >{{x.Skilllevel}}</mat-option>  
+                </mat-select>  
+              </mat-form-field>
+              </div>
+
+          </div>
+        </div>
+        <!-- <div class="form-group">        
+          <div class="col-sm-offset-2 col-sm-4">
+            <div class="checkbox">
+              <label><input type="checkbox" name="remember"> Remember me</label>
+            </div>
+          </div>
+        </div> -->
+        <div class="form-group">        
+          <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-default">Submit</button>
+          </div>
+        </div>
+      </form>
+</div>
+
+

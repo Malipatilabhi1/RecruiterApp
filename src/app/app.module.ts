@@ -18,15 +18,14 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatListModule } from '@angular/material/list';
 
+import {MatDialogModule} from "@angular/material/dialog";
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import {MatGridListModule} from '@angular/material/grid-list'
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import {MatStepperModule} from '@angular/material/stepper';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { RichTextEditorAllModule } from '@syncfusion/ej2-angular-richtexteditor';
-
-
-
+import { NgChartsModule} from 'ng2-charts';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -40,6 +39,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { SidebarContentComponent } from './sidebar-content/sidebar-content.component';
 import { SignInPageComponent } from './sign-in-page/sign-in-page.component';
 import { AssesmentScreenComponent } from './assesment-screen/assesment-screen.component';
+import { EditDataComponent } from './edit-data/edit-data.component';
+import { ScoreComponent } from './score/score.component';
+
 
 @NgModule({
   declarations: [
@@ -51,7 +53,10 @@ import { AssesmentScreenComponent } from './assesment-screen/assesment-screen.co
     DashboardComponent,
     SidebarContentComponent,
     SignInPageComponent,
-    AssesmentScreenComponent
+    AssesmentScreenComponent,
+    EditDataComponent,
+    ScoreComponent,
+    
   ],
   imports: [
     
@@ -78,9 +83,8 @@ import { AssesmentScreenComponent } from './assesment-screen/assesment-screen.co
     MatStepperModule,
     NgxPaginationModule,
     RichTextEditorAllModule,
-    
-    
-   
+    MatDialogModule,
+    NgChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

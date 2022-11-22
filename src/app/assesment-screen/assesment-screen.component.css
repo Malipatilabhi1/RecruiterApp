@@ -84,24 +84,75 @@
     color: rgb(19, 158, 19);
     font-size: medium;
   } */
-
-.gap{
-  float: left;
+  /* .position{
+    mar-top: 23% !important;
+  } */
+  .new_candidate_btn{
+    background-color: green;
+    margin: none !important;   
+    padding: none !important;
+    width:48px;
+    
+  }
+  .header{
+    margin-left: 1%;
+    height: 60px;
+    margin-bottom: 7px;
+    box-shadow: 0px 0px 10px 0px #aeabab,
+    0 1px 1px 0 #9f9999,
+    0 1px 3px 0 #a8a0a0;
+  }
+  .label{
+    font-size: 22px;
+    color:brown;
+    margin-top: 2%;
+   
+  }
+  .searchbar{
+    float: right;
+    margin: none ;
+    
+    padding: none !important;
+  }
+  #div1,#div2,#div3{
+    display: inline;
+  }
+  .rightF{
+   float: right;
+  }
+  MatDialog{
+    height: 100%;
+    width: 80%;
+  }
+.dialogButton{
+  margin-left: 9%;
+  width: 50px;
+  height: 20px;
+  margin-top: 3%;
 }
 button:disabled {
   background-color:#9b9b9b;
+}
+.zoom:hover {
+  -ms-transform: scale(1.1); /* IE 9 */
+  -webkit-transform: scale(1.1); /* Safari 3-8 */
+  transform: scale(1.1); 
+}
+.position{
+  position:relative;
+  height: 25px;
+  margin-top: 20%;
+  margin-left: 9%;
 }
  button{
     background-color: rgb(37, 142, 37);
     color: aliceblue;
     border: none;
     border-radius: 5px;
-    margin-top: 52% !important;
-    margin-left: 2%;
     width: 124px;
   }
   .container{
-    margin-top: 5%; 
+    margin-top: 12px; 
   }
   .size{
     margin: 3%;
@@ -136,15 +187,18 @@ button:disabled {
     float: right !important; */
     /* padding-top: 10px; */
   }
-  
+  .skills{
+    float: left;
+  }
   .dropdown {
     position: relative;
     display: inline-block;
+    
     /* text-align: end; */
     /* margin-left: 10% !important; */
   }
   .dropdown-content {
-    display: none;
+    display:none;
     position: absolute;
     /* right: 0; */
     background-color: #fdfbfb;
@@ -160,7 +214,7 @@ button:disabled {
   }
   .dropdown-content a:hover {background-color: rgb(251, 247, 247);}
   
-  .dropdown:hover .dropdown-content {display: block;}
+  .dropdown:hover .dropdown-content {display:block;position: block;}
   
   .threeDots{
     float: right;

@@ -82,11 +82,14 @@ Cskills:any=[];
     this.skillFormGroup = new FormGroup({
       Skills: new FormArray([
         new FormGroup({
-          skillId: new FormControl<number[]>([]),
-          cmpId: new FormControl<number[]>([]),
+          skillId: new FormControl([this.Cskills.skillName]),
+          cmpId: new FormControl([this.Cskills.skilllevel]),
         }),
+        
       ]),
+      
     });
+    
 
   }
 
@@ -131,8 +134,11 @@ Cskills:any=[];
         skillId: new FormControl<number[]>([0]),
         cmpId: new FormControl<number[]>([0]),
       }),
+      
     ]),
+    
   });
+  
   isLinear = false;
 
   email:any;

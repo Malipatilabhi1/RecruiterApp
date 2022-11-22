@@ -1,9 +1,12 @@
 
 
 <div class="backgroud">
+  
   <mat-card class="adjustable">
     <mat-card-header>
+     
       <mat-card-title>Profile Creation</mat-card-title>
+      <mat-icon style="margin-left:72%;" matTooltip="Back to Candidate-Info" routerLink="/Candidate-Info">first_page</mat-icon>
     </mat-card-header>
     <!-- <h1 *ngIf="!value">Add Medal</h1>
 <h1 *ngIf="value">Edit Medal</h1> -->
@@ -13,7 +16,6 @@
     <mat-step [stepControl]="firstFormGroup">
       <form [formGroup]="firstFormGroup" class="">
         <ng-template matStepLabel>Basic Info</ng-template>
-        
         <mat-form-field appearance="fill">
           <mat-label>EmailId</mat-label>
           <input matInput placeholder="EmailId" formControlName="email" required>

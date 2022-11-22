@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder } from '@angular/forms';
 
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -16,6 +17,7 @@ export class DashboardComponent implements OnInit {
   constructor(private http:HttpClient,private formBuilder:FormBuilder) { }
 
   ngOnInit(): void {
+    
   }
 
   profileForm=this.formBuilder.group({
@@ -40,4 +42,6 @@ export class DashboardComponent implements OnInit {
     this.http.post('https://recruiterapp-dbb97-default-rtdb.firebaseio.com/Category.json',this.catForm.value)
     .subscribe(response =>console.log(response)); 
   }
+
+  
 }
