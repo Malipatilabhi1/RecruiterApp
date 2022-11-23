@@ -274,10 +274,12 @@ export class ProfileCreationComponent implements OnInit {
     }
     showCandidateAssesmentStatus(){
     this.email = this.firstFormGroup.controls['email'].value;
+    this.sEmail = this.fifthFormGroup.controls['searchEmail'].value;
+
    
     
 
-      this._service.gettingCandidateDatawithAssesmentId(this.email).subscribe(
+      this._service.gettingCandidateDatawithAssesmentId(this.sEmail).subscribe(
         (res)=>{
           console.log(res);
           

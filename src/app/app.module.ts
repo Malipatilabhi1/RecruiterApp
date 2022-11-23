@@ -36,6 +36,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { SidebarContentComponent } from './sidebar-content/sidebar-content.component';
 import { SignInPageComponent } from './sign-in-page/sign-in-page.component';
 import { AssesmentScreenComponent } from './assesment-screen/assesment-screen.component';
+import { LoginPageComponent } from './login-page/login-page.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { AssesmentScreenComponent } from './assesment-screen/assesment-screen.co
     SidebarContentComponent,
     SignInPageComponent,
     AssesmentScreenComponent,
+    LoginPageComponent,
   ],
   imports: [
     BrowserModule,

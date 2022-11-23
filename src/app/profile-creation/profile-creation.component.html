@@ -16,9 +16,12 @@
       <mat-icon button type="button" class="iconE" (click)="checkExistingcandidate()"
         >search
       </mat-icon>
-      <!-- <mat-icon>filter</mat-icon> -->
-    
-     </div>
+      
+    </div>
+    <div class="filter">
+
+      <mat-icon class="iconFilter">filter_alt</mat-icon>
+    </div>
       <!-- <button type="button" class="btn btn-primary">
         <i class="fas fa-search"></i>
       </button> -->
@@ -207,8 +210,19 @@
       </mat-step> -->
 
       <mat-step>
-        <ng-template matStepLabel>Done</ng-template>
-        <h1>You are now done.</h1>
+        <ng-template matStepLabel>Add a Note</ng-template>
+        <!-- <h1>You are now done.</h1> -->
+        <form [formGroup]="secondFormGroup">
+          <mat-form-field appearance="fill">
+            <mat-label>Message for Interviwer</mat-label>
+            <textarea
+              matInput
+              formControlName="message"
+              placeholder="Enter here...."
+              class="text-box-Size"
+            ></textarea>
+          </mat-form-field>
+        </form>
         <div class="done-buttons">
           <button mat-button matStepperPrevious class="color2">Back</button>
           <button mat-button (click)="stepper.reset()" class="red">

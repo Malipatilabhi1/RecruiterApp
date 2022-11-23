@@ -198,8 +198,26 @@ button{
    height: 30px;
    width:230px;
    font-size: medium;
+   border-radius: 10px;
+   box-shadow: inset;
 
   }
+  .filter{
+   margin-left: 13px;
+   margin-top: 3px;
+   /* background-color: #fdfbfb; */
+
+   
+  }
+  .iconFilter{
+   color: blueviolet;
+   border-color: black;
+   outline-color: black;
+  }
+  .done-buttons{
+   margin-left: 65%;
+   margin-top: 21%;
+}
  
 /* .padding{
    padding-top: 1%;
