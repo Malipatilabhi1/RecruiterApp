@@ -17,6 +17,8 @@ import { ProfileServiceService } from '../services/profile-service.service';
 export class ProfileCreationComponent implements OnInit {
   // profileForm:FormGroup;
   pArray: any = [];
+  skillData:any;
+  skillArray:any;
   edata:any;
   eRes:any;
   arr:any=[];
@@ -269,21 +271,27 @@ export class ProfileCreationComponent implements OnInit {
         
       }
     )
+    
+    this._service.gettingCandidateDatawithAssesmentId(this.sEmail).subscribe(
+      (res)=>{
+        this.skillData =res;
+        console.log(this.skillData);
+
+        this.skillArray = this.skillData.data[0].skills;
+        console.log(this.skillArray[1].skillName);
+        
+        
+      }
+    )
   
  
     }
     showCandidateAssesmentStatus(){
-    this.email = this.firstFormGroup.controls['email'].value;
+    // this.email = this.firstFormGroup.controls['email'].value;
     this.sEmail = this.fifthFormGroup.controls['searchEmail'].value;
       
     
 
-      this._service.gettingCandidateDatawithAssesmentId(this.sEmail).subscribe(
-        (res)=>{
-          console.log(res);
-          
-        }
-      )
     }
 
 }

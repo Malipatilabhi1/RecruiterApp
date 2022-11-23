@@ -186,7 +186,7 @@ button{
 
   }
   .p{
-   margin-top: 5px;
+   margin-top: 4px;
    margin-left: 5px;
    width: 10px;
   }
@@ -216,7 +216,24 @@ button{
 
    
   }
+  /* .skillclass{ */
+   /* margin-left: 55px;
+
+  }
+
+  .complex{
+   margin-left: 30px;
+  } */
+ .skill{
+   margin-left: 70px;
+   /* margin-top: 40px; */
+ }
  
+ .level{
+   margin-left: 80px;
+   color: green;
+   
+ }
 /* .padding{
    padding-top: 1%;
    padding-left: 3%;
