@@ -200,6 +200,22 @@ button{
    font-size: medium;
 
   }
+  .iconFilter{
+   color: blueviolet;
+   border-color: black;
+   outline-color: black;
+  }
+  .done-buttons{
+   margin-left: 65%;
+   margin-top: 21%;
+}
+.filter{
+   margin-left: 13px;
+   margin-top: 3px;
+   /* background-color: #fdfbfb; */
+
+   
+  }
  
 /* .padding{
    padding-top: 1%;
