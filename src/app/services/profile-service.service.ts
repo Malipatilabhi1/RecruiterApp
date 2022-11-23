@@ -10,17 +10,36 @@ export class ProfileServiceService {
 
   sendingCandidateDataToServer(
     emailId: any,
-    name: any,
     phone: any,
-    experiance: any,
+    name: any,
+    experience: any,
     skills: number
   ) {
-    return this._http.post('http://localhost:3000/candidateManager/profile', {
+    return this._http.post('http://localhost:3000/candidateManager/saveData', {
       emailId,
       phone,
       name,
-      experiance,
+      experience,
       skills,
     });
+  }
+
+  GettingDataViaEmailId(emailId: any) {
+    return this._http.post(
+      'http://localhost:3000/candidateManager/filterEmail',
+      {
+        emailId,
+      }
+    );
+  }
+
+  gettingCandidateDatawithAssesmentId(emailId: any) {
+    return this._http.post(
+      'http://localhost:3000/candidateManager/candidateskill',
+
+      {
+        emailId,
+      }
+    );
   }
 }

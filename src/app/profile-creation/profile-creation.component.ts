@@ -17,31 +17,25 @@ import { ProfileServiceService } from '../services/profile-service.service';
 export class ProfileCreationComponent implements OnInit {
   // profileForm:FormGroup;
   pArray: any = [];
-  data: any;
-  public static sID1: any = '';
-  public static sID2: any = '';
-  public static sID3: any = '';
-  public static cId1: any = '';
-  public static cId2: any = '';
-  public static cId3: any = '';
+  edata:any;
+  eRes:any;
+  arr:any=[];
+  sEmail:any;
   Skill: any = [];
   Complexity: any = [];
   CandidateInfo: Object = '';
-  Name: any = '';
-  PhoneNo: any = '';
-  Email: any = '';
-  Experiance: any = '';
-  i!: number;
-  value: any = [];
-  key: any = [];
+  public static Name: any = '';
+  public static PhoneNo: any = '';
+  public static Email: any = '';
+  public static Experiance: any = '';
 
   // Skill:any=[{skillId:'1',skillName:'C#'},{skillId:'2',skillName:'Angular'},{skillId:'3',skillName:'SQL'},{skillId:'4',skillName:'Azure'}];
-  public formGroup: FormGroup | undefined;
+
   constructor(
     private _http: HttpClient,
     private formBuilder: FormBuilder,
     private elementRef: ElementRef,
-    private _Pservice: ProfileServiceService
+    private _service: ProfileServiceService
   ) {}
 
   ngOnInit(): void {
@@ -77,6 +71,9 @@ export class ProfileCreationComponent implements OnInit {
     phone: ['', Validators.required],
     experience: [''],
   });
+  fifthFormGroup = this.formBuilder.group({
+    searchEmail: ['']
+  });
   secondFormGroup = this.formBuilder.group({
     message: [''],
   });
@@ -86,29 +83,42 @@ export class ProfileCreationComponent implements OnInit {
   skillFormGroup = new FormGroup({
     Skills: new FormArray([
       new FormGroup({
-        skillId: new FormControl(),
-        cmpId: new FormControl(),
+        skillId: new FormControl<number[]>([0]),
+        cmpId: new FormControl<number[]>([0]),
       }),
     ]),
   });
   isLinear = false;
 
-  storeDatas() {
-    // debugger;
-    this.pArray = this.skillFormGroup.value.Skills;
-    console.log(this.Skills);
-    console.log(this.pArray);
-    this.Email = this.firstFormGroup.controls['email'].value;
-    this.Name = this.firstFormGroup.controls['name'].value;
-    this.PhoneNo = this.firstFormGroup.controls['phone'].value;
-    this.Experiance = this.firstFormGroup.controls['experience'].value;
-    +' yrs';
+  email: any;
+  name: any;
+  phone: any;
+  experience: any;
+  SkillA: any = [];
 
-    console.log(this.secondFormGroup.controls['message'].value);
-    console.log(this.thirdFormGroup.controls['resume'].value);
-    console.log(this.firstFormGroup.controls['email'].value);
-    console.log(this.firstFormGroup.controls['name'].value);
-    console.log(this.firstFormGroup.controls['phone'].value);
+  storeDatas() {
+    debugger;
+    // this.pArray=this.skillFormGroup.value.Skills;
+    this.SkillA = this.skillFormGroup.value.Skills;
+    // console.log(this.Skills.value)
+    console.log(this.SkillA);
+    // debugger;
+
+    this.email = this.firstFormGroup.controls['email'].value;
+    this.name = this.firstFormGroup.controls['name'].value;
+    this.phone = this.firstFormGroup.controls['phone'].value;
+    this.experience = this.firstFormGroup.controls['experience'].value;
+
+    // ProfileCreationComponent.Email= this.firstFormGroup.controls['email'].value;
+    // ProfileCreationComponent.Name = this.firstFormGroup.controls['name'].value;
+    // ProfileCreationComponent.PhoneNo = this.firstFormGroup.controls['phone'].value;
+    // ProfileCreationComponent.Experiance= this.firstFormGroup.controls['experience'].value;
+
+    // console.log(this.secondFormGroup.controls['message'].value);
+    // console.log(this.thirdFormGroup.controls['resume'].value);
+    // console.log(this.firstFormGroup.controls['email'].value);
+    // console.log(this.firstFormGroup.controls['name'].value);
+    // console.log(this.firstFormGroup.controls['phone'].value);
 
     // ProfileCreationComponent.sID1 = this.pArray[0].skillId;
     // ProfileCreationComponent.sID2 = this.pArray[1].skillId;
@@ -129,46 +139,13 @@ export class ProfileCreationComponent implements OnInit {
     // console.log(this.pArray[2].skillId);
     // console.log(this.pArray[2].cmpId);
 
-    console.log(
-      '-----------------------------------------------------------------'
-    );
-    console.log(this.CandidateInfo);
-    console.log(
-      '-----------------------------------------------------------------'
-    );
+    // this._Pservice.sendingCandidateDataToServer(ProfileCreationComponent.Email,ProfileCreationComponent.PhoneNo,ProfileCreationComponent.PhoneNo,ProfileCreationComponent.Experiance,this.pArray)
 
-    for (this.i = 0; this.i < this.pArray.length; this.i++) {
-      this.value = this.pArray[this.i].skillId;
-      this.key = this.pArray[this.i].cmpId;
-    }
-    console.log(this.value, '', this.key);
-
-    this.data = {
-      emailId: this.Email,
-      phone: this.PhoneNo,
-      name: this.Name,
-      experiance: this.Experiance,
-      skills: this.pArray,
-    };
-
-    // console.log(this.data.skills);
-
-    this._Pservice
-      .sendingCandidateDataToServer(
-        this.Email,
-        this.PhoneNo,
-        this.Name,
-        this.Experiance,
-        this.pArray
-      )
-      .subscribe(
-        (res) => {
-          console.log(res);
-        },
-        (error) => {
-          console.warn(error);
-        }
-      );
+    this._service
+      .sendingCandidateDataToServer(this.email, this.phone, this.name, this.experience, this.SkillA)
+      .subscribe((response: any) => {
+        console.log(response);
+      });
   }
   //--------------------------------------------------
 
@@ -186,7 +163,26 @@ export class ProfileCreationComponent implements OnInit {
   // }
 
   // Pass profile data to backend
-
+  sendData(data: any) {
+    debugger;
+    return this._http
+      .post<any>(
+        'url',
+        data
+        // {
+        // name,
+        // Phone,
+        // Emailid,
+        // Experience,
+        // resume,
+        // Skills:{
+        //   skillid,
+        //   complexity
+        // }
+        // }
+      )
+      .subscribe((response) => {});
+  }
   getComplexity() {
     this._http
       .get<any>('http://localhost:3000/ComplexityManager')
@@ -204,7 +200,6 @@ export class ProfileCreationComponent implements OnInit {
         console.log(this.Skill);
       });
   }
-
   get Skills(): FormArray {
     return this.skillFormGroup.get('Skills') as FormArray;
   }
@@ -212,17 +207,12 @@ export class ProfileCreationComponent implements OnInit {
   addNew() {
     // debugger;
     const skill = new FormGroup({
-      skillId: new FormControl(),
-      cmpId: new FormControl(),
+      skillId: new FormControl<number>(0),
+      cmpId: new FormControl<number>(0),
     });
 
     this.Skills.push(skill);
-
     console.log(skill);
-
-    // const aa = this.formGroup?.get.skillId?.value;
-    // const skilll = new FormGroup()
-    //   const sid = skilll.skillId;
   }
 
   // storeData(data:any){
@@ -242,8 +232,60 @@ export class ProfileCreationComponent implements OnInit {
 
   // }
 
-  onSelectSkill(data: any) {}
+  onSelectSkill(data: any) {
+    // debugger;
+  }
   pitch(data: any) {
     // debugger;
   }
+
+  checkExistingcandidate(){
+    this.email = this.firstFormGroup.controls['email'].value;
+    this.sEmail = this.fifthFormGroup.controls['searchEmail'].value;
+    console.log(this.sEmail);
+    // console.log(this.email);
+    
+    this._service.GettingDataViaEmailId(this.sEmail).subscribe(
+      (res)=>{
+        // console.log(res);
+        this.edata=res;
+        this.eRes = this.edata;
+        console.log(this.eRes);
+        
+        console.log(this.edata[0].canName);
+      
+        
+    // this.firstFormGroup.setValue.name(this.eRes[0].canName)
+    // , phone: this.eRes[0].canPhone, experience:this.eRes[0].canExperience
+    this.firstFormGroup.controls.name.setValue(this.edata[0].canName);
+    this.firstFormGroup.controls.email.setValue(this.edata[0].EmailId)
+    this.firstFormGroup.controls.phone.setValue(this.edata[0].canPhone)
+    this.firstFormGroup.controls.experience.setValue(this.edata[0].canExperience)
+
+
+    // this.firstFormGroup.setValue.name(this.eRes[0].canName)
+    
+
+        
+      }
+    )
+  
+ 
+    }
+    showCandidateAssesmentStatus(){
+    this.email = this.firstFormGroup.controls['email'].value;
+   
+    
+
+      this._service.gettingCandidateDatawithAssesmentId(this.email).subscribe(
+        (res)=>{
+          console.log(res);
+          
+        }
+      )
+    }
+
 }
+  
+
+
