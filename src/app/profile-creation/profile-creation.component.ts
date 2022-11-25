@@ -17,12 +17,16 @@ import { ProfileServiceService } from '../services/profile-service.service';
 export class ProfileCreationComponent implements OnInit {
   // profileForm:FormGroup;
   pArray: any = [];
-  skillData:any;
-  skillArray:any;
-  edata:any;
-  eRes:any;
-  arr:any=[];
-  sEmail:any;
+  updateData: any;
+  Candidatestatus: any;
+  canId: any;
+  status: boolean = false;
+  skillData: any;
+  skillArray: any;
+  edata: any;
+  eRes: any;
+  arr: any = [];
+  sEmail: any;
   Skill: any = [];
   Complexity: any = [];
   CandidateInfo: Object = '';
@@ -74,7 +78,7 @@ export class ProfileCreationComponent implements OnInit {
     experience: [''],
   });
   fifthFormGroup = this.formBuilder.group({
-    searchEmail: ['']
+    searchEmail: [''],
   });
   secondFormGroup = this.formBuilder.group({
     message: [''],
@@ -99,7 +103,7 @@ export class ProfileCreationComponent implements OnInit {
   SkillA: any = [];
 
   storeDatas() {
-    debugger;
+    // debugger;
     // this.pArray=this.skillFormGroup.value.Skills;
     this.SkillA = this.skillFormGroup.value.Skills;
     // console.log(this.Skills.value)
@@ -142,12 +146,37 @@ export class ProfileCreationComponent implements OnInit {
     // console.log(this.pArray[2].cmpId);
 
     // this._Pservice.sendingCandidateDataToServer(ProfileCreationComponent.Email,ProfileCreationComponent.PhoneNo,ProfileCreationComponent.PhoneNo,ProfileCreationComponent.Experiance,this.pArray)
+    console.log(this.status);
+    this.updateData = [
+      {
+        canPhone: this.phone,
+        canName: this.name,
+        EmailId: this.email,
+        canExperience: this.experience,
+        skills: this.SkillA,
+        canId: this.canId,
+        Candidatestatus: this.Candidatestatus,
+      }
+    ];
+    console.log(this.updateData);
 
-    this._service
-      .sendingCandidateDataToServer(this.email, this.phone, this.name, this.experience, this.SkillA)
-      .subscribe((response: any) => {
-        console.log(response);
+    if (this.status) {
+      this._service.updateCandidateStatus(this.updateData).subscribe((res) => {
+        console.log(res);
       });
+    } else {
+      this._service
+        .sendingCandidateDataToServer(
+          this.email,
+          this.phone,
+          this.name,
+          this.experience,
+          this.SkillA
+        )
+        .subscribe((response: any) => {
+          console.log(response);
+        });
+    }
   }
   //--------------------------------------------------
 
@@ -166,7 +195,7 @@ export class ProfileCreationComponent implements OnInit {
 
   // Pass profile data to backend
   sendData(data: any) {
-    debugger;
+    // debugger;
     return this._http
       .post<any>(
         'url',
@@ -241,60 +270,55 @@ export class ProfileCreationComponent implements OnInit {
     // debugger;
   }
 
-  checkExistingcandidate(){
+  checkExistingcandidate() {
     this.email = this.firstFormGroup.controls['email'].value;
     this.sEmail = this.fifthFormGroup.controls['searchEmail'].value;
     console.log(this.sEmail);
     // console.log(this.email);
-    
-    this._service.GettingDataViaEmailId(this.sEmail).subscribe(
-      (res)=>{
-        // console.log(res);
-        this.edata=res;
-        this.eRes = this.edata;
-        console.log(this.eRes);
-        
-        console.log(this.edata[0].canName);
-      
-        
-    // this.firstFormGroup.setValue.name(this.eRes[0].canName)
-    // , phone: this.eRes[0].canPhone, experience:this.eRes[0].canExperience
-    this.firstFormGroup.controls.name.setValue(this.edata[0].canName);
-    this.firstFormGroup.controls.email.setValue(this.edata[0].EmailId)
-    this.firstFormGroup.controls.phone.setValue(this.edata[0].canPhone)
-    this.firstFormGroup.controls.experience.setValue(this.edata[0].canExperience)
 
+    this._service.GettingDataViaEmailId(this.sEmail).subscribe((res) => {
+      // console.log(res);
+      this.edata = res;
+      this.eRes = this.edata;
+      console.log(this.eRes);
 
-    // this.firstFormGroup.setValue.name(this.eRes[0].canName)
-    
+      console.log(this.edata[0].canName);
 
-        
-      }
-    )
-    
-    this._service.gettingCandidateDatawithAssesmentId(this.sEmail).subscribe(
-      (res)=>{
-        this.skillData =res;
+      // this.firstFormGroup.setValue.name(this.eRes[0].canName)
+      // , phone: this.eRes[0].canPhone, experience:this.eRes[0].canExperience
+      this.firstFormGroup.controls.name.setValue(this.edata[0].canName);
+      this.firstFormGroup.controls.email.setValue(this.edata[0].EmailId);
+      this.firstFormGroup.controls.phone.setValue(this.edata[0].canPhone);
+      this.firstFormGroup.controls.experience.setValue(
+        this.edata[0].canExperience
+      );
+
+      // this.firstFormGroup.setValue.name(this.eRes[0].canName)
+    });
+
+    this._service
+      .gettingCandidateDatawithCandidateskill(this.sEmail)
+      .subscribe((res) => {
+        this.skillData = res;
+        this.status = true;
+
         console.log(this.skillData);
 
         this.skillArray = this.skillData.data[0].skills;
         console.log(this.skillArray[1].skillName);
-        
-        
-      }
-    )
-  
- 
+        this.canId = this.skillData.data[0].canId;
+        this.Candidatestatus = this.skillData.data[0].Candidatestatus;
+        console.log(this.Candidatestatus);
+
+        console.log(this.canId);
+        console.log(this.status);
+      });
+    if (this.skillData) {
+      this.status = true;
     }
-    showCandidateAssesmentStatus(){
+  }
+  showCandidateAssesmentStatus() {
     // this.email = this.firstFormGroup.controls['email'].value;
     this.sEmail = this.fifthFormGroup.controls['searchEmail'].value;
-      
-    
-
-    }
-
+  }
 }
-  
-
-

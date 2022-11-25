@@ -33,7 +33,7 @@ export class ProfileServiceService {
     );
   }
 
-  gettingCandidateDatawithAssesmentId(emailId: any) {
+  gettingCandidateDatawithCandidateskill(emailId: any) {
     return this._http.post(
       'http://localhost:3000/candidateManager/candidateskill',
 
@@ -41,5 +41,13 @@ export class ProfileServiceService {
         emailId,
       }
     );
+  }
+
+  updateCandidateStatus(data:any){
+    return this._http.post('http://localhost:3000/candidateManager/updateCandidateStatus',
+    {
+      data
+    }
+    )
   }
 }

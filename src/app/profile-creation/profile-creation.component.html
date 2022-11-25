@@ -99,21 +99,29 @@
       <!-- #docregion label -->
       <mat-step [stepControl]="skillFormGroup" label="Skills">
         <!-- #enddocregion label -->
-        <div class="d-flex flex-row bd-highlight mb-3">
-          <!-- <h2 class="skillclass">SKILLS</h2> -->
-          <div class="d-flex flex-column bd-highlight mb-3">
-            <div class="skill" *ngFor="let skill of skillArray">
-              <p>{{skill.skillName}}     </p>
+        <!-- <div class="d-flex flex-row bd-highlight mb-3"> -->
+          <!-- <div class="d-flex flex-column bd-highlight mb-3"> -->
+            <div class="row" *ngIf="edata">
+              
+              <div class="col-5">
+                <h2 class="skillclass">Skills</h2>
+
+                <div class="skill" *ngFor="let skill of skillArray">
+                  <p>{{skill.skillName}}     </p>
+                </div>
+              </div>
+          <!-- </div> -->
+          <!-- <div class="d-flex flex-column bd-highlight mb-3"> -->
+            <div class="col-5">
+            <h2 class="complex">Complexity</h2>
+
+            <div class="level" *ngFor="let skill of skillArray">
+              <p> {{skill.Skilllevel}}</p>
             </div>
           </div>
-          <!-- <h2 class="complex">Complexity</h2> -->
-        <div class="d-flex flex-column bd-highlight mb-3">
-
-        <div class="level" *ngFor="let skill of skillArray">
-          <h3> {{skill.Skilllevel}}</h3>
-        </div>
-        </div>
-        </div>
+      </div>
+        <!-- </div> -->
+        <!-- </div> -->
         <form [formGroup]="skillFormGroup">
           <div formArrayName="Skills">
             <ng-container

@@ -164,10 +164,10 @@ button{
   .dropdown-content a:hover {background-color: rgb(251, 247, 247);}
   .dropdown:hover .dropdown-content {display: block;}
  
-  .skill{
+  /* .skill{
     color: rgb(19, 158, 19);
     font-size: medium;
-  }
+  } */
   .buttonCheck{
    /* margin-left: 10px; */
   }
@@ -216,22 +216,25 @@ button{
 
    
   }
-  /* .skillclass{ */
-   /* margin-left: 55px;
+  .skillclass{
+    margin-left: 60px;
 
   }
 
-  .complex{
-   margin-left: 30px;
-  } */
+   .complex{
+   margin-left: 20px;
+  } 
  .skill{
-   margin-left: 70px;
+   margin-left: 60px;
    /* margin-top: 40px; */
+   font-weight: bold;
+   color: rgb(32, 8, 117);
  }
  
  .level{
-   margin-left: 80px;
-   color: green;
+   margin-left: 20px;
+   color: rgb(32, 6, 80);
+   font-weight: bold;
    
  }
 /* .padding{
