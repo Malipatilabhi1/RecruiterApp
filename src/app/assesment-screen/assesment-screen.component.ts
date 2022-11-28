@@ -4,10 +4,11 @@ import { Router } from '@angular/router';
 import{FormBuilder} from '@angular/forms';
 import { DataFileService } from '../data-file.service';
 import { Pipe,PipeTransform } from '@angular/core';
-import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
+import {MatDialog, MatDialogConfig, MatDialogRef} from "@angular/material/dialog";
 import { EditDataComponent } from '../edit-data/edit-data.component';
 import { ScoreComponent } from '../score/score.component';
-// import { Color, Label } from 'ng2-charts';
+import { style } from '@angular/animations';
+// import { baseColors, Label } from 'ng2-charts';
 
 
 
@@ -22,6 +23,12 @@ export class AssesmentScreenComponent implements OnInit {
   skillA:any=[];
   buttonDisabled:boolean;
   search : String ="";
+  Searchdata:string="";
+  Searchvalue:string="";
+  Searchdata1:string="";
+  Searchvalue1:string="";
+  dialogRef: MatDialogRef <any> ;
+
   constructor(
      private http: HttpClient,
      private _navigate:Router,
@@ -63,23 +70,30 @@ export class AssesmentScreenComponent implements OnInit {
   delete(){
     
   }
+  searchdata(value:any){
+    if(value=='status'){
+      this.Searchdata='Candidatestatus';
+    }
+  }
 
   openDialogEdit(value:any){
    
     this.dialog.open(EditDataComponent,
       {
         data:{
-          value
+          value,
+          style:"width:80%, height:80% "
         }
       });
   }
   openDialogScore(){
-    this.dialog.open(ScoreComponent,
-      {
-        data:{
-          age:100
-        }
-      });
+    this.dialogRef = this.dialog.open(ScoreComponent, {
+      height: '90%',
+      width: '90%'
+  });
+  
+  
+    
   }
 
 }

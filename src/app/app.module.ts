@@ -17,7 +17,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatListModule } from '@angular/material/list';
-
+import { MatTabsModule } from '@angular/material/tabs';
+import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatDialogModule} from "@angular/material/dialog";
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import {MatGridListModule} from '@angular/material/grid-list'
@@ -42,6 +43,10 @@ import { AssesmentScreenComponent } from './assesment-screen/assesment-screen.co
 import { EditDataComponent } from './edit-data/edit-data.component';
 import { ScoreComponent } from './score/score.component';
 
+import * as CanvasJSAngularChart from '../assets/canvasjs.angular.component';
+import { FilterPipe } from './filter.pipe';
+var CanvasJSChart = CanvasJSAngularChart.CanvasJSChart;
+
 
 @NgModule({
   declarations: [
@@ -55,8 +60,8 @@ import { ScoreComponent } from './score/score.component';
     SignInPageComponent,
     AssesmentScreenComponent,
     EditDataComponent,
-    ScoreComponent,
-    
+    ScoreComponent, 
+    CanvasJSChart, FilterPipe
   ],
   imports: [
     
@@ -84,7 +89,9 @@ import { ScoreComponent } from './score/score.component';
     NgxPaginationModule,
     RichTextEditorAllModule,
     MatDialogModule,
-    NgChartsModule
+    NgChartsModule,
+    MatTabsModule,
+    MatDatepickerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

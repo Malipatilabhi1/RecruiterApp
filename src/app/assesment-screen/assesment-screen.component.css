@@ -87,11 +87,44 @@
   /* .position{
     mar-top: 23% !important;
   } */
+  .search_status{
+    padding-left: 4%; 
+  }
+  .search_label{
+    margin-left: 10px;
+  }
+  .filter_label{
+    font-size: 18px;
+      color:brown;
+      margin-left: 10px;
+      margin-bottom: 6%;
+  }
+  .search_icon{
+    float: right;
+    color:brown;
+  }
+  .search_feild{
+    margin-left: 5px;
+  }
+  .status_select{
+    margin-left: 1%;
+    margin-bottom: 6%;
+    width: 140px;
+  }
+    .filter{
+      float: right;
+      right: 0;
+    }
+    .namefilter{
+      margin-left: 7%;
+    }
   .new_candidate_btn{
     background-color: green;
     margin: none !important;   
     padding: none !important;
-    width:48px;
+    width:110px;
+    float: right;
+    margin-right: 2%;
     
   }
   .header{
@@ -109,10 +142,9 @@
    
   }
   .searchbar{
-    float: right;
     margin: none ;
-    
     padding: none !important;
+    margin-left: 1%;
   }
   #div1,#div2,#div3{
     display: inline;
@@ -221,4 +253,24 @@ button:disabled {
   }
   #menu{
     height: 200px;
+  }
+  .split1{
+    height: 100%;
+    width: 70%;
+    position: fixed;
+    background:rgb(189, 189, 91);
+    z-index: 1;
+    left: 0;
+    overflow-x: hidden;
+    padding-top: 20px;
+  }
+  .split2{
+    height: 100%;
+    width: 30%;
+    position: fixed;
+    background:rgb(235, 235, 231);
+    z-index: 1;
+    right: 0;
+    overflow-x: hidden;
+    padding-top: 20px;
   }
