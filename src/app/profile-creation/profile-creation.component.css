@@ -13,15 +13,40 @@ mat-card{
    display: inline;
 }
 
+.leftspacee{
+   margin-left: 8%;
+
+}
+.leftspaceee{
+
+}
 .spaceL{
    padding-left: 53%;
 }
 .leftspace{
+   margin-left: 17%;
+   /* padding-top: 20%; */
+}
+.leftspace1{
    margin-left: 8%;
-   padding-top: 20%;
+
+}
+
+
+.mskill{
+   font-weight: bold;
+
+}
+.mlevel{
+   font-weight: bold;
+
 }
 .text-box-Size{
    min-height: 80px;
+}
+.divu2{
+   display: inline;
+
 }
 .width{
    width: 180px;

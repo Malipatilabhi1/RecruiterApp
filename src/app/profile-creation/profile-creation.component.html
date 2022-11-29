@@ -101,7 +101,7 @@
         <!-- #enddocregion label -->
         <!-- <div class="d-flex flex-row bd-highlight mb-3"> -->
           <!-- <div class="d-flex flex-column bd-highlight mb-3"> -->
-            <div class="row" *ngIf="edata">
+            <!-- <div class="row" *ngIf="edata">
               
               <div class="col-5">
                 <h2 class="skillclass">Skills</h2>
@@ -110,8 +110,7 @@
                   <p>{{skill.skillName}}     </p>
                 </div>
               </div>
-          <!-- </div> -->
-          <!-- <div class="d-flex flex-column bd-highlight mb-3"> -->
+       
             <div class="col-5">
             <h2 class="complex">Complexity</h2>
 
@@ -119,8 +118,52 @@
               <p> {{skill.Skilllevel}}</p>
             </div>
           </div>
+      </div> -->
+      <div class="d-flex flex-row bd-highlight mb-3">
+      <div id="divu" class="leftspacee" *ngIf="edata" >
+        
+        <mat-form-field class="width" *ngFor="let skill of skillArray">
+          <mat-label class="mskill"> {{skill.skillName}}  </mat-label>
+          <mat-select
+            formControlName="skillId"
+            id="skillId"
+            ngDefaultControl
+            (ngModelChange)="onSelectSkill($event)"
+          >
+            <mat-option
+              *ngFor="let x of Skill"
+              value="{{ x.skillId }}"
+              (change)="onSelectSkill($event)"
+              >{{ x.skillName }}</mat-option
+            >
+          </mat-select>
+        </mat-form-field>
       </div>
-        <!-- </div> -->
+      
+      <div id="divu2" class="leftspaceee" *ngIf="edata">
+        <mat-form-field class="width" *ngFor="let skill of skillArray">
+          <mat-label class="mlevel"> {{skill.Skilllevel}} </mat-label>
+          
+
+          <mat-select
+            formControlName="cmpId"
+            id="cmpId"
+            ngDefaultControl
+            (ngModelChange)="onSelectSkill($event)"
+          >
+            <mat-option
+              *ngFor="let x of Complexity"
+              value="{{ x.cmpId }}"
+              (change)="onSelectSkill($event)"
+              >{{ x.Skilllevel }}</mat-option
+            >
+          </mat-select>
+        </mat-form-field>
+      </div>
+      </div>
+
+
+        <!-- on proile creation for the first time -->
         <!-- </div> -->
         <form [formGroup]="skillFormGroup">
           <div formArrayName="Skills">
@@ -128,7 +171,7 @@
               *ngFor="let skill of Skills.controls; let i = index"
               [formGroupName]="i"
             >
-              <div id="div1" class="leftspace">
+              <div id="div1" class="leftspace1">
                 <mat-form-field class="width">
                   <mat-label> Skill </mat-label>
                   <mat-select
@@ -155,7 +198,7 @@
       </div> -->
               <div id="div2" class="leftspace">
                 <mat-form-field class="width">
-                  <mat-label> Complexity </mat-label>
+                  <mat-label > Complexity </mat-label>
                   <mat-select
                     formControlName="cmpId"
                     id="cmpId"

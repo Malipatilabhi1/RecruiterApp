@@ -19,6 +19,7 @@ export class ProfileCreationComponent implements OnInit {
   pArray: any = [];
   updateData: any;
   Candidatestatus: any;
+  count: number = 0;
   canId: any;
   status: boolean = false;
   skillData: any;
@@ -87,12 +88,15 @@ export class ProfileCreationComponent implements OnInit {
     resume: [''],
   });
   skillFormGroup = new FormGroup({
-    Skills: new FormArray([
-      new FormGroup({
-        skillId: new FormControl<number[]>([0]),
-        cmpId: new FormControl<number[]>([0]),
-      }),
-    ]),
+    Skills: new FormArray(
+      [
+        new FormGroup({
+          skillId: new FormControl<number[]>([0]),
+          cmpId: new FormControl<number[]>([0]),
+        }),
+      ],
+      [Validators.maxLength(5)]
+    ),
   });
   isLinear = false;
 
@@ -156,7 +160,7 @@ export class ProfileCreationComponent implements OnInit {
         skills: this.SkillA,
         canId: this.canId,
         Candidatestatus: this.Candidatestatus,
-      }
+      },
     ];
     console.log(this.updateData);
 
@@ -237,13 +241,24 @@ export class ProfileCreationComponent implements OnInit {
 
   addNew() {
     // debugger;
-    const skill = new FormGroup({
-      skillId: new FormControl<number>(0),
-      cmpId: new FormControl<number>(0),
-    });
+    this.count++;
+    // console.log('clicked', this.count);
 
-    this.Skills.push(skill);
-    console.log(skill);
+    // while (this.count) {
+    //   if (this.skillData) {
+    //     this.count < 3;
+    //   } else {
+    //     this.count < 6;
+    //   }
+
+      const skill = new FormGroup({
+        skillId: new FormControl<number>(0),
+        cmpId: new FormControl<number>(0),
+      });
+
+      this.Skills.push(skill);
+    // }
+    // console.log(skill);
   }
 
   // storeData(data:any){
@@ -309,6 +324,8 @@ export class ProfileCreationComponent implements OnInit {
         this.canId = this.skillData.data[0].canId;
         this.Candidatestatus = this.skillData.data[0].Candidatestatus;
         console.log(this.Candidatestatus);
+      // this.skillFormGroup.controls.skillId.setValue(this.skillArray[1].skillName);
+
 
         console.log(this.canId);
         console.log(this.status);
