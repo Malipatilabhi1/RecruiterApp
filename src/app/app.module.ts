@@ -27,6 +27,7 @@ import {MatStepperModule} from '@angular/material/stepper';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { RichTextEditorAllModule } from '@syncfusion/ej2-angular-richtexteditor';
 import { NgChartsModule} from 'ng2-charts';
+import { MatNativeDateModule, MatRippleModule } from '@angular/material/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -45,6 +46,7 @@ import { ScoreComponent } from './score/score.component';
 
 import * as CanvasJSAngularChart from '../assets/canvasjs.angular.component';
 import { FilterPipe } from './filter.pipe';
+import { AssessmentRecordComponent } from './assessment-record/assessment-record.component';
 var CanvasJSChart = CanvasJSAngularChart.CanvasJSChart;
 
 
@@ -61,7 +63,7 @@ var CanvasJSChart = CanvasJSAngularChart.CanvasJSChart;
     AssesmentScreenComponent,
     EditDataComponent,
     ScoreComponent, 
-    CanvasJSChart, FilterPipe
+    CanvasJSChart, FilterPipe, AssessmentRecordComponent
   ],
   imports: [
     
@@ -91,7 +93,8 @@ var CanvasJSChart = CanvasJSAngularChart.CanvasJSChart;
     MatDialogModule,
     NgChartsModule,
     MatTabsModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    MatNativeDateModule,MatRippleModule
   ],
   providers: [],
   bootstrap: [AppComponent]

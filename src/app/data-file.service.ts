@@ -9,6 +9,8 @@ import { ProfileCreationComponent } from './profile-creation/profile-creation.co
 export class DataFileService {
 
   arr:any=[];
+  Assessments:any=[];
+  Search_email:any;
   constructor(private _http:HttpClient) { }
 
   Intermediate(data:any)
@@ -66,4 +68,53 @@ export class DataFileService {
   //       }
   //     );
   // }
+  sendingCandidateDataToServer(
+    emailId: any,
+    phone: any,
+    name: any,
+    experience: any,
+    skills: number
+  ) {
+    return this._http.post('http://localhost:3000/candidateManager/saveData', {
+      emailId,
+      phone,
+      name,
+      experience,
+      skills,
+    });
+  }
+
+  GettingDataViaEmailId(emailId: any) {
+   
+    return this._http.post('http://localhost:3000/candidateManager/candidateSkill',
+      {
+        emailId,
+      }
+    );
+  }
+
+  gettingCandidateDatawithCandidateskill(emailId: any) {
+    return this._http.post(
+      'http://localhost:3000/candidateManager/candidateskill',
+
+      {
+        emailId,
+      }
+    );
+  }
+
+  updateCandidateStatus(data:any){
+    return this._http.post('http://localhost:3000/candidateManager/updateCandidateStatus',
+    {
+      data
+    }
+    )
+  }
+  getAssessments(emailId:any){
+    return this._http.post<any>('http://localhost:3000/candidateManager/candidateSkill',
+    {emailId}
+  ).subscribe(response=>{
+    this.Assessments=response.data;
+  })
+  }
 }

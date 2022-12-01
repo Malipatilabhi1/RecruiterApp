@@ -381,7 +381,7 @@
   <div class="container col-lg-10" id="div1" >
     <mat-card class="col-md-12 header">
     <div id="div1">
-      <label class="label">Candidate-Info</label>
+      <label class="label">CandidateInfo</label>
     </div>
    
     <mat-icon class="filter" id="div2" (click)="sidenavright.toggle();">filter_alt</mat-icon>
@@ -391,7 +391,8 @@
     </div>
   </mat-card>
     <div class="row">
-      <div *ngFor="let data of arr|filter:Searchvalue:Searchdata|filter:Searchvalue1:Searchdata1;" class="col-md-4" >
+      <div *ngFor="let data of arr" class="col-md-4" >
+        <!-- |filter:Searchvalue:Searchdata|filter:Searchvalue1:Searchdata1; -->
         <mat-card class="col-md-12 size zoom">
           
           <div class="col-md-6">
@@ -403,7 +404,10 @@
             
           </div>
           <div class="col-md-6">
-            <button (click)="openDialogScore()" class="dialogButton" [hidden]="data.Candidatestatus =='Open'">Score</button>
+            <button  class="dialogButton"  (click)="openDialogScore(data.canName)" [hidden]="data.Candidatestatus =='Open'">Score</button>
+
+            <!-- <button  class="dialogButton"  routerLink="/barchart" [hidden]="data.Candidatestatus =='Open'">Score</button> -->
+           
             <mat-icon class="threeDots" id="div2" [matMenuTriggerFor]="menu">more_vert</mat-icon>
 
             <div  class="dropdown skills" id="div1">
@@ -419,7 +423,7 @@
            
             <mat-menu #menu="matMenu">
               <!-- <label mat-menu-item (click)="sendData(data)" routerLink="/profile-creation">Edit</label> -->
-              <label mat-menu-item (click)="openDialogEdit(data)" >Edit</label>
+              <label mat-menu-item routerLink="/profile-creation">Edit</label>
               <!--   -->
               <label mat-menu-item (click)="delete()" >Delete</label>
             </mat-menu>
@@ -437,33 +441,80 @@
   <div class="col-md-2 sidebar" id="div2">
     <mat-sidenav-container>
       <mat-sidenav #sidenavright opened="false" mode="over" position="end">
-        <mat-nav-list><br>
+        <mat-nav-list class="filter_feilds"><br>
           <label class="filter_label">Filter Records</label>
-          <mat-form-field class="width" appearance="fill">  
+          <mat-form-field class="" appearance="fill">  
             <mat-label>Status Type:</mat-label> 
-            <mat-select [(ngModel)]="Searchvalue" (opened)="searchdata('status')" placeholder="Choose status">
+            <mat-select [(ngModel)]="Searchvalue"  placeholder="Choose status">
              <mat-option  value="Open">Open</mat-option> 
              <mat-option  value='closed'>Closed</mat-option>
              <mat-option  value='new'>New</mat-option> 
             </mat-select>  
           </mat-form-field>
 
-          <mat-form-field class="width" appearance="fill">  
+          <!-- <mat-form-field class="" appearance="fill">  
             <mat-label>Filter Name/Email</mat-label> 
             <mat-select [(ngModel)]="Searchdata1" >
              <mat-option  value="canName">Name</mat-option> 
              <mat-option  value='EmailId'>Email</mat-option> 
             </mat-select>  
-          </mat-form-field>
+          </mat-form-field> -->
 
-          <label class="search_label">Search By Name/Email:</label>
-      <mat-form-field class="search_feild" appearance="fill">
-        <input type="text" matInput [(ngModel)]="Searchvalue1" placeholder="Search here...">
+
+          
+        <mat-form-field class="" appearance="fill">
+        <input type="text" matInput [(ngModel)]="Searchvalue1" placeholder="Search Name..">
         <!-- <mat-icon class="search_icon">search</mat-icon> -->
         </mat-form-field>
-      <br>
 
-      
+        <mat-form-field class="" appearance="fill">
+          <input type="text" matInput [(ngModel)]="Searchvalue2" placeholder="Search Email..">
+          <!-- <mat-icon class="search_icon">search</mat-icon> -->
+          </mat-form-field>
+
+
+          <mat-form-field appearance="fill" class="example-form-field">
+            <mat-label>From date</mat-label>
+            <input matInput [matDatepicker]="datepicker" [(ngModel)]="start_date">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="datepicker"></mat-datepicker-toggle>
+            <mat-datepicker #datepicker>
+              <mat-datepicker-actions>
+                <button mat-button matDatepickerCancel>Cancel</button>
+                <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
+              </mat-datepicker-actions>
+            </mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill" class="example-form-field">
+            <mat-label>From date</mat-label>
+            <input matInput [matDatepicker]="datepicker" [(ngModel)]="end_date">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="datepicker"></mat-datepicker-toggle>
+            <mat-datepicker #datepicker>
+              <mat-datepicker-actions>
+                <button mat-button matDatepickerCancel>Cancel</button>
+                <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
+              </mat-datepicker-actions>
+            </mat-datepicker>
+          </mat-form-field>
+
+        <!-- <mat-form-field appearance="fill" class="">
+          <mat-label>Enter a date range</mat-label>
+          <mat-date-range-input [rangePicker]="picker">
+            <input matStartDate [(ngModel)]="start_date" placeholder="Start date">
+            <input matEndDate [(ngModel)]="end_date" placeholder="End date">
+          </mat-date-range-input>
+          <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-date-range-picker #picker></mat-date-range-picker>
+        </mat-form-field><br><br> -->
+
+
+        <button class="rightF" (click)="searchFilter(Searchvalue,Searchvalue1,Searchvalue2,start_date,end_date)">
+          <mat-icon>search</mat-icon>
+        </button>
+      <br>
 
         </mat-nav-list>
 

@@ -5,5 +5,35 @@
     margin-left: 18%;
 }
 .left{
-    margin-left: 1%;
+    margin-left: 3%;
 }
+.container{
+    margin-top: 2%;
+}
+mat-card{
+    margin-bottom: 2%;
+    width:65%;
+    box-shadow: 0px 0px 12px 0px #aeabab,
+    0 2px 2px 0 #302f2f,
+    0 2px 4px 0 #a8a0a0;
+}
+.div1{
+    margin-left: 6%;
+}
+
+.input{
+    width:90%
+}
+.green
+{
+   background-color: green;
+   color: aliceblue;
+   border-radius: 3px;
+   border-color: green;
+}
+h2{
+      color:brown;
+  }
+  .aswer_area{
+    min-height: 75px;
+  }

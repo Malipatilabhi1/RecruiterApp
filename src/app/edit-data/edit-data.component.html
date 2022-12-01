@@ -1,4 +1,4 @@
-<!-- <p>Assessment Result Data</p> -->
+<!-- 
 <div class="container">
     <h2>Edit Profile</h2>
     <form class="form-horizontal" [formGroup]="recruiterData">
@@ -26,12 +26,7 @@
               <input type="number" class="form-control" formControlName="experience" id="email" placeholder="Enter experience" name="email">
             </div>
           </div>
-          <!-- <div class="form-group">
-            <label class="control-label col-sm-2" for="email">Date:</label>
-            <div class="col-sm-4">
-              <input type="number" class="form-control" formControlName="date" id="email" placeholder="Enter date" name="email">
-            </div>
-          </div> -->
+         
           <div [formGroup]="skillFormGroup">
           <div class="form-group"  *ngFor="let y of lengthA">
 
@@ -55,13 +50,7 @@
 
           </div>
         </div>
-        <!-- <div class="form-group">        
-          <div class="col-sm-offset-2 col-sm-4">
-            <div class="checkbox">
-              <label><input type="checkbox" name="remember"> Remember me</label>
-            </div>
-          </div>
-        </div> -->
+        
         <div class="form-group">        
           <div class="col-sm-offset-2 col-sm-10">
             <button type="submit" class="btn btn-default">Submit</button>
@@ -70,4 +59,58 @@
       </form>
 </div>
 
+ -->
 
+ <div class="container">
+  <mat-card>
+    <div class="div1">
+    <h2 >Add New Skill</h2>
+    <div>
+      <mat-form-field>
+        <input matInput type="text" [(ngModel)]="skill" placeholder="Enter skill" appearance="fill" >
+      </mat-form-field>
+      <button (click)="addSkill(skill)" class="left green">Add</button>
+    </div>
+    <!-- <div>
+    <mat-form-field>
+      <input matInput type="text" [(ngModel)]="complexity" placeholder="Enter complexity">
+    </mat-form-field> 
+    <button (click)="addComplexity(complexity)" class="left">Add</button>
+  </div> -->
+    </div>
+    </mat-card> 
+ <mat-card>
+  <div class="div1">
+    <h2 >Add New Question and Answer</h2>
+     <mat-form-field class="width">
+         <mat-label> Skills </mat-label>
+         <mat-select formControlName="skillId" id="skillId" (valueChange)="getSelectedSkill($event)">
+           <mat-option *ngFor="let x of Skills" value="{{ x.skillId }}"  >{{ x.skillName }}</mat-option>
+         </mat-select>
+     </mat-form-field>
+
+      <mat-form-field class="left">
+      <mat-label> Complexity </mat-label>
+      <mat-select formControlName="cmpId" id="cmpId" (valueChange)="getSelectedComplexity($event)">
+        <mat-option *ngFor="let x of Complexity" value="{{ x.cmpId }}"  >{{ x.Name }}</mat-option>
+      </mat-select>
+      </mat-form-field>
+      <br/>
+
+      <mat-form-field class="input">
+      <mat-label> Question </mat-label>
+      <textarea matInput [(ngModel)]="Question" placeholder="Enter question"></textarea>
+      </mat-form-field><br>
+      <mat-form-field class="input">
+      <mat-label>Answer </mat-label>
+      <textarea matInput [(ngModel)]="answer" placeholder="Enter answer" class="aswer_area"></textarea>
+      </mat-form-field>
+      <br/>
+      <!-- 
+      <textarea ></textarea> -->
+      <button type="submit" class="green" (click)="addQuestion(SkillId,ComplexityId,Question,answer)"> Submit</button>
+      <button  class="left">Upload File</button>
+      </div>
+      </mat-card>
+
+</div>

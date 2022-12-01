@@ -1,94 +1,12 @@
-/* .main-content {
-	padding-top: 20px;
-	padding-bottom: 100px;
-}
-
-.user-info {
-	display: flex;
-	align-items: center;
-}
-.user-info__img img {
-	margin-right: 15px;
-	height: 55px;
-	width: 55px;
-	border-radius: 45px;
-	border: 3px solid #fff;
-	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-.shadow {
-    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
-}
-.fa, .fas {
-    font-family: "Font Awesome 5 Pro";
-    font-weight: 900;
-}
-.fa, .fab, .fad, .fal, .far, .fas {
-    -moz-osx-font-smoothing: grayscale;
-    -webkit-font-smoothing: antialiased;
-    display: inline-block;
-    font-style: normal;
-    font-variant: normal;
-    text-rendering: auto;
-    line-height: 1;
-}
-.mb-0, .my-0 {
-    margin-bottom: 0!important;
-}
-
-.font-weight-bold {
-    font-weight: 700!important;
-}
-.mt-4, .my-4 {
-    margin-top: 1.5rem!important;
-}
-
-
-.text-muted mb-0{
-    font-size: medium;
-    margin-top: 10px;
-}
-
-.dropbtn {
-    background-color:transparent;
-    color: rgb(111, 107, 107);
-    
-    font-size: 16px;
-    border: none;
-    padding-top: 10px;
-  }
-  .dropdown {
-    position: relative;
-    display: inline-block;
-  }
-  .dropdown-content {
-    display: none;
-    position: absolute;
-    right: 0;
-    background-color: #fdfbfb;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-    text-align: center;
-    width: 10px;
-  }
-  .dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-  }
-  .dropdown-content a:hover {background-color: rgb(251, 247, 247);}
-  .dropdown:hover .dropdown-content {display: block;}
- 
-  .skill{
-    color: rgb(19, 158, 19);
-    font-size: medium;
+/* .date_picker{
+  width:90%;
+  margin-left: 6%;
+} */
+  /* .search_status{
+    padding-left: 6%; 
   } */
-  /* .position{
-    mar-top: 23% !important;
-  } */
-  .search_status{
-    padding-left: 4%; 
+  .filter_feilds{
+    margin-left: 6%;
   }
   .search_label{
     margin-left: 10px;
@@ -99,25 +17,25 @@
       margin-left: 10px;
       margin-bottom: 6%;
   }
-  .search_icon{
+  /* .search_icon{
     float: right;
     color:brown;
-  }
-  .search_feild{
+  } */
+  /* .search_feild{
     margin-left: 5px;
-  }
-  .status_select{
+  } */
+  /* .status_select{
     margin-left: 1%;
     margin-bottom: 6%;
     width: 140px;
-  }
+  } */
     .filter{
       float: right;
       right: 0;
     }
-    .namefilter{
+    /* .namefilter{
       margin-left: 7%;
-    }
+    } */
   .new_candidate_btn{
     background-color: green;
     margin: none !important;   
@@ -136,26 +54,28 @@
     0 1px 3px 0 #a8a0a0;
   }
   .label{
-    font-size: 22px;
+    font-size: 22px;  
     color:brown;
     margin-top: 2%;
    
   }
-  .searchbar{
+  /* .searchbar{
     margin: none ;
     padding: none !important;
     margin-left: 1%;
-  }
+  } */
   #div1,#div2,#div3{
     display: inline;
   }
   .rightF{
    float: right;
+   margin-right: 4px;
+   width: 38px;
   }
-  MatDialog{
+  /* MatDialog{
     height: 100%;
     width: 80%;
-  }
+  } */
 .dialogButton{
   margin-left: 9%;
   width: 50px;
@@ -165,11 +85,11 @@
 button:disabled {
   background-color:#9b9b9b;
 }
-.zoom:hover {
-  -ms-transform: scale(1.1); /* IE 9 */
-  -webkit-transform: scale(1.1); /* Safari 3-8 */
+/* .zoom:hover {
+  -ms-transform: scale(1.1); 
+  -webkit-transform: scale(1.1); 
   transform: scale(1.1); 
-}
+} */
 .position{
   position:relative;
   height: 25px;
@@ -215,9 +135,7 @@ button:disabled {
     border: none;
     padding: none;
     margin: none;
-    /* margin-left: 4% !important;
-    float: right !important; */
-    /* padding-top: 10px; */
+    
   }
   .skills{
     float: left;
@@ -225,14 +143,11 @@ button:disabled {
   .dropdown {
     position: relative;
     display: inline-block;
-    
-    /* text-align: end; */
-    /* margin-left: 10% !important; */
+   
   }
   .dropdown-content {
     display:none;
     position: absolute;
-    /* right: 0; */
     background-color: #fdfbfb;
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);

@@ -76,16 +76,20 @@ export class InterviewerScreenComponent implements OnInit {
     Time:any;
   ngOnInit(): void {
      //call api 
+     
+     
      let now: Date = new Date();
+     this.Time=now.getHours()+':'+now.getMinutes()+':'+now.getSeconds();
     this.getCandidateDetails();
     
-    this.Time=now.getHours()+':'+now.getMinutes()+':'+now.getSeconds();
+    
+
     console.log(now);  
     // this.ExtractDate=this.Today.getMonth()+'/'+this.Today.getDate()+'/'+this.Today.getFullYear();
   }
 
   getCandidateDetails(){
-    debugger
+    
     this.candidate=this.dfs.arr;
     this.profile();
     console.log(this.candidate)
@@ -114,15 +118,17 @@ Myskills:any=[];
     this.CName=this.candidate.canName;
     this.status=this.candidate.Candidatestatus;
     this.candidateSkill=this.candidate.skills;
+    debugger
     this.AssDate=this.candidate.Date;
+    this.FilterDate = formatDate(this.Today, 'MM/dd/yyyy', 'en-US');
+    console.log(this.FilterDate)
     this.candidateSkill.forEach((element: { skillId: any;cmpId:any }) => {
       let skillId=element.skillId;
       let cmpId=element.cmpId;
       this.Myskills.push({skillId,cmpId});
-      console.log(this.Myskills)
-      
+      console.log(this.Myskills)   
     });
-    this.FilterDate = formatDate(this.AssDate, 'MM/dd/yyyy', 'en-US');
+    
     // this.FilterDate = this.datepipe.transform(this.AssDate, 'yyyy-MM-dd');
     // this.FilterDate=this.AssDate.getMonth()+'/'+this.AssDate.getDate()+'/'+this.AssDate.getFullYear();
     console.log(this.FilterDate)
@@ -147,14 +153,7 @@ Myskills:any=[];
           // this.arr.push(this.newArry);
           this.Asid=response.assessmentId;
           console.log(response);
-          this.httpClient.post<any>('http://localhost:3000/assessmentStagingManager',{
-            canId,
-            RowandQuestion_number
-          }).subscribe(
-            response=>{
-              console.log(response);
-              this.newArry=response.data;
-             });
+          this.getQuestion(canId,RowandQuestion_number);
           // console.log(this.newArry);
           this.update();
       }
@@ -162,6 +161,17 @@ Myskills:any=[];
   }catch{
      ("Error")
   }
+  }
+
+  getQuestion(canId:any,RowandQuestion_number:any){
+    this.httpClient.post<any>('http://localhost:3000/assessmentStagingManager',{
+      canId,
+      RowandQuestion_number
+    }).subscribe(
+      response=>{
+        console.log(response);
+        this.newArry=response.result;
+       });
   }
 
   //Assessment start button 
@@ -207,7 +217,8 @@ Myskills:any=[];
         console.log(response);     
         this.i++;
         this.updateData();     
-        this.getQueAns(this.CId,this.i,this.ExtractDate,this.Time,this.status,this.candidateSkill,this.i);
+        // this.getQueAns(this.CId,this.i,this.ExtractDate,this.Time,this.status,this.candidateSkill,this.i);
+        this.getQuestion(this.CId,this.i);
         this.keywordzz=this.keywordsArray[this.i].keyword;    
       },  
     );
@@ -244,11 +255,13 @@ Myskills:any=[];
     let status=this.endstatus;
     let canId=this.CId;
     let assessmentId=this.Asid;
+    let endTime=this.Time;
     this.httpClient.post<any>('http://localhost:3000/assessmentManager/endAssessment',
     {
       status,
       canId,
-      assessmentId
+      assessmentId,
+      endTime
     }).subscribe(
       response=>{
         alert(response.status); 

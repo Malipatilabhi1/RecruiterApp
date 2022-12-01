@@ -7,6 +7,7 @@ import { Pipe,PipeTransform } from '@angular/core';
 import {MatDialog, MatDialogConfig, MatDialogRef} from "@angular/material/dialog";
 import { EditDataComponent } from '../edit-data/edit-data.component';
 import { ScoreComponent } from '../score/score.component';
+
 import { style } from '@angular/animations';
 // import { baseColors, Label } from 'ng2-charts';
 
@@ -22,11 +23,12 @@ export class AssesmentScreenComponent implements OnInit {
   arr: any = [];
   skillA:any=[];
   buttonDisabled:boolean;
-  search : String ="";
-  Searchdata:string="";
-  Searchvalue:string="";
-  Searchdata1:string="";
-  Searchvalue1:string="";
+  search : String;
+  Searchvalue:string;
+  Searchvalue1:string;
+  Searchvalue2:string;
+  start_date:string;
+  end_date:string;
   dialogRef: MatDialogRef <any> ;
 
   constructor(
@@ -42,10 +44,11 @@ export class AssesmentScreenComponent implements OnInit {
   ngOnInit(): void {
     this.getCandidates();
   }
+  
 
   getCandidates(){
     debugger;
-    this.http.get<any>('http://localhost:3000/profileManager').subscribe(
+    this.http.post<any>('http://localhost:3000/cardsFilterManager',{}).subscribe(
       response=>{
         // console.log(response)
         this.arr=response.result;
@@ -70,11 +73,7 @@ export class AssesmentScreenComponent implements OnInit {
   delete(){
     
   }
-  searchdata(value:any){
-    if(value=='status'){
-      this.Searchdata='Candidatestatus';
-    }
-  }
+  
 
   openDialogEdit(value:any){
    
@@ -86,15 +85,33 @@ export class AssesmentScreenComponent implements OnInit {
         }
       });
   }
-  openDialogScore(){
+  
+  openDialogScore(value:any){
     this.dialogRef = this.dialog.open(ScoreComponent, {
-      height: '90%',
-      width: '90%'
-  });
-  
-  
-    
+     data:{
+      value,
+      style:"width:40%, height:80% "
+     }
+  });   
   }
 
+
+  // searchByStatus(status:any){
+  //   debugger
+    
+  // }
+
+  searchFilter(status:any,name:any,emailId:any,startDate:any,endDate:any){
+    console.log(this.start_date)
+    console.log(startDate)
+    debugger
+    this.http.post<any>('http://localhost:3000/cardsFilterManager',
+    {
+      status,name,emailId,startDate,endDate
+    }).subscribe(
+      response=>{ 
+        this.arr=response.result;
+       })  
+  }
 }
 
