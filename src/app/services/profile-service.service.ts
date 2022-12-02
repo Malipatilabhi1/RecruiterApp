@@ -24,14 +24,14 @@ export class ProfileServiceService {
     });
   }
 
-  GettingDataViaEmailId(emailId: any) {
-    return this._http.post(
-      'http://localhost:3000/candidateManager/filterEmail',
-      {
-        emailId,
-      }
-    );
-  }
+  // GettingDataViaEmailId(emailId: any) {
+  //   return this._http.post(
+  //     'http://localhost:3000/candidateManager/filterEmail',
+  //     {
+  //       emailId,
+  //     }
+  //   );
+  // }
 
   gettingCandidateDatawithCandidateskill(emailId: any) {
     return this._http.post(
@@ -43,11 +43,33 @@ export class ProfileServiceService {
     );
   }
 
-  updateCandidateStatus(data:any){
-    return this._http.post('http://localhost:3000/candidateManager/updateCandidateStatus',
-    {
-      data
-    }
-    )
+  updateCandidateStatus(data: any) {
+    return this._http.post(
+      'http://localhost:3000/candidateManager/updateCandidateStatus',
+      {
+        data,
+      }
+    );
+  }
+
+  gettingDataForScheduler(canId: any) {
+    return this._http.post(
+      'http://localhost:3000/candidateManager/displayCandidateSkills',
+      {
+        canId,
+      }
+    );
+  }
+
+  sendingSchedulingDataToBackend(canId:any,date:any,interviewSkills:any) {
+    debugger;
+    return this._http.post(
+      'http://localhost:3000/candidateInterviewManager/addInterview',
+      {
+        canId,
+        date,
+        interviewSkills
+      }
+    );
   }
 }

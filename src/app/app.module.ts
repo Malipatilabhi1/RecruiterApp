@@ -23,11 +23,12 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
 import {NgxPaginationModule} from 'ngx-pagination';
 import {MatStepperModule} from '@angular/material/stepper';
 
-
+import {MatDatepickerModule} from '@angular/material/datepicker';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './login/login.component';
+import { MatNativeDateModule, MatRippleModule } from '@angular/material/core';
 import { HeaderComponent } from './header/header.component';
 import { ProfileCreationComponent } from './profile-creation/profile-creation.component';
 import { InterviewerScreenComponent } from './interviewer-screen/interviewer-screen.component';
@@ -71,8 +72,11 @@ import { AssesmentScreenComponent } from './assesment-screen/assesment-screen.co
     HttpClientModule,
     AngularEditorModule,
     MatStepperModule,
-    
+    MatDatepickerModule,
     NgxPaginationModule,
+    MatNativeDateModule,
+    MatRippleModule,
+    
     
     
    

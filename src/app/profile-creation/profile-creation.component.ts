@@ -7,6 +7,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { ProfileServiceService } from '../services/profile-service.service';
 
 @Component({
@@ -17,14 +18,24 @@ import { ProfileServiceService } from '../services/profile-service.service';
 export class ProfileCreationComponent implements OnInit {
   // profileForm:FormGroup;
   pArray: any = [];
+  cId: any = [];
+
+  sData: any;
   updateData: any;
   Candidatestatus: any;
+  newdate!: string;
+  sArray: any;
+  cArray: any;
+  selected: any;
+  forSkill: any;
   count: number = 0;
   canId: any;
   status: boolean = false;
   skillData: any;
+  chooseDate: any;
   skillArray: any;
   edata: any;
+  canD: any;
   eRes: any;
   arr: any = [];
   sEmail: any;
@@ -48,6 +59,9 @@ export class ProfileCreationComponent implements OnInit {
   ngOnInit(): void {
     this.getSkills();
     this.getComplexity();
+    this.form = this.formBuilder.group({
+      selected: new FormArray([]),
+    });
   }
 
   ngAfterViewInit() {
@@ -71,7 +85,10 @@ export class ProfileCreationComponent implements OnInit {
   // });
 
   //-------------------------------------------------------
-
+  // eigthformgroup = this.formBuilder.group([
+  //   checkbox: ['',Validators.required],
+  // ])
+  form!: FormGroup;
   firstFormGroup = this.formBuilder.group({
     email: ['', Validators.required],
     name: ['', Validators.required],
@@ -80,6 +97,9 @@ export class ProfileCreationComponent implements OnInit {
   });
   fifthFormGroup = this.formBuilder.group({
     searchEmail: [''],
+  });
+  sixthFormGroup = this.formBuilder.group({
+    notifier: [''],
   });
   secondFormGroup = this.formBuilder.group({
     message: [''],
@@ -151,6 +171,7 @@ export class ProfileCreationComponent implements OnInit {
 
     // this._Pservice.sendingCandidateDataToServer(ProfileCreationComponent.Email,ProfileCreationComponent.PhoneNo,ProfileCreationComponent.PhoneNo,ProfileCreationComponent.Experiance,this.pArray)
     console.log(this.status);
+
     this.updateData = [
       {
         canPhone: this.phone,
@@ -200,29 +221,13 @@ export class ProfileCreationComponent implements OnInit {
   // Pass profile data to backend
   sendData(data: any) {
     // debugger;
-    return this._http
-      .post<any>(
-        'url',
-        data
-        // {
-        // name,
-        // Phone,
-        // Emailid,
-        // Experience,
-        // resume,
-        // Skills:{
-        //   skillid,
-        //   complexity
-        // }
-        // }
-      )
-      .subscribe((response) => {});
+    return this._http.post<any>('url', data).subscribe((response) => {});
   }
   getComplexity() {
     this._http
       .get<any>('http://localhost:3000/ComplexityManager')
       .subscribe((response) => {
-        this.Complexity = response.data;
+        this.Complexity = response.result;
         console.log(this.Complexity);
       });
   }
@@ -231,7 +236,7 @@ export class ProfileCreationComponent implements OnInit {
     this._http
       .get<any>('http://localhost:3000/skillsManager')
       .subscribe((response) => {
-        this.Skill = response.data;
+        this.Skill = response.result;
         console.log(this.Skill);
       });
   }
@@ -242,21 +247,13 @@ export class ProfileCreationComponent implements OnInit {
   addNew() {
     // debugger;
     this.count++;
-    // console.log('clicked', this.count);
 
-    // while (this.count) {
-    //   if (this.skillData) {
-    //     this.count < 3;
-    //   } else {
-    //     this.count < 6;
-    //   }
+    const skill = new FormGroup({
+      skillId: new FormControl<number>(0),
+      cmpId: new FormControl<number>(0),
+    });
 
-      const skill = new FormGroup({
-        skillId: new FormControl<number>(0),
-        cmpId: new FormControl<number>(0),
-      });
-
-      this.Skills.push(skill);
+    this.Skills.push(skill);
     // }
     // console.log(skill);
   }
@@ -284,6 +281,9 @@ export class ProfileCreationComponent implements OnInit {
   pitch(data: any) {
     // debugger;
   }
+  newProfileSubmit(){
+
+  }
 
   checkExistingcandidate() {
     this.email = this.firstFormGroup.controls['email'].value;
@@ -291,44 +291,48 @@ export class ProfileCreationComponent implements OnInit {
     console.log(this.sEmail);
     // console.log(this.email);
 
-    this._service.GettingDataViaEmailId(this.sEmail).subscribe((res) => {
-      // console.log(res);
-      this.edata = res;
-      this.eRes = this.edata;
-      console.log(this.eRes);
+    // this._service.GettingDataViaEmailId(this.sEmail).subscribe((res) => {
+    // console.log(res);
+    // this.edata = res;
+    // this.eRes = this.edata;
+    // console.log(this.eRes);
 
-      console.log(this.edata[0].canName);
+    // console.log(this.edata[0].canName);
 
-      // this.firstFormGroup.setValue.name(this.eRes[0].canName)
-      // , phone: this.eRes[0].canPhone, experience:this.eRes[0].canExperience
-      this.firstFormGroup.controls.name.setValue(this.edata[0].canName);
-      this.firstFormGroup.controls.email.setValue(this.edata[0].EmailId);
-      this.firstFormGroup.controls.phone.setValue(this.edata[0].canPhone);
-      this.firstFormGroup.controls.experience.setValue(
-        this.edata[0].canExperience
-      );
+    // this.firstFormGroup.setValue.name(this.eRes[0].canName)
+    // , phone: this.eRes[0].canPhone, experience:this.eRes[0].canExperience
 
-      // this.firstFormGroup.setValue.name(this.eRes[0].canName)
-    });
+    // this.firstFormGroup.setValue.name(this.eRes[0].canName)
+    // });
 
     this._service
       .gettingCandidateDatawithCandidateskill(this.sEmail)
       .subscribe((res) => {
         this.skillData = res;
         this.status = true;
-
-        console.log(this.skillData);
+        console.log(this.skillData.data);
 
         this.skillArray = this.skillData.data[0].skills;
         console.log(this.skillArray[1].skillName);
         this.canId = this.skillData.data[0].canId;
         this.Candidatestatus = this.skillData.data[0].Candidatestatus;
         console.log(this.Candidatestatus);
-      // this.skillFormGroup.controls.skillId.setValue(this.skillArray[1].skillName);
-
+        // this.skillFormGroup.controls.skillId.setValue(this.skillArray[1].skillName);
 
         console.log(this.canId);
         console.log(this.status);
+        this.firstFormGroup.controls.name.setValue(
+          this.skillData.data[0].canName
+        );
+        this.firstFormGroup.controls.email.setValue(
+          this.skillData.data[0].EmailId
+        );
+        this.firstFormGroup.controls.phone.setValue(
+          this.skillData.data[0].canPhone
+        );
+        this.firstFormGroup.controls.experience.setValue(
+          this.skillData.data[0].canExperience
+        );
       });
     if (this.skillData) {
       this.status = true;
@@ -338,4 +342,90 @@ export class ProfileCreationComponent implements OnInit {
     // this.email = this.firstFormGroup.controls['email'].value;
     this.sEmail = this.fifthFormGroup.controls['searchEmail'].value;
   }
+  next() {
+    // debugger
+    console.log('click');
+
+    this.canD = this.canId;
+
+    console.log(this.canD);
+    this._service.gettingDataForScheduler(this.canD).subscribe(
+      (res) => {
+        console.log(res);
+        this.forSkill = res;
+        this.sArray = this.forSkill.data;
+        console.log(this.sArray);
+      }
+      // for(let i =0;i<this.sArray.length;i++)
+    );
+  }
+
+  onCheckboxChange(event: any) {
+    this.selected = this.form.controls['selected'] as FormArray;
+    if (event.target.checked) {
+      this.selected.push(new FormControl(event.target.value));
+    } else {
+      const index = this.selected.controls.findIndex(
+        (x: { value: any }) => x.value === event.target.value
+      );
+      this.selected.removeAt(index);
+    }
+    console.log(this.selected.value);
+  }
+
+  // submit() {
+  //   console.log(this.form.value);
+  //   this.cArray = this.form.value.selected;
+  //   console.log(this.chooseDate);
+  //   console.log(this.cArray);
+  //   this.fetchComplexId();
+  // }
+  getEndDate(type: string, event: MatDatepickerInputEvent<Date>) {
+    console.log(event.value);
+    this.chooseDate = event.value;
+    console.log(this.chooseDate);
+
+    const date = new Date(this.chooseDate);
+    this.newdate = new Intl.DateTimeFormat('en-US', {
+      year: 'numeric',
+      month: 'numeric',
+      day: 'numeric',
+    }).format(date);
+    console.log(this.newdate.toString());
+  }
+
+  fetchComplexId() {
+    for (let item of this.sArray) {
+      for (let i = 0; i < this.cArray.length; i++) {
+        if (this.cArray[i] == item.skillId) {
+          this.cId[i] = { skillId: item.skillId, cmpId: item.cmpId };
+          // console.log(this.cId);
+        }
+      }
+    }
+    console.log(this.cId, 'cid');
+  }
+  submit() {
+    console.log(this.form.value);
+    this.cArray = this.form.value.selected;
+    console.log(this.chooseDate);
+    console.log(this.cArray);
+    this.fetchComplexId();
+    this._service
+      .sendingSchedulingDataToBackend(this.canId, this.newdate, this.cId)
+      .subscribe((res) => {
+        console.log(res);
+      });
+  }
+
+  // sendSechdulerData() {
+   
+  //   console.log(this.sData);
+
+  //   this._service
+  //     .sendingSchedulingDataToBackend(this.canId, this.newdate, this.cId)
+  //     .subscribe((res) => {
+  //       console.log(res);
+  //     });
+  // }
 }

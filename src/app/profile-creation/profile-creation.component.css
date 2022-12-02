@@ -70,6 +70,17 @@ mat-card{
    margin-left: 78%;
    margin-top: 26%; 
 }
+.submitt{
+   margin-left: 512px;
+}
+.submit{
+   margin-left: 78%;
+   margin-top: 35%; 
+   background-color: green;
+   color: #fdfbfb;
+   border-color: greenyellow;
+   
+}
 .resume-buttons{
    margin-left: 78%;
    margin-top: 35%; 
@@ -262,6 +273,65 @@ button{
    font-weight: bold;
    
  }
+ .para{
+   font-weight: bold;
+   font-size: medium;
+   color: darkgray;
+ }
+ .cskill{
+   font-weight: bold;
+   margin-left: 45px;
+ }
+ .sk{
+   margin-left: 45px;
+ }
+ .radiooo{
+   margin-left: 200px;
+   margin-top: 5px;
+ }
+
+ .check{
+   margin-left: 70px;
+   margin-top: 5px;
+   font-weight: bold;
+
+ }
+ .abc{
+   margin-left: 30px;
+   margin-top: 13px;
+ }
+ .col-5{
+   margin-left: 20px;
+   /* margin-top: 2px; */
+   font-weight: bold;
+   
+ }
+ .col-input:checked{
+   background-color: rgb(20, 46, 192) !important;
+   border: 0;
+}
+.col-input:focus, .label::after, label.form-check-label:focus, .form-check-input::after, .form-check-input:not(:disabled):not(.disabled):active:focus {
+   color: black;
+   outline: 0;
+   border: 0;
+   box-shadow: 0 0 0 0.1rem green !important;
+}
+.nextback{
+   align-items: flex-end;
+   margin-left: 420px;
+}
+.submit{
+   margin-top: 40px;
+   margin-left: 50px;
+}
+.abcd{
+   font-weight: bold;
+ }
+ .chek {
+   width: 110px;
+   display: inline-block;
+}
+
 /* .padding{
    padding-top: 1%;
    padding-left: 3%;

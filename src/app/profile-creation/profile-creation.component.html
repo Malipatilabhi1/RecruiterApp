@@ -5,36 +5,42 @@
     </mat-card-header>
     <div class="input-group">
       <form [formGroup]="fifthFormGroup" class="">
-        
         <div class="d-flex flex-row bd-highlight mb-3">
-        <div class="form-outline">
-        <input type="search" id="form1" class="form-control" formControlName="searchEmail"  placeholder=" Search EmailId" />
-        <!-- <label class="form-label" for="form1">Search</label> -->
-      </div>
-      <div class="p">
-      
-      <mat-icon button type="button" class="iconE" (click)="checkExistingcandidate()"
-        >search
-      </mat-icon>
-      <!-- <mat-icon>filter</mat-icon> -->
-    
-     </div>
-     <div class="filter">
-
-      <mat-icon button type="button" class="iconFilter">filter_alt</mat-icon>
-    </div>
-      <!-- <button type="button" class="btn btn-primary">
+          <div class="form-outline">
+            <input
+              type="search"
+              id="form1"
+              class="form-control"
+              formControlName="searchEmail"
+              placeholder=" Search EmailId"
+            />
+            <!-- <label class="form-label" for="form1">Search</label> -->
+          </div>
+          <div class="p">
+            <mat-icon
+              button
+              type="button"
+              class="iconE"
+              (click)="checkExistingcandidate()"
+              >search
+            </mat-icon>
+            <!-- <mat-icon>filter</mat-icon> -->
+          </div>
+          <!-- <div class="filter">
+            <mat-icon button type="button" class="iconFilter"
+              >filter_alt</mat-icon
+            >
+          </div> -->
+          <!-- <button type="button" class="btn btn-primary">
         <i class="fas fa-search"></i>
       </button> -->
-      </div>
+        </div>
       </form>
     </div>
-    
 
     <mat-stepper [linear]="isLinear" #stepper>
       <mat-step [stepControl]="firstFormGroup">
         <form [formGroup]="firstFormGroup" class="">
-          
           <ng-template matStepLabel>Basic Info</ng-template>
 
           <mat-form-field appearance="fill">
@@ -90,7 +96,14 @@
             />
           </mat-form-field>
           <div class="basic-info-button">
-            <button mat-button matStepperNext class="green" (click)="showCandidateAssesmentStatus()">Next</button>
+            <button
+              mat-button
+              matStepperNext
+              class="green"
+              (click)="showCandidateAssesmentStatus()"
+            >
+              Next
+            </button>
             <!-- <button type="button" class="btn btn-outline-success" (click)="checkExistingcandidate()" >Success</button> -->
           </div>
         </form>
@@ -100,8 +113,8 @@
       <mat-step [stepControl]="skillFormGroup" label="Skills">
         <!-- #enddocregion label -->
         <!-- <div class="d-flex flex-row bd-highlight mb-3"> -->
-          <!-- <div class="d-flex flex-column bd-highlight mb-3"> -->
-            <!-- <div class="row" *ngIf="edata">
+        <!-- <div class="d-flex flex-column bd-highlight mb-3"> -->
+        <!-- <div class="row" *ngIf="edata">
               
               <div class="col-5">
                 <h2 class="skillclass">Skills</h2>
@@ -119,49 +132,45 @@
             </div>
           </div>
       </div> -->
-      <div class="d-flex flex-row bd-highlight mb-3">
-      <div id="divu" class="leftspacee" *ngIf="edata" >
-        
-        <mat-form-field class="width" *ngFor="let skill of skillArray">
-          <mat-label class="mskill"> {{skill.skillName}}  </mat-label>
-          <mat-select
-            formControlName="skillId"
-            id="skillId"
-            ngDefaultControl
-            (ngModelChange)="onSelectSkill($event)"
-          >
-            <mat-option
-              *ngFor="let x of Skill"
-              value="{{ x.skillId }}"
-              (change)="onSelectSkill($event)"
-              >{{ x.skillName }}</mat-option
-            >
-          </mat-select>
-        </mat-form-field>
-      </div>
-      
-      <div id="divu2" class="leftspaceee" *ngIf="edata">
-        <mat-form-field class="width" *ngFor="let skill of skillArray">
-          <mat-label class="mlevel"> {{skill.Skilllevel}} </mat-label>
-          
+        <div class="d-flex flex-row bd-highlight mb-3">
+          <div id="divu" class="leftspacee" *ngIf="skillData">
+            <mat-form-field class="width" *ngFor="let skill of skillArray">
+              <mat-label class="mskill"> {{ skill.skillName }} </mat-label>
+              <mat-select
+                formControlName="skillId"
+                id="skillId"
+                ngDefaultControl
+                (ngModelChange)="onSelectSkill($event)"
+              >
+                <mat-option
+                  *ngFor=""
+                  value=""
+                  (change)="onSelectSkill($event)"
+                ></mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
 
-          <mat-select
-            formControlName="cmpId"
-            id="cmpId"
-            ngDefaultControl
-            (ngModelChange)="onSelectSkill($event)"
-          >
-            <mat-option
-              *ngFor="let x of Complexity"
-              value="{{ x.cmpId }}"
-              (change)="onSelectSkill($event)"
-              >{{ x.Skilllevel }}</mat-option
-            >
-          </mat-select>
-        </mat-form-field>
-      </div>
-      </div>
+          <div id="divu2" class="leftspaceee" *ngIf="skillData">
+            <mat-form-field class="width" *ngFor="let skill of skillArray">
+              <mat-label class="mlevel"> {{ skill.Skilllevel }} </mat-label>
 
+              <mat-select
+                formControlName="cmpId"
+                id="cmpId"
+                ngDefaultControl
+                (ngModelChange)="onSelectSkill($event)"
+              >
+                <mat-option
+                  *ngFor="let x of Complexity"
+                  value="{{ x.cmpId }}"
+                  (change)="onSelectSkill($event)"
+                  >{{ x.Skilllevel }}</mat-option
+                >
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
 
         <!-- on proile creation for the first time -->
         <!-- </div> -->
@@ -198,7 +207,7 @@
       </div> -->
               <div id="div2" class="leftspace">
                 <mat-form-field class="width">
-                  <mat-label > Complexity </mat-label>
+                  <mat-label> Complexity </mat-label>
                   <mat-select
                     formControlName="cmpId"
                     id="cmpId"
@@ -221,38 +230,126 @@
             </div>
           </div>
 
-          <div class="skills-buttons">
+          <div class="skills-buttons" *ngIf="skillData">
             <button mat-button matStepperPrevious class="color2">Back</button>
             <button mat-button matStepperNext class="green">Next</button>
+          </div>
+          <div class="submitt" *ngIf="skillData == null">
+            <button mat-button (click)="storeDatas()"  class="green">
+              Submit
+            </button>
           </div>
         </form>
       </mat-step>
 
-    
-
-      <!-- #docregion label -->
       <mat-step [stepControl]="thirdFormGroup" label="Assesment">
-        <!-- #enddocregion label -->
         <form [formGroup]="thirdFormGroup">
-          <!-- <div>
-            <label for="input-file-id" class="resume control-label"
-              >Resume:</label
-            >
-            <input
-              class="ng-hide"
-              formControlName="resume"
-              id="input-file-id"
-              multiple
-              type="file"
-            />
-          </div> -->
           <br />
           <div class="resume-buttons">
             <button mat-button matStepperPrevious class="color2">Back</button>
-            <button mat-button matStepperNext class="green">Next</button>
+            <button mat-button matStepperNext class="green" (click)="next()">
+              Next
+            </button>
           </div>
         </form>
       </mat-step>
+
+      <mat-step [stepControl]="sixthFormGroup" label="Scheduler">
+        <form [formGroup]="sixthFormGroup">
+          <br />
+          <div class="para">
+            <p>Select below skill for Scheduling</p>
+          </div>
+          <hr />
+
+          <!-- <div class="sk" *ngFor="let skill of sArray">
+            <p> {{skill.skillName}}</p>
+            
+            
+          </div> -->
+          <!-- <div class="radiooo">
+            <form action="/action_page.php" *ngFor="let skill of sArray">
+              <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike" >
+              <label for="vehicle1" >{{skill.skillName}} </label><br>
+              
+              
+            </form>
+          </div> -->
+
+          <!-- <div class="check" > -->
+          <!-- <div class="d-flex flex-row bd-highlight mb-3"> -->
+          <!-- <div class="row abc" *ngFor="let skill of sArray">
+                <div class="col-5" >
+                  {{ skill.skillName }}
+
+                </div>
+              
+            <form [formGroup]="eigthformgroup" >
+             
+                <div class="col" >
+
+                  <input type="checkbox" class="abc" formControlName="checkbox" (click)="onChange(skill.skillName)" />
+                </div>
+                </form>
+                </div> -->
+          <div class="row" >
+            <div class="col-5">
+              <section>
+                <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
+                  <div *ngFor="let skill of sArray; let i = index">
+                    <div class="chek">
+
+                      {{ skill.skillName }}
+                    </div>
+                    <input
+                      type="checkbox"
+                      class="checc"
+                      formArrayName="selected"
+                      [value]="skill.skillId"
+                      (change)="onCheckboxChange($event)"
+                    />
+                  </div>
+                  
+                  <button type="submit" class="submit">Submit</button>
+                  <!-- <button type="submit" class="btn btn-outline-success">Submit</button> -->
+                </form>
+
+                <!-- <p>{{ form.value | json }}</p> -->
+              </section>
+            </div>
+            <div class="col-3">
+              <mat-form-field>
+                <mat-label class="abcd">Choose a Date</mat-label>
+                <input matInput [matDatepicker]="picker" placeholder="Choose a date"  (dateChange)="getEndDate('change', $event)">
+                <mat-datepicker-toggle matSuffix [for]="picker" ></mat-datepicker-toggle>
+                <mat-datepicker #picker  ></mat-datepicker>
+              </mat-form-field>
+              <!-- <mat-form-field appearance="fill">
+                <mat-label>Choose Date</mat-label>
+                <input matInput [matDatepicker]="picker" id=""  (dateChange)="getEndDate('change', $event)"/>
+
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle
+                  matIconSuffix
+                  [for]="picker"
+                ></mat-datepicker-toggle>
+                <mat-datepicker
+                  #picker
+                  
+                ></mat-datepicker
+              ></mat-form-field> -->
+            </div>
+          </div>
+          <div class="nextback">
+
+            <button mat-button matStepperPrevious class="color2">Back</button>
+            <!-- <button mat-button matStepperNext class="green" (click)="sendSechdulerData()">Next</button> -->
+          </div>
+        </form>
+      </mat-step>
+
+      <!-- #docregion label -->
+
       <!-- e------------------------------------------------------------------------l -->
       <!-- #docregion label -->
 
@@ -276,7 +373,7 @@
         </div>
       </mat-step> -->
 
-      <mat-step>
+      <!-- <mat-step>
         <ng-template matStepLabel>Done</ng-template>
         <h1>You are now done.</h1>
         <div class="done-buttons">
@@ -289,7 +386,7 @@
             Submit
           </button>
         </div>
-      </mat-step>
+      </mat-step> -->
     </mat-stepper>
   </mat-card>
 </div>
