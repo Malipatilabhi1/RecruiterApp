@@ -21,18 +21,10 @@ export class SidebarContentComponent implements OnInit {
   showMe: boolean = true;
   hideMe: boolean = false;
   hideMeI: boolean = false;
-  // public categoryA: any = [];
-  // public levelA: any = [];
-  // nextI = 0;
-  // i = 0;
-  // Today: any = new Date();
-  // sliderOutput = 0;
+
   skill = 0;
   complexity = 0;
-  // public question: any = '';
-  // public answer: any = '';
-  // ques: boolean = false;
-  // public QunAns: any = [];
+  
   constructor(
     private formBuilder: FormBuilder,
     private httpClient: HttpClient
@@ -45,9 +37,7 @@ export class SidebarContentComponent implements OnInit {
   hideAnswer() {
     this.showMe = !this.showMe;
   }
-  // updateSetting(event: any) {
-  //   this.sliderOutput = event.value;
-  // }
+  
   
   fetchData(skillId: number, compId: number) {
     debugger;
@@ -56,7 +46,7 @@ export class SidebarContentComponent implements OnInit {
         compId,skillId
     })
       .subscribe((response) => {
-        this.arr = response.data; 
+        this.arr = response.result; 
         console.log(this.arr);
       });
   }
@@ -65,7 +55,7 @@ export class SidebarContentComponent implements OnInit {
     this.httpClient
       .get<any>('http://localhost:3000/skillsManager')
       .subscribe((response) => {
-        this.Skill = response.data;
+        this.Skill = response.result;
       });
   }
   getComplexity() {
@@ -73,7 +63,7 @@ export class SidebarContentComponent implements OnInit {
     this.httpClient
       .get<any>('http://localhost:3000/ComplexityManager')
       .subscribe((response) => {
-        this.Complexity = response.data;
+        this.Complexity = response.result;
         // console.log(this.Complexity);
       });
   }

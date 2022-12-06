@@ -29,6 +29,9 @@ export class AssesmentScreenComponent implements OnInit {
   Searchvalue2:string;
   start_date:string;
   end_date:string;
+  Farr:any=[];
+  Rarr:any=[];
+  statuss:any="closed";
   dialogRef: MatDialogRef <any> ;
 
   constructor(
@@ -58,9 +61,7 @@ export class AssesmentScreenComponent implements OnInit {
       }
     );
   }
-  Farr:any=[];
-  Rarr:any=[];
-  statuss:any="closed";
+  
 
   filterCandidate(){
  
@@ -87,6 +88,7 @@ export class AssesmentScreenComponent implements OnInit {
   }
   
   openDialogScore(value:any){
+    this.sendData(value)
     this.dialogRef = this.dialog.open(ScoreComponent, {
      data:{
       value,
@@ -112,6 +114,15 @@ export class AssesmentScreenComponent implements OnInit {
       response=>{ 
         this.arr=response.result;
        })  
+  }
+
+  reset(){
+    this.Searchvalue="";
+    this.Searchvalue="";
+    this.Searchvalue1="";
+    this.Searchvalue2="";
+    this.start_date="";
+    this.end_date="";
   }
 }
 

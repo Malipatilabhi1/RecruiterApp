@@ -4,6 +4,7 @@ import { dialogClose } from '@syncfusion/ej2-angular-richtexteditor';
 import { MatDialogRef } from '@angular/material/dialog';
 import { HttpClient } from '@angular/common/http';
 import {MatDialog, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { DataFileService } from '../data-file.service';
 
 
 @Component({
@@ -36,12 +37,13 @@ export class ScoreComponent implements OnInit {
   //   }
   // ]
 
-  canId:any= 2;
-  Date:any= "2022-11-14";
+  canId:any;
+  Date:any;
   array:any=[];
+  scoredata:any=[];
  
   dataPoints:any=[];
-  constructor(public dialogRef: MatDialogRef<any>,private http:HttpClient) { 
+  constructor(public dialogRef: MatDialogRef<any>,private http:HttpClient,private dfs:DataFileService) { 
     
     this.dialogRef.updateSize('50%', '75%'); 
   }
@@ -49,7 +51,11 @@ export class ScoreComponent implements OnInit {
     
   // }
 
-  ngOnInit(): void {    
+  ngOnInit(): void {   
+    this.scoredata=this.dfs.arr;
+    console.log(this.scoredata)
+    this.canId=this.scoredata.canId;
+    this.Date=this.scoredata.date;
    this.getData(this.canId,this.Date);
     this.chart.chartOptions.render();
   }

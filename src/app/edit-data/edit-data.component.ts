@@ -12,13 +12,15 @@ export class EditDataComponent implements OnInit {
 
 skill:any;
 SkillId:any;
-complexity:any;
+// complexity:any;
 ComplexityId:any;
 Question:any;
 answer:any;
+Keyword:any;
 Skills: any = [];
 Complexity: any = [];
-response:any=[];
+QAresponse:any;
+Skillresponse:any;
 
   constructor(private formBuilder:FormBuilder,private http:HttpClient) {
    
@@ -59,18 +61,28 @@ response:any=[];
   }
 
 
-  addSkill(value:any){
-
+  addSkill(skillName:any){
+    debugger
+  try{
+   
+    this.http.post<any>('http://localhost:3000/skillsManager/addSkill',
+    {skillName}).subscribe((response) => {
+       this.Skillresponse = response.Message;    
+    });
+  }catch{
+      this.Skillresponse="Error adding Skill"
   }
+  }
+  
   addComplexity(value:any){
     
   }
 
-  addQuestion(skillId:any,cmpId:any,Question:any,Answer:any){
+  addQuestion(skillId:any,cmpId:any,Question:any,Answer:any,Answerkeywords:any){
     debugger
     this.http.post<any>('http://localhost:3000/qaManager/insertQA',
-    {skillId,cmpId,Question,Answer}).subscribe((response) => {
-       this.response = response.data;
+    {skillId,cmpId,Question,Answer,Answerkeywords}).subscribe((response) => {
+       this.QAresponse = response.Message;
     });
   }
 }

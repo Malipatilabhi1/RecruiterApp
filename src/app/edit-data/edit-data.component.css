@@ -20,6 +20,9 @@ mat-card{
 .div1{
     margin-left: 6%;
 }
+.response{
+    color:green;
+}
 
 .input{
     width:90%
@@ -35,5 +38,8 @@ h2{
       color:brown;
   }
   .aswer_area{
-    min-height: 75px;
+    min-height: 65px;
+  }
+  .example-full-width{
+    width:60%
   }

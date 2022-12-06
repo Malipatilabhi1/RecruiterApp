@@ -66,16 +66,17 @@
     <div class="div1">
     <h2 >Add New Skill</h2>
     <div>
-      <mat-form-field>
+      <mat-form-field >
         <input matInput type="text" [(ngModel)]="skill" placeholder="Enter skill" appearance="fill" >
       </mat-form-field>
-      <button (click)="addSkill(skill)" class="left green">Add</button>
+      <button (click)="addSkill(skill)" class="left green" [disabled]="!skill">Add</button>
+      <p class="response"> {{Skillresponse}}</p>
     </div>
     <!-- <div>
     <mat-form-field>
       <input matInput type="text" [(ngModel)]="complexity" placeholder="Enter complexity">
     </mat-form-field> 
-    <button (click)="addComplexity(complexity)" class="left">Add</button>
+    <button (click)="addComplexity(complexity)" class="left green">Add</button>
   </div> -->
     </div>
     </mat-card> 
@@ -105,12 +106,26 @@
       <mat-label>Answer </mat-label>
       <textarea matInput [(ngModel)]="answer" placeholder="Enter answer" class="aswer_area"></textarea>
       </mat-form-field>
+      <mat-form-field class="input">
+        <input matInput placeholder="Keywords.."  [(ngModel)]="Keyword">
+      </mat-form-field>
       <br/>
       <!-- 
       <textarea ></textarea> -->
-      <button type="submit" class="green" (click)="addQuestion(SkillId,ComplexityId,Question,answer)"> Submit</button>
-      <button  class="left">Upload File</button>
+      <button type="submit" class="green" (click)="addQuestion(SkillId,ComplexityId,Question,answer,Keyword)"> Submit</button>
+      <button type="file" class="left" id="div1">Upload File</button>
+      <p class="response" id="div2">{{QAresponse}}</p>
       </div>
+
+      <!-- <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Choose a date</mat-label>
+        <input matInput [matDatepicker]="picker">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker  #picker></mat-datepicker>
+      </mat-form-field> -->
       </mat-card>
+
+
 
 </div>

@@ -8,9 +8,6 @@ import { ElementRef } from '@angular/core';
 import { DataFileService } from '../data-file.service';
 import {formatDate } from '@angular/common';
 
-
-
-
 @Component({
   selector: 'app-interviewer-screen',
   templateUrl: './interviewer-screen.component.html',
@@ -32,8 +29,6 @@ export class InterviewerScreenComponent implements OnInit {
   //         ' 1.Source code compilation in managed code.2.Newly created code is clubbed with assembly code.3.The Common Language Runtime (CLR) is loaded.4.Assembly execution is done through CLR.',skillId:1,complexity:'Medium'},
   //     ];
   
-  
-  // Complexity:any=[];
   arr: any=[];      
   showMe:boolean=true;
   hideMe:boolean=false;
@@ -64,36 +59,21 @@ export class InterviewerScreenComponent implements OnInit {
     private formBuilder:FormBuilder,
     private httpClient:HttpClient,
     private elementRef: ElementRef,
-    private dfs:DataFileService,
-    
-    ){
-      
-      
-    }
+    private dfs:DataFileService,  ){}
+
     hour:any;
     min:any;
     sec:any;
     Time:any;
   ngOnInit(): void {
-     //call api 
-     
-     
+     //call api  
      let now: Date = new Date();
      this.Time=now.getHours()+':'+now.getMinutes()+':'+now.getSeconds();
     this.getCandidateDetails();
-    
-    
-
     console.log(now);  
-    // this.ExtractDate=this.Today.getMonth()+'/'+this.Today.getDate()+'/'+this.Today.getFullYear();
   }
 
-  getCandidateDetails(){
-    
-    this.candidate=this.dfs.arr;
-    this.profile();
-    console.log(this.candidate)
-  }
+ 
   Asid:any='';
   CName:any;
   Email:any;
@@ -109,18 +89,25 @@ FilterDate:any;
 skillIds:any=[];
 cmpIds:any=[];
 Myskills:any=[];
-
+InterviewId:any;
+InterviewDate:any;
+getCandidateDetails(){  
+  this.candidate=this.dfs.arr;
+  this.profile();
+  console.log(this.candidate)
+}
 
   profile(){
     this.Asid;
-    // this.Today=this.candidate.Date;
     this.CId=this.candidate.canId;
     this.CName=this.candidate.canName;
     this.status=this.candidate.Candidatestatus;
     this.candidateSkill=this.candidate.skills;
+    this.InterviewId=this.candidate.InterviewId;
+    this.InterviewDate=this.candidate.date;
     debugger
     this.AssDate=this.candidate.Date;
-    this.FilterDate = formatDate(this.Today, 'MM/dd/yyyy', 'en-US');
+    this.FilterDate = formatDate(this.InterviewDate, 'MM/dd/yyyy', 'en-US');
     console.log(this.FilterDate)
     this.candidateSkill.forEach((element: { skillId: any;cmpId:any }) => {
       let skillId=element.skillId;
@@ -128,11 +115,7 @@ Myskills:any=[];
       this.Myskills.push({skillId,cmpId});
       console.log(this.Myskills)   
     });
-    
-    // this.FilterDate = this.datepipe.transform(this.AssDate, 'yyyy-MM-dd');
-    // this.FilterDate=this.AssDate.getMonth()+'/'+this.AssDate.getDate()+'/'+this.AssDate.getFullYear();
     console.log(this.FilterDate)
-    
   }
   
   canId=2;
@@ -140,20 +123,30 @@ Myskills:any=[];
   recId=1;
   note_value=1;
   newArry:any=[];
+
+   //Assessment start button 
+   assesmentStart()
+   {
+     debugger;
+     this.getQueAns(this.CId,this.recId,this.FilterDate,this.Time,this.InterviewId,this.Myskills,this.RowandQuestion_number);
+     this.hideMe=true;
+     this.keywordload();
+     // this.keywordload();  
+   }
   
-  getQueAns(canId:any,recId:any,Date:any,starttime:any,Candidatestatus:any,skills:any,RowandQuestion_number:any){
+  getQueAns(canId:any,recId:any,Date:any,starttime:any,InterviewId:any,skills:any,RowandQuestion_number:any){
     debugger;
     try{
     this.httpClient.post<any>('http://localhost:3000/randomizationManager',
     {
-    canId,recId,Date,starttime,Candidatestatus,skills
+    canId,recId,Date,starttime,InterviewId,skills
     }).subscribe(
       response=>{      
           // this.newArry=response.data;
           // this.arr.push(this.newArry);
           this.Asid=response.assessmentId;
           console.log(response);
-          this.getQuestion(canId,RowandQuestion_number);
+          this.getQuestion(canId,RowandQuestion_number,this.Asid);
           // console.log(this.newArry);
           this.update();
       }
@@ -163,26 +156,22 @@ Myskills:any=[];
   }
   }
 
-  getQuestion(canId:any,RowandQuestion_number:any){
+  getQuestion(canId:any,RowandQuestion_number:any,assessmentId:any){
     this.httpClient.post<any>('http://localhost:3000/assessmentStagingManager',{
       canId,
-      RowandQuestion_number
+      RowandQuestion_number,
+      assessmentId
     }).subscribe(
       response=>{
         console.log(response);
         this.newArry=response.result;
+        this.keywordload();
        });
   }
-
-  //Assessment start button 
-  assesmentStart()
-  {
-    debugger;
-    this.getQueAns(this.CId,this.recId,this.FilterDate,this.Time,this.status,this.Myskills,this.RowandQuestion_number);
-    this.hideMe=true;
-    this.keywordload();
-    // this.keywordload();  
+  keywordload(){
+    this.keywordzz=this.newArry[0].Answerkeywords;
   }
+ 
 
   
   //duplicate method for right arrow //it use when we have api
@@ -199,6 +188,12 @@ Myskills:any=[];
   datastoring_response:any='';
   nextQA()
   {
+    if(this.newArry.currentRecordId==20){
+        this.saveData();
+
+    }else{
+
+    
     debugger;
     let canId=this.CId;
     let RowandQuestion_number=this.i;
@@ -217,18 +212,24 @@ Myskills:any=[];
         console.log(response);     
         this.i++;
         this.updateData();     
-        // this.getQueAns(this.CId,this.i,this.ExtractDate,this.Time,this.status,this.candidateSkill,this.i);
-        this.getQuestion(this.CId,this.i);
-        this.keywordzz=this.keywordsArray[this.i].keyword;    
+        this.getQuestion(this.CId,this.i,this.Asid);
+        this.keywordload();
       },  
     );
   }
+}
 
   //duplicate method for left arrow //it use when we have api
   prevQA(){
     debugger;
     this.i--;
-    this.getQueAns(this.CId,this.i,this.ExtractDate,this.Time,this.status,this.candidateSkill,this.i);
+    let canId=this.CId;
+    let RowandQuestion_number=this.i;
+    
+    this.getQuestion(this.CId,RowandQuestion_number,this.Asid);
+   this.recruiterData.controls['score']=this.newArry[0].score;
+   this.recruiterData.controls['note']=this.newArry[0].Note;
+   
   } 
   ScoreA:any=[];
   NoteA:any=[];
@@ -256,12 +257,14 @@ Myskills:any=[];
     let canId=this.CId;
     let assessmentId=this.Asid;
     let endTime=this.Time;
+    let InterviewId=this.InterviewId;
     this.httpClient.post<any>('http://localhost:3000/assessmentManager/endAssessment',
     {
       status,
       canId,
       assessmentId,
-      endTime
+      endTime,
+      InterviewId
     }).subscribe(
       response=>{
         alert(response.status); 
@@ -384,127 +387,19 @@ Myskills:any=[];
     // {keyword:'group of threads,  without interfering ,  principal threads operation'}
   ];
 
-  //to display the keywords
-  keywordload(){
-    this.keywordzz=this.keywordsArray[0].keyword;
-  }
-
-  //fetching question and ans from backend
-  // getQueAns(){
-  //   debugger;
-  //   this.httpClient.get<any>('http://localhost:3000/qaManager').subscribe(
-  //     response=>{
-  //       this.arr=response.data;
-  //       console.log(this.arr); 
-  //     }
-  //   );
-  // }
-  // canId=2;
-  // RowandQuestion_number=1;
-  // getQueAns(canId:any,RowandQuestion_number:any){
-  //   debugger;
-  //   this.httpClient.post<any>('http://localhost:3000/assessmentStagingManager',{
-  //   canId,
-  //   RowandQuestion_number
-  //   }).subscribe(
-  //     response=>{
-  //       this.arr=response.data;
-  //       console.log(this.arr); 
-  //     }
-  //   );
-  // }
-
-  // Sid:any='';
-  // Sname:any='';
-  // SSkills:any=[];
-
-  // catchData(id:any,name:any,skills:any)
-  // {
-  //   this.Sid=id;
-  //   this.Sname=name;
-  //   this.SSkills=skills;
-  // }
-
-  //fetch data from db //duplicate method for upcomming api
   
 
-
-  // getSkills(){
-  //   debugger;
-  //   this.httpClient.get<any>('http://localhost:3000/skillsManager').subscribe(
-  //     response=>{
-  //       this.Skill=response.data;
-  //       // console.log(this.Skill); 
-  //     }
-  //   );
-  // }
-  
-  // getComplexity(){
-    
-  //   this.httpClient.get<any>('http://localhost:3000/ComplexityManager').subscribe(
-  //     response=>{
-  //       this.Complexity=response.data;
-  //       // console.log(this.Complexity);
-  //     }
-  //   );
-  // }
-
-  // onSelectSkill(data:any)
-  // {
-  //   debugger;
-  //  this.skill=data;
-  // }
-  
-
-  // onSelectComple(data:any){
-  //   this.complexity=data;
-
-  //   let id=this.i.toString();
-
-  //   // this.fetchData(id,this.skill,data);
-  //   // this.hideMeI=true;
-
-  // }
+ 
   
   
   
     
-  //for fetching next Q/A right arrow //hardcoded value
-
-  // nextQuestion(data:any){
-  //   debugger;
-    
-  //     if(data === "next"){
-  //       this.i++;
-  //       this.nextI++;
-  //       this.question ="Q: "+ this.arr[this.i].Question;
-  //       this.answer = "A: "+this.arr[this.i].Answer;
-  //       this.keywordzz=this.keywordsArray[this.i].keyword;
-       
-  //       this.updateData();
-  //       this.value=0;
-  //       this.ScoreData='';
-  //     }
-  // }
+ 
   flush(){
     this.Score='';
     this.Note='';
   }
-  //for fetching previous Q/A left arrow //hardcoded value
-  // privQuestion(data:any)
-  // {
-  //   debugger;
-  //   if(data=== "prev"){
-  //     this.ques = true;
-  //     this.i--;
-      
-  //     this.question ="Q: "+ this.arr[this.i].Question;
-  //       this.answer = "A: "+this.arr[this.i].Answer;
-  //       this.keywordzz=this.keywordsArray[this.i].keyword;
-  //     this.nextI--;
-  //   }
-  //   this.ques = false;
-  // }
+  
   
   resume:boolean=false;
   //slider value

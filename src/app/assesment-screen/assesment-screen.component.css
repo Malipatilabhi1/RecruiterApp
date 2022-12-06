@@ -1,12 +1,26 @@
-/* .date_picker{
-  width:90%;
-  margin-left: 6%;
-} */
-  /* .search_status{
-    padding-left: 6%; 
-  } */
+mat-sidenav{
+  width:20%;
+}
+mat-sidenav-content{ 
+  margin-left: 3%;
+  padding-right: 4%;
+}
+mat-sidenav-container{
+height: 100%;
+}
+mat-datepicker-toggle{
+  float: right;
+}
+mat-form-field{
+  width: 90%;
+}
+.reset_button{
+  margin-top: 4%;
+  width:50px; 
+  height: 30px;
+}
   .filter_feilds{
-    margin-left: 6%;
+    margin-left: 10%;
   }
   .search_label{
     margin-left: 10px;
@@ -17,18 +31,7 @@
       margin-left: 10px;
       margin-bottom: 6%;
   }
-  /* .search_icon{
-    float: right;
-    color:brown;
-  } */
-  /* .search_feild{
-    margin-left: 5px;
-  } */
-  /* .status_select{
-    margin-left: 1%;
-    margin-bottom: 6%;
-    width: 140px;
-  } */
+  
     .filter{
       float: right;
       right: 0;
@@ -67,10 +70,11 @@
   #div1,#div2,#div3{
     display: inline;
   }
-  .rightF{
+  .search_button{
    float: right;
-   margin-right: 4px;
+   margin-right: 10%;
    width: 38px;
+   height: 38px;
   }
   /* MatDialog{
     height: 100%;
@@ -84,17 +88,22 @@
 }
 button:disabled {
   background-color:#9b9b9b;
+  
 }
 /* .zoom:hover {
   -ms-transform: scale(1.1); 
   -webkit-transform: scale(1.1); 
   transform: scale(1.1); 
 } */
-.position{
-  position:relative;
+.startAssessment_button{
+  
   height: 25px;
-  margin-top: 20%;
-  margin-left: 9%;
+  margin-top: 15%;
+  margin-left: 12%;
+  
+}
+.rightF{
+  float: right;
 }
  button{
     background-color: rgb(37, 142, 37);

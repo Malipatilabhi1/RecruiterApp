@@ -47,6 +47,7 @@ import { ScoreComponent } from './score/score.component';
 import * as CanvasJSAngularChart from '../assets/canvasjs.angular.component';
 import { FilterPipe } from './filter.pipe';
 import { AssessmentRecordComponent } from './assessment-record/assessment-record.component';
+import { InterviewInfoComponent } from './interview-info/interview-info.component';
 var CanvasJSChart = CanvasJSAngularChart.CanvasJSChart;
 
 
@@ -63,7 +64,7 @@ var CanvasJSChart = CanvasJSAngularChart.CanvasJSChart;
     AssesmentScreenComponent,
     EditDataComponent,
     ScoreComponent, 
-    CanvasJSChart, FilterPipe, AssessmentRecordComponent
+    CanvasJSChart, FilterPipe, AssessmentRecordComponent, InterviewInfoComponent
   ],
   imports: [
     

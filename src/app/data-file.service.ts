@@ -11,11 +11,13 @@ export class DataFileService {
   arr:any=[];
   Assessments:any=[];
   Search_email:any;
+  candidateEmail:any;
   constructor(private _http:HttpClient) { }
 
   Intermediate(data:any)
   {
     this.arr=data;
+    console.log(this.arr)
   }
 
   sendData(emailId:any,phone:any,name:any,experience:any,skills:number)
@@ -30,44 +32,6 @@ export class DataFileService {
 
   }
 
-  // sendingCandidateDataToServer(emailId:any,phone:any,name:any,experience:any,skills:number) {
-  //   this._http
-  //     .post('http://localhost:3000/candidateManager', {
-  //       emailId: ProfileCreationComponent.Email,
-
-  //       phone: ProfileCreationComponent.PhoneNo,
-
-  //       name: ProfileCreationComponent.Name,
-
-  //       experience: ProfileCreationComponent.Experiance,
-
-  //       skills: [
-  //         {
-  //           skillId: ProfileCreationComponent.sID1,
-
-  //           cmpId: ProfileCreationComponent.cId1,
-  //         },
-  //         {
-  //           skillId: ProfileCreationComponent.sID2,
-
-  //           cmpId: ProfileCreationComponent.cId2,
-  //         },
-  //         {
-  //           skillId: ProfileCreationComponent.sID3,
-
-  //           cmpId: ProfileCreationComponent.cId3,
-  //         },
-  //       ],
-  //     })
-  //     .subscribe(
-  //       (res) => {
-  //         console.log(res);
-  //       },
-  //       (error) => {
-  //         console.warn(error);
-  //       }
-  //     );
-  // }
   sendingCandidateDataToServer(
     emailId: any,
     phone: any,
@@ -94,11 +58,33 @@ export class DataFileService {
   }
 
   gettingCandidateDatawithCandidateskill(emailId: any) {
+    this.candidateEmail=emailId;
     return this._http.post(
       'http://localhost:3000/candidateManager/candidateskill',
 
       {
         emailId,
+      }
+    );
+  }
+
+  gettingDataForScheduler(canId: any) {
+    return this._http.post(
+      'http://localhost:3000/candidateManager/displayCandidateSkills',
+      {
+        canId,
+      }
+    );
+  }
+
+  sendingSchedulingDataToBackend(canId:any,date:any,interviewSkills:any) {
+    debugger;
+    return this._http.post(
+      'http://localhost:3000/candidateInterviewManager/addInterview',
+      {
+        canId,
+        date,
+        interviewSkills
       }
     );
   }

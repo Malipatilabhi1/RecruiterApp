@@ -35,6 +35,8 @@ emailId:any="vishwas261999@gmail.com";
 ngOnInit(): void {
  debugger;
  this.getinfo(this.emailId)
+ this.emailId=this.dfs.candidateEmail;
+ console.log(this.emailId);
 }
 
 }
