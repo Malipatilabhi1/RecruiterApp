@@ -1,10 +1,10 @@
 import { formatDate } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { DataFileService } from '../data-file.service';
 import { MatDialog ,MatDialogRef} from '@angular/material/dialog';
 import { ScoreComponent } from '../score/score.component';
-
+import {userIdToken} from '../../app/header/header.component';
 
 @Component({
   selector: 'app-interview-info',
@@ -13,6 +13,7 @@ import { ScoreComponent } from '../score/score.component';
 })
 export class InterviewInfoComponent implements OnInit {
 
+  headers = new HttpHeaders({'Authorization':`Bearer ${userIdToken}`});
   arr: any = [];
   assignCandidates:any=[];
   skillA:any=[];
@@ -34,7 +35,7 @@ export class InterviewInfoComponent implements OnInit {
 
   getCandidates(){
     debugger;
-    this.http.post<any>('http://localhost:3000/InterviewFilterManager',{}).subscribe(
+    this.http.post<any>('http://localhost:3000/InterviewFilterManager',{},{headers:this.headers}).subscribe(
       response=>{
         console.log(response)
         this.assignCandidates=response.result;
@@ -70,9 +71,10 @@ export class InterviewInfoComponent implements OnInit {
     this.http.post<any>('http://localhost:3000/InterviewFilterManager',
     {
       status,name,emailId,startDate,endDate
-    }).subscribe(
+    },{headers:this.headers}).subscribe(
       response=>{ 
         this.assignCandidates=response.result;
+        console.log(this.assignCandidates);
        })  
   }
 

@@ -56,7 +56,7 @@
   
   
   <div class="col-lg-9">
-    <mat-card class="size">
+    <mat-card class="size QACard_size">
       <div class="size" *ngFor="let data of newArry| paginate: { itemsPerPage: 1, currentPage: p }" >
         <h3  class="red" id="div1"><b> {{newArry[0].Question}}</b> </h3>
         <span class="QANumber">{{newArry[0].currentRecordId}}/{{newArry[0].lastRecordId}}</span>
@@ -64,16 +64,16 @@
         <h3 *ngIf="showMe" id="div"><b></b>{{newArry[0].Answer}}</h3>
       </div> 
     </mat-card>
-    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    
   </div>
 
   <div class="col-lg-3 ">
     <mat-card class="size">
-      <div class="col-lg-7" *ngFor="let data of newArry">
+      <div class="col-lg-7">
         <label>Skill:</label>
-        <h4> {{data.skillName}}</h4>
+        <h4> {{newArry[0].skillName}}</h4>
         <label>Complexity: </label>
-        <h4>{{data.Name}}</h4>
+        <h4>{{newArry[0].Name}}</h4>
       </div>
       <div class="col-lg-5">
         
@@ -92,7 +92,7 @@
   </div>
 
   <div class="col-lg-8">
-    <mat-card>
+    <mat-card class="size">
       <div>
         <angular-editor id="editor2" placeholder="Note" [config]="editorConfig1" formControlName="note"  [(ngModel)]="value1">    
         </angular-editor>    

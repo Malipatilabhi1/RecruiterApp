@@ -37,7 +37,7 @@ import { HeaderComponent } from './header/header.component';
 import { ProfileCreationComponent } from './profile-creation/profile-creation.component';
 import { InterviewerScreenComponent } from './interviewer-screen/interviewer-screen.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule,HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SidebarContentComponent } from './sidebar-content/sidebar-content.component';
 import { SignInPageComponent } from './sign-in-page/sign-in-page.component';
 import { AssesmentScreenComponent } from './assesment-screen/assesment-screen.component';
@@ -48,8 +48,23 @@ import * as CanvasJSAngularChart from '../assets/canvasjs.angular.component';
 import { FilterPipe } from './filter.pipe';
 import { AssessmentRecordComponent } from './assessment-record/assessment-record.component';
 import { InterviewInfoComponent } from './interview-info/interview-info.component';
-var CanvasJSChart = CanvasJSAngularChart.CanvasJSChart;
 
+import { MsalGuard, MsalInterceptor, MsalModule, MsalRedirectComponent, MsalService, MSAL_INSTANCE } from '@azure/msal-angular';
+import { InteractionType, IPublicClientApplication, PublicClientApplication } from '@azure/msal-browser';
+// Import the Azure AD B2C configuration 
+import { msalConfig, protectedResources } from './auth-config';
+import { WebapiComponent } from './webapi/webapi.component';
+
+var CanvasJSChart = CanvasJSAngularChart.CanvasJSChart;
+export function MSALInstanceFactory():IPublicClientApplication{
+  return new PublicClientApplication({
+    auth:{
+      clientId:'d76f4c48-fcf4-4182-ba25-6b92e5ba3e7f',
+      authority: "https://login.microsoftonline.com/a7bae7fa-0df1-4562-a554-16a95f54c8ce",
+      redirectUri:'http://localhost:4200/'
+    }
+  })
+}
 
 @NgModule({
   declarations: [
@@ -64,7 +79,7 @@ var CanvasJSChart = CanvasJSAngularChart.CanvasJSChart;
     AssesmentScreenComponent,
     EditDataComponent,
     ScoreComponent, 
-    CanvasJSChart, FilterPipe, AssessmentRecordComponent, InterviewInfoComponent
+    CanvasJSChart, FilterPipe, AssessmentRecordComponent, InterviewInfoComponent, WebapiComponent
   ],
   imports: [
     
@@ -86,7 +101,8 @@ var CanvasJSChart = CanvasJSAngularChart.CanvasJSChart;
     MatListModule,
     ScrollingModule,
     MatGridListModule,
-    HttpClientModule,
+    
+    
     AngularEditorModule,
     MatStepperModule,
     NgxPaginationModule,
@@ -95,9 +111,22 @@ var CanvasJSChart = CanvasJSAngularChart.CanvasJSChart;
     NgChartsModule,
     MatTabsModule,
     MatDatepickerModule,
-    MatNativeDateModule,MatRippleModule
+    MatNativeDateModule,MatRippleModule,
+    HttpClientModule,
+  MsalModule,
+    
+ 
+
+    
   ],
-  providers: [],
+  providers: [
+    {
+      provide: MSAL_INSTANCE,
+      useFactory:MSALInstanceFactory
+      
+    },
+    MsalService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { DataFileService } from '../data-file.service';
+import {userIdToken} from '../../app/header/header.component'
 
 @Component({
   selector: 'app-assessment-record',
@@ -9,7 +10,7 @@ import { DataFileService } from '../data-file.service';
 })
 export class AssessmentRecordComponent implements OnInit {
 
-  
+  headers = new HttpHeaders({'Authorization':`Bearer ${userIdToken}`});
 
   //  arr:any = [{date:'14/11/2022',assessmentstatus:'open'},{date:'15/11/2022',assessmentstatus:'closed'},
   // {date:'14/11/2022',assessmentstatus:'open'},{date:'15/11/2022',assessmentstatus:'closed'}];
@@ -18,7 +19,7 @@ export class AssessmentRecordComponent implements OnInit {
   
     getinfo(emailId:any){
       this.httpClient.post<any>('http://localhost:3000/candidateManager/candidateSkill',
-      {emailId}
+      {emailId},{headers:this.headers}
     ).subscribe(
     response=>{
       console.log(response);

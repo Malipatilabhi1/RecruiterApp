@@ -23,6 +23,9 @@ mat-card{
 .response{
     color:green;
 }
+.response1{
+    color: red;
+}
 
 .input{
     width:90%

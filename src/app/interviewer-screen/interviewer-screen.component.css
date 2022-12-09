@@ -181,6 +181,10 @@ mat-slider{
 .borderC{
   border-color: #ea5455;
 }
+.QACard_size{
+  min-height:250px ;
+  height: auto !important ;
+}
 .color-size{
   margin-left: 2px;
   font-size: 13px !important;

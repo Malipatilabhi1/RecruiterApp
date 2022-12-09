@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ProfileCreationComponent } from './profile-creation/profile-creation.component';
+
+import {userIdToken} from '../app/header/header.component';
 
 
 @Injectable({
@@ -8,6 +10,7 @@ import { ProfileCreationComponent } from './profile-creation/profile-creation.co
 })
 export class DataFileService {
 
+  headers = new HttpHeaders({'Authorization':`Bearer ${userIdToken}`});
   arr:any=[];
   Assessments:any=[];
   Search_email:any;
@@ -28,7 +31,7 @@ export class DataFileService {
       name,
       experience,
       skills
-    })
+    },{headers:this.headers})
 
   }
 
@@ -45,7 +48,7 @@ export class DataFileService {
       name,
       experience,
       skills,
-    });
+    },{headers:this.headers});
   }
 
   GettingDataViaEmailId(emailId: any) {
@@ -53,7 +56,7 @@ export class DataFileService {
     return this._http.post('http://localhost:3000/candidateManager/candidateSkill',
       {
         emailId,
-      }
+      },{headers:this.headers}
     );
   }
 
@@ -64,7 +67,7 @@ export class DataFileService {
 
       {
         emailId,
-      }
+      },{headers:this.headers}
     );
   }
 
@@ -73,7 +76,7 @@ export class DataFileService {
       'http://localhost:3000/candidateManager/displayCandidateSkills',
       {
         canId,
-      }
+      },{headers:this.headers}
     );
   }
 
@@ -85,7 +88,7 @@ export class DataFileService {
         canId,
         date,
         interviewSkills
-      }
+      },{headers:this.headers}
     );
   }
 
@@ -93,12 +96,12 @@ export class DataFileService {
     return this._http.post('http://localhost:3000/candidateManager/updateCandidateStatus',
     {
       data
-    }
+    },{headers:this.headers}
     )
   }
   getAssessments(emailId:any){
     return this._http.post<any>('http://localhost:3000/candidateManager/candidateSkill',
-    {emailId}
+    {emailId},{headers:this.headers}
   ).subscribe(response=>{
     this.Assessments=response.data;
   })

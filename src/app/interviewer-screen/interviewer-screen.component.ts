@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, NgModel } from '@angular/forms';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
@@ -7,6 +7,7 @@ import { bindCallback } from 'rxjs';
 import { ElementRef } from '@angular/core';
 import { DataFileService } from '../data-file.service';
 import {formatDate } from '@angular/common';
+import {userIdToken} from '../../app/header/header.component';
 
 @Component({
   selector: 'app-interviewer-screen',
@@ -28,6 +29,8 @@ export class InterviewerScreenComponent implements OnInit {
   //         {Question:'Explain the four steps involved in the C# code compilation',Answer:'Four steps of code compilation in C# include'+
   //         ' 1.Source code compilation in managed code.2.Newly created code is clubbed with assembly code.3.The Common Language Runtime (CLR) is loaded.4.Assembly execution is done through CLR.',skillId:1,complexity:'Medium'},
   //     ];
+
+  headers = new HttpHeaders({'Authorization':`Bearer ${userIdToken}`});
   
   arr: any=[];      
   showMe:boolean=true;
@@ -140,7 +143,7 @@ getCandidateDetails(){
     this.httpClient.post<any>('http://localhost:3000/randomizationManager',
     {
     canId,recId,Date,starttime,InterviewId,skills
-    }).subscribe(
+    },{headers:this.headers}).subscribe(
       response=>{      
           // this.newArry=response.data;
           // this.arr.push(this.newArry);
@@ -160,8 +163,8 @@ getCandidateDetails(){
     this.httpClient.post<any>('http://localhost:3000/assessmentStagingManager',{
       canId,
       RowandQuestion_number,
-      assessmentId
-    }).subscribe(
+      assessmentId },
+      {headers:this.headers}).subscribe(
       response=>{
         console.log(response);
         this.newArry=response.result;
@@ -206,7 +209,7 @@ getCandidateDetails(){
       RowandQuestion_number,
       score,
       notes
-    }).subscribe(
+    },{headers:this.headers}).subscribe(
       response=>{
         this.datastoring_response=response.status;
         console.log(response);     
@@ -265,7 +268,7 @@ getCandidateDetails(){
       assessmentId,
       endTime,
       InterviewId
-    }).subscribe(
+    },{headers:this.headers}).subscribe(
       response=>{
         alert(response.status); 
         console.log(response);
@@ -336,56 +339,28 @@ getCandidateDetails(){
   
   
 
-  
-  //display candidate profile // hardcoded data
-  
-  // skill1:any='';
-  // complexity1:any='';
-  // skill2:any='';
-  // complexity2:any='';
-  // skill3:any='';
-  // complexity3:any='';
 
-//candidate skill // hardcoded data
-  // skildata()
-  // {
-  //   this.skill1='C#',
-  //   this.complexity1='Medium';
-  // this.skill2='Angular';
-  // this.complexity2='Easy';
-  // this.skill3='SQL';
-  // this.complexity3='Easy';
-  // }
 
   //key words array
-  keywordsArray:any=[
-    {keyword:'Its mandatory to assign a value to it'},
-    {keyword:'Different dimensions and size.'},
-    {keyword:'Collection of similar types of data.'},
-    {keyword:'comprises elements of type array.'},
-    {keyword:'uesd for treating an object as an array.'},
-    {keyword:'Execute independently of the primary.'},
-    {keyword:'Easy to use and can be added to the toolbox.'},
-    {keyword:'Angular provides several out of the box built-in features.'},
-    {keyword:'value type with a set of related named constant.'},
-    {keyword:'storing of data in a file'},
-    {keyword:''},
-    {keyword:''}, 
-    {keyword:''},
-    {keyword:''},
-    {keyword:''},
-    {keyword:''},
-    // {keyword:'automatically releases the memory space'},
-    // {keyword:'execute independently'},
-    // {keyword:'objects cant be instantiated'},
-    // {keyword:'accesse from anywhere, instance creation is not necessary'},
-    // {keyword:'overridden,  virtual keyword,  Override keyword'},
-    // {keyword:'exception handling, No matter if the exception code with excecute'},
-    // {keyword:'restriction,  inherited,  sealed modifier'},
-    // {keyword:''},
-    // {keyword:'interfaces expect different data, '},
-    // {keyword:'group of threads,  without interfering ,  principal threads operation'}
-  ];
+  // keywordsArray:any=[
+  //   {keyword:'Its mandatory to assign a value to it'},
+  //   {keyword:'Different dimensions and size.'},
+  //   {keyword:'Collection of similar types of data.'},
+  //   {keyword:'comprises elements of type array.'},
+  //   {keyword:'uesd for treating an object as an array.'},
+  //   {keyword:'Execute independently of the primary.'},
+  //   {keyword:'Easy to use and can be added to the toolbox.'},
+  //   {keyword:'Angular provides several out of the box built-in features.'},
+  //   {keyword:'value type with a set of related named constant.'},
+  //   {keyword:'storing of data in a file'},
+  //   {keyword:''},
+  //   {keyword:''}, 
+  //   {keyword:''},
+  //   {keyword:''},
+  //   {keyword:''},
+  //   {keyword:''},
+    
+  // ];
 
   
 

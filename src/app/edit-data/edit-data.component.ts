@@ -1,7 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormBuilder, FormControl } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {userIdToken} from '../../app/header/header.component';
 
 @Component({
   selector: 'app-edit-data',
@@ -10,6 +11,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class EditDataComponent implements OnInit {
 
+  headers = new HttpHeaders({'Authorization':`Bearer ${userIdToken}`});
 skill:any;
 SkillId:any;
 // complexity:any;
@@ -21,6 +23,7 @@ Skills: any = [];
 Complexity: any = [];
 QAresponse:any;
 Skillresponse:any;
+Skillresponse1:any;
 
   constructor(private formBuilder:FormBuilder,private http:HttpClient) {
    
@@ -35,7 +38,7 @@ Skillresponse:any;
 
   getComplexity() {
     this.http
-      .get<any>('http://localhost:3000/ComplexityManager')
+      .get<any>('http://localhost:3000/ComplexityManager',{headers:this.headers})
       .subscribe((response) => {
         this.Complexity = response.result;
         console.log(this.Complexity);
@@ -44,7 +47,7 @@ Skillresponse:any;
 
   getSkills() {
     this.http
-      .get<any>('http://localhost:3000/skillsManager')
+      .get<any>('http://localhost:3000/skillsManager',{headers:this.headers})
       .subscribe((response) => {
         this.Skills = response.result;
         // console.log(this.Skill);
@@ -62,12 +65,22 @@ Skillresponse:any;
 
 
   addSkill(skillName:any){
+      this.Skillresponse='';
+      this.Skillresponse1='';
     debugger
   try{
    
     this.http.post<any>('http://localhost:3000/skillsManager/addSkill',
-    {skillName}).subscribe((response) => {
-       this.Skillresponse = response.Message;    
+    {skillName},{headers:this.headers}).subscribe((response) => {
+      //  this.Skillresponse = response.Message;
+      
+       if(response.Message=='The skill is already present!!')
+       {
+        this.Skillresponse1 = response.Message;
+       }else{
+        this.Skillresponse=response.Message;
+       }
+       console.log(response)   
     });
   }catch{
       this.Skillresponse="Error adding Skill"
@@ -81,7 +94,7 @@ Skillresponse:any;
   addQuestion(skillId:any,cmpId:any,Question:any,Answer:any,Answerkeywords:any){
     debugger
     this.http.post<any>('http://localhost:3000/qaManager/insertQA',
-    {skillId,cmpId,Question,Answer,Answerkeywords}).subscribe((response) => {
+    {skillId,cmpId,Question,Answer,Answerkeywords},{headers:this.headers}).subscribe((response) => {
        this.QAresponse = response.Message;
     });
   }

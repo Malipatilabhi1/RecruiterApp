@@ -10,24 +10,41 @@ import { ProfileCreationComponent } from './profile-creation/profile-creation.co
 import { ScoreComponent } from './score/score.component';
 import { SidebarContentComponent } from './sidebar-content/sidebar-content.component';
 import { SignInPageComponent } from './sign-in-page/sign-in-page.component';
+import { MsalGuard } from '@azure/msal-angular';
+import { WebapiComponent } from './webapi/webapi.component';
+import { HeaderComponent } from './header/header.component';
+import { MaslGuard } from './masl.guard';
 
 const routes: Routes = [
-   {path:'dashboard',component:DashboardComponent},
-  {path:'profile-creation',component:ProfileCreationComponent},
-  {path:'QASection',component:SidebarContentComponent},
-  {path:'a',component:SignInPageComponent},
-  {path:'Assessment',component:InterviewerScreenComponent},
-  {path:'Candidate-Info',component:AssesmentScreenComponent},
+   {path:'',component:DashboardComponent,},
+  {path:'profile',component:ProfileCreationComponent,canActivate:[MaslGuard]},
+  {path:'QASection',component:SidebarContentComponent,canActivate:[MaslGuard]},
+  {path:'sign',component:SignInPageComponent,},
+  {path:'Assessment',component:InterviewerScreenComponent,canActivate:[MaslGuard]},
+
+  {path:'Candidate-Info',component:AssesmentScreenComponent,canActivate:[MaslGuard]},
   {path:'app',component:AppComponent},
-  {path:'barchart',component:ScoreComponent},
-  {path:'addqa',component:EditDataComponent},
-  {path:'interview-info',component:InterviewInfoComponent}
+  {path:'barchart',component:ScoreComponent,canActivate:[MaslGuard]},
+  {path:'addqa',component:EditDataComponent,canActivate:[MaslGuard]},
+  {path:'interview-info',component:InterviewInfoComponent,canActivate:[MaslGuard]},
+  // {path:'**',component:DashboardComponent},
+  
+  
+  {
+    path: 'webapi',
+    component: WebapiComponent,
+    // The profile component is protected with MSAL Guard.
+    // canActivate: [MsalGuard]
+  },
 
 
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  // imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {
+    initialNavigation:'enabledBlocking'
+  })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

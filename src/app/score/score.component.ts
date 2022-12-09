@@ -2,9 +2,10 @@ import { ExpressionType } from '@angular/compiler';
 import { Component, OnInit,Inject } from '@angular/core';
 import { dialogClose } from '@syncfusion/ej2-angular-richtexteditor';
 import { MatDialogRef } from '@angular/material/dialog';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {MatDialog, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { DataFileService } from '../data-file.service';
+import {userIdToken} from '../../app/header/header.component';
 
 
 @Component({
@@ -13,29 +14,9 @@ import { DataFileService } from '../data-file.service';
   styleUrls: ['./score.component.css']
 })
 export class ScoreComponent implements OnInit {
-  // arr:any=[
-  //   {
-  //       "skillName": "Angular",
-  //       "candidateScore": 34,
-  //       "count": 7,
-  //       "skillScore": 70,
-  //       "percentage": 49
-  //   },
-  //   {
-  //       "skillName": "c#",
-  //       "candidateScore": 36,
-  //       "count": 7,
-  //       "skillScore": 70,
-  //       "percentage": 51
-  //   },
-  //   {
-  //       "skillName": "React",
-  //       "candidateScore": 49,
-  //       "count": 6,
-  //       "skillScore": 60,
-  //       "percentage": 82
-  //   }
-  // ]
+  
+    
+  headers = new HttpHeaders({'Authorization':`Bearer ${userIdToken}`});
 
   canId:any;
   Date:any;
@@ -103,7 +84,7 @@ export class ScoreComponent implements OnInit {
     this.http.post<any>('http://localhost:3000/cardsScoreManager/scores',
     {
     canId,Date
-    }).subscribe(
+    },{headers:this.headers}).subscribe(
       response=>{   
        
      this.array=response.val;
@@ -122,7 +103,7 @@ i:any=0;
   }
 
   this.chartOptions.data[0].dataPoints = this.dataPoints;
-     
+      
      
   console.log(this.dataPoints)
   }

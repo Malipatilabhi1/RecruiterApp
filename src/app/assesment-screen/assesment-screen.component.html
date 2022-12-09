@@ -57,17 +57,6 @@
             <mat-datepicker #picker1></mat-datepicker>
           </mat-form-field>
           
-
-        <!-- <mat-form-field appearance="fill" class="">
-          <mat-label>Enter a date range</mat-label>
-          <mat-date-range-input [rangePicker]="picker">
-            <input matStartDate [(ngModel)]="start_date" placeholder="Start date">
-            <input matEndDate [(ngModel)]="end_date" placeholder="End date">
-          </mat-date-range-input>
-          <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
-          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-date-range-picker #picker></mat-date-range-picker>
-        </mat-form-field><br><br> -->
         
         <button type="reset" (click)="reset()" class="reset_button">clear</button>
         <button class="search_button" (click)="searchFilter(Searchvalue,Searchvalue1,Searchvalue2,start_date,end_date)">
@@ -109,7 +98,7 @@
                   </div>
                   <div class="col-md-6">
                     <div class="row">
-                    <button  class="dialogButton"  (click)="openDialogScore(data)" [hidden]="data.Candidatestatus =='Open'">Score</button>
+                    <!-- <button  class="dialogButton"  (click)="openDialogScore(data)" [hidden]="data.Candidatestatus =='Open'">Score</button> -->
         
                     <!-- <button  class="dialogButton"  routerLink="/barchart" [hidden]="data.Candidatestatus =='Open'">Score</button> -->
                    
@@ -128,13 +117,12 @@
                    
                     <mat-menu #menu="matMenu">
                       <!-- <label mat-menu-item (click)="sendData(data)" routerLink="/profile-creation">Edit</label> -->
-                      <label mat-menu-item routerLink="/profile-creation">Edit</label>
-                      <!--   -->
-                      <label mat-menu-item (click)="delete()" >Delete</label>
+                      <label mat-menu-item routerLink="/profile-creation" (click)="sendData(data.EmailId)">Edit</label>
+                     
                     </mat-menu>
                   </div>
                     <div class="row">
-                      <button (click)="sendData(data)" routerLink="/Assessment" [disabled]="data.Candidatestatus =='closed'" class="startAssessment_button">{{ data.Candidatestatus =='Open' ? 'Start-Assessment' : 'Completed' }}</button>
+                      <button  routerLink="/Assessment" [disabled]="data.Candidatestatus =='closed'" class="ScheduleAssesment_button">{{ data.Candidatestatus =='Open' ? 'Schedule Assesment' : 'Completed' }}</button>
                     </div>
         
                   </div>
