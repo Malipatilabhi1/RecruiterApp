@@ -1,16 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { ChangeDetectionStrategy, Component, EventEmitter, 
   Input, OnInit, OnChanges, Output, SimpleChanges, ElementRef } from '@angular/core';
-  import { ActivatedRoute } from '@angular/router';
-  import { MatDatepickerInputEvent } from '@angular/material/datepicker';
-
-import {
-  FormArray,
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { MatDatepickerInputEvent } from '@angular/material/datepicker';
+import { FormArray,FormBuilder,FormControl,FormGroup,Validators,} from '@angular/forms';
 import { DataFileService } from '../data-file.service';
 import { FormData } from '../form-data'; 
 
@@ -51,6 +44,7 @@ export class ProfileCreationComponent implements OnInit{
   public static PhoneNo: any = '';
   public static Email: any = '';
   public static Experiance: any = '';
+  EmailforEdit:string='';
 
   // Skill:any=[{skillId:'1',skillName:'C#'},{skillId:'2',skillName:'Angular'},{skillId:'3',skillName:'SQL'},{skillId:'4',skillName:'Azure'}];
 
@@ -62,11 +56,20 @@ export class ProfileCreationComponent implements OnInit{
   ) {}
 
   ngOnInit(): void {
+    this.EmailforEdit=this._service.arr;
     this.getSkills();
     this.getComplexity();
     this.form = this.formBuilder.group({
       selected: new FormArray([]),
     });
+    
+    this.fifthFormGroup = this.formBuilder.group({
+    
+      searchEmail: (this.EmailforEdit),
+    });
+    console.log(this.EmailforEdit)
+
+    
   }
 
   ngAfterViewInit() {
@@ -83,7 +86,8 @@ export class ProfileCreationComponent implements OnInit{
     experience: [''],
   });
   fifthFormGroup = this.formBuilder.group({
-    searchEmail: [''],
+    
+    searchEmail: (''),
   });
   sixthFormGroup = this.formBuilder.group({
     notifier: [''],
@@ -266,6 +270,8 @@ export class ProfileCreationComponent implements OnInit{
     if (this.skillData) {
       this.status = true;
     }
+
+    this.next();
   }
   showCandidateAssesmentStatus() {
     debugger
@@ -287,7 +293,7 @@ export class ProfileCreationComponent implements OnInit{
         this.sArray = this.forSkill.data;
         console.log(this.sArray);
       }
-      // for(let i =0;i<this.sArray.length;i++)
+      
     );
   }
 

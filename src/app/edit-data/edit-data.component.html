@@ -62,7 +62,7 @@
  -->
 
  <div class="container">
-  <mat-card>
+  <mat-card class="first_card">
     <div class="div1">
     <h2 >Add New Skill</h2>
     <div>
@@ -73,12 +73,7 @@
       <p class="response"> {{Skillresponse}}</p>
       <p class="response1">{{Skillresponse1}}</p>
     </div>
-    <!-- <div>
-    <mat-form-field>
-      <input matInput type="text" [(ngModel)]="complexity" placeholder="Enter complexity">
-    </mat-form-field> 
-    <button (click)="addComplexity(complexity)" class="left green">Add</button>
-  </div> -->
+   
     </div>
     </mat-card> 
  <mat-card>
@@ -117,16 +112,5 @@
       <button type="file" class="left" id="div1">Upload File</button>
       <p class="response" id="div2">{{QAresponse}}</p>
       </div>
-
-      <!-- <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>Choose a date</mat-label>
-        <input matInput [matDatepicker]="picker">
-        <mat-hint>MM/DD/YYYY</mat-hint>
-        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker  #picker></mat-datepicker>
-      </mat-form-field> -->
       </mat-card>
-
-
-
 </div>

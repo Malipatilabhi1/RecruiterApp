@@ -20,6 +20,31 @@ import { style } from '@angular/animations';
   styleUrls: ['./assesment-screen.component.css']
 })
 export class AssesmentScreenComponent implements OnInit {
+
+//   hardcode:any=[{canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
+//   {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
+//   {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
+//   {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
+//   {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
+//   {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
+//   {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
+//   {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
+//   {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
+//   {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
+//   {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
+//   {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
+//   {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
+//   {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
+//   {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
+//   {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
+//   {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
+//   {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
+//   {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
+//   {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
+//   {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
+//   {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
+//   {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
+// ]
   
   headers = new HttpHeaders({'Authorization':`Bearer ${userIdToken}`});
 
@@ -39,6 +64,7 @@ export class AssesmentScreenComponent implements OnInit {
   Farr:any=[];
   Rarr:any=[];
   statuss:any="closed";
+  p: any = 0;
   dialogRef: MatDialogRef <any> ;
 
   constructor(
@@ -53,27 +79,43 @@ export class AssesmentScreenComponent implements OnInit {
      
   ngOnInit(): void {
     this.getCandidates();
+    // this.filterCandidate(this.hardcode)
   }
   
 
-  async getCandidates(){
-    // debugger;
+   getCandidates(){
     
-    this.http.post<any>('http://localhost:3000/cardsFilterManager',{},{headers:this.headers}).subscribe(
+    this.http.post<any>('http://localhost:3000/cardsFilterManager',{}
+    ,{headers:this.headers}).subscribe(
       response=>{
         // console.log(response)
         this.arr=response.result;
         this.skillA=response.result.skills;
         console.log(this.arr);
-        this.filterCandidate()     
+        this.filterCandidate(this.arr)     
       }
     );
   }
-  
+  Recentcandidates:any=[];
+  Remainingcandidates:any=[];
 
-  filterCandidate(){
- 
+  filterCandidate(value:any){
+    debugger
+    this.Recentcandidates=[];
+    this.Remainingcandidates=[];
+    for(let i=0 ;i<=value.length-1;i++){
+      if(i<=8){
+        this.Recentcandidates.push(value[i])    
+      }
+      else{
+        this.Remainingcandidates.push(value[i]) 
+      }
+    }
+    console.log(this.Recentcandidates)
+    console.log(this.Remainingcandidates)
   }
+
+
   sendData(data:any){
     debugger;
     this.dfs.Intermediate(data);
@@ -105,12 +147,6 @@ export class AssesmentScreenComponent implements OnInit {
   });   
   }
 
-
-  // searchByStatus(status:any){
-  //   debugger
-    
-  // }
-
   searchFilter(status:any,name:any,emailId:any,startDate:any,endDate:any){
     console.log(this.start_date)
     console.log(startDate)
@@ -121,6 +157,7 @@ export class AssesmentScreenComponent implements OnInit {
     },{headers:this.headers}).subscribe(
       response=>{ 
         this.arr=response.result;
+        this.filterCandidate(this.arr);
        })  
   }
 
@@ -132,5 +169,6 @@ export class AssesmentScreenComponent implements OnInit {
     this.start_date="";
     this.end_date="";
   }
+  
 }
 

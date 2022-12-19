@@ -1,3 +1,7 @@
+
+
+
+
 #div1,#div2{
     display: inline;
 }
@@ -9,9 +13,10 @@
 }
 .container{
     margin-top: 2%;
+    scrollbar-width: thin;
 }
 mat-card{
-    margin-bottom: 2%;
+    margin-top: 1%;
     width:65%;
     box-shadow: 0px 0px 12px 0px #aeabab,
     0 2px 2px 0 #302f2f,
@@ -46,3 +51,4 @@ h2{
   .example-full-width{
     width:60%
   }
+  

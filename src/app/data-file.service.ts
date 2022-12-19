@@ -22,6 +22,11 @@ export class DataFileService {
     this.arr=data;
     console.log(this.arr)
   }
+  Intermediate1(data:any)
+  {
+    this.arr=data;
+    console.log(this.arr)
+  }
 
   sendData(emailId:any,phone:any,name:any,experience:any,skills:number)
   {
@@ -105,5 +110,19 @@ export class DataFileService {
   ).subscribe(response=>{
     this.Assessments=response.data;
   })
+  }
+
+  ScheduledCandidates(){
+    return this._http.post<any>('http://localhost:3000/InterviewFilterManager',{},{headers:this.headers})
+  }
+
+
+
+  ScheduledCandidatesFilter(status:any,name:any,emailId:any,startDate:any,endDate:any){
+    
+    return this._http.post<any>('http://localhost:3000/InterviewFilterManager',
+    {
+      status,name,emailId,startDate,endDate
+    },{headers:this.headers})
   }
 }

@@ -35,7 +35,8 @@ export class InterviewInfoComponent implements OnInit {
 
   getCandidates(){
     debugger;
-    this.http.post<any>('http://localhost:3000/InterviewFilterManager',{},{headers:this.headers}).subscribe(
+
+    this.dfs.ScheduledCandidates().subscribe(
       response=>{
         console.log(response)
         this.assignCandidates=response.result;
@@ -47,8 +48,8 @@ export class InterviewInfoComponent implements OnInit {
     );
   }
   openDialogScore(value:any){
-    
-    this.dfs.Intermediate(value);
+    debugger
+    this.dfs.Intermediate1(value);
 
     this.dialogRef = this.dialog.open(ScoreComponent, {
       data:{
@@ -56,22 +57,13 @@ export class InterviewInfoComponent implements OnInit {
        style:"width:40%, height:80% "
       }
    });   
-  //   this.dialogRef = this.dialog.open(ScoreComponent, {
-  //    data:{
-  //     value,
-  //     style:"width:40%, height:80% "
-  //    }
-  // });   
+  
   }
 
   searchFilter(status:any,name:any,emailId:any,startDate:any,endDate:any){
     console.log(this.start_date)
     console.log(startDate)
-    debugger
-    this.http.post<any>('http://localhost:3000/InterviewFilterManager',
-    {
-      status,name,emailId,startDate,endDate
-    },{headers:this.headers}).subscribe(
+    this.dfs.ScheduledCandidatesFilter(status,name,emailId,startDate,endDate).subscribe(
       response=>{ 
         this.assignCandidates=response.result;
         console.log(this.assignCandidates);

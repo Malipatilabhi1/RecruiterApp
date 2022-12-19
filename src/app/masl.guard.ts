@@ -14,7 +14,7 @@ export class MaslGuard implements CanActivate {
    
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      debugger
+      
     if(this.msalService.instance.getActiveAccount()==null){
     
       return false;

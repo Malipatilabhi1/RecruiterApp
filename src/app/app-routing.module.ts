@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
-import { AssesmentScreenComponent } from './assesment-screen/assesment-screen.component';
+
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { EditDataComponent } from './edit-data/edit-data.component';
 import { InterviewInfoComponent } from './interview-info/interview-info.component';
@@ -14,6 +14,7 @@ import { MsalGuard } from '@azure/msal-angular';
 import { WebapiComponent } from './webapi/webapi.component';
 import { HeaderComponent } from './header/header.component';
 import { MaslGuard } from './masl.guard';
+import { AssesmentScreenComponent } from './assesment-screen/assesment-screen.component';
 
 const routes: Routes = [
    {path:'',component:DashboardComponent,},

@@ -33,6 +33,7 @@ export class ScoreComponent implements OnInit {
   // }
 
   ngOnInit(): void {   
+    debugger
     this.scoredata=this.dfs.arr;
     console.log(this.scoredata)
     this.canId=this.scoredata.canId;
@@ -86,8 +87,8 @@ export class ScoreComponent implements OnInit {
     canId,Date
     },{headers:this.headers}).subscribe(
       response=>{   
-       
-     this.array=response.val;
+       debugger
+     this.array=response.skillData;
      console.log(this.array)
      this.getval();
     
@@ -96,7 +97,7 @@ export class ScoreComponent implements OnInit {
 }
 i:any=0;
   getval(){
-    for (this.i = 0; this.i <= this.array.length-1; this.i++){
+    for (this.i = 0; this.i <= this.array.length; this.i++){
     this.dataPoints.push({X:this.array[this.i].skillScore,y:this.array[this.i].percentage,label:this.array[this.i].skillName+" "+this.array[this.i].percentage+"%",score:this.array[this.i].skillScore,scored:this.array[this.i].candidateScore,Question:this.array[this.i].count});
     console.log(this.dataPoints)
     // (this.array[i].skillNam,this.array[i].percentage+"%") this.array[this.i].candidateScore

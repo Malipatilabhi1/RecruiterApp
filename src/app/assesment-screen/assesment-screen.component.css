@@ -1,3 +1,7 @@
+
+mat-sidenav-content{
+  scrollbar-width:2px;
+}
 mat-sidenav{
   width:20%;
 }
@@ -62,11 +66,7 @@ mat-form-field{
     margin-top: 2%;
    
   }
-  /* .searchbar{
-    margin: none ;
-    padding: none !important;
-    margin-left: 1%;
-  } */
+  
   #div1,#div2,#div3{
     display: inline;
   }
@@ -103,6 +103,20 @@ button:disabled {
   width:auto;
   
 }
+.Assesmentbutton{
+  height: 25px;
+  width:auto;
+}
+.tablecard{
+  margin-left: 1%;
+  margin-bottom: 1%;
+  height: 45px;
+  }
+  label{
+    margin-bottom: 1% !important;
+  }
+  
+
 .rightF{
   float: right;
 }

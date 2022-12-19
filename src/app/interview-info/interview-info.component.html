@@ -15,15 +15,7 @@
               </mat-select>  
             </mat-form-field>
   
-            <!-- <mat-form-field class="" appearance="fill">  
-              <mat-label>Filter Name/Email</mat-label> 
-              <mat-select [(ngModel)]="Searchdata1" >
-               <mat-option  value="canName">Name</mat-option> 
-               <mat-option  value='EmailId'>Email</mat-option> 
-              </mat-select>  
-            </mat-form-field> -->
-  
-  
+           
             
           <mat-form-field  appearance="fill">
           <input type="text" matInput [(ngModel)]="Searchvalue1" placeholder="Search Name..">
@@ -58,16 +50,7 @@
             </mat-form-field>
             
   
-          <!-- <mat-form-field appearance="fill" class="">
-            <mat-label>Enter a date range</mat-label>
-            <mat-date-range-input [rangePicker]="picker">
-              <input matStartDate [(ngModel)]="start_date" placeholder="Start date">
-              <input matEndDate [(ngModel)]="end_date" placeholder="End date">
-            </mat-date-range-input>
-            <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
-            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-date-range-picker #picker></mat-date-range-picker>
-          </mat-form-field><br><br> -->
+         
           
           <button type="reset" (click)="reset()" class="reset_button">clear</button>
           <button class="search_button" (click)="searchFilter(Searchvalue,Searchvalue1,Searchvalue2,start_date,end_date)">

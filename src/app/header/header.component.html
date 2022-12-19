@@ -16,16 +16,10 @@
       </div>
      
       <span class="example-spacer"></span>
-      <!-- <div class="dropdown">
-        <button class="dropbtn"><mat-icon class="">account_box</mat-icon></button>
-        <div class="dropdown-content">
-          <a href="#"> Interviewer</a>
-          <a href="#"> <mat-icon class="black">logout</mat-icon>Logout</a>
-        </div>
-      </div> -->
+      
       <mat-icon (click)="login()" *ngIf="!isLoggedIn()">login</mat-icon>
      <mat-icon (click)="logout()" *ngIf="isLoggedIn()">logout</mat-icon>
-    <!-- </button> -->
+   
   </mat-toolbar>
 
   <mat-sidenav-container>

@@ -176,18 +176,6 @@ getCandidateDetails(){
   }
  
 
-  
-  //duplicate method for right arrow //it use when we have api
-  // nextQA()
-  // {
-  //   debugger;
-  //   this.i++;
-  //   this.updateData();
-  //   this.getQueAns(this.CId,this.i);
-  //   this.keywordzz=this.keywordsArray[this.i].keyword;
-  //   // let id=this.i.toString();
-  //   // this.fetchData(id,this.skill,this.complexity); 
-  // }
   datastoring_response:any='';
   nextQA()
   {
@@ -242,8 +230,7 @@ getCandidateDetails(){
   update(){
     this.value=this.newArry[0].score;
     this.value1=this.newArry[0].Note;
-    // this.value=this.recruiterData.controls['score'].value;
-    // this.recruiterData.controls['note']=this.newArry.Note;
+   
   }
   updateData(){
       debugger;
@@ -337,38 +324,7 @@ getCandidateDetails(){
     ] 
   }
   
-  
-
-
-
-  //key words array
-  // keywordsArray:any=[
-  //   {keyword:'Its mandatory to assign a value to it'},
-  //   {keyword:'Different dimensions and size.'},
-  //   {keyword:'Collection of similar types of data.'},
-  //   {keyword:'comprises elements of type array.'},
-  //   {keyword:'uesd for treating an object as an array.'},
-  //   {keyword:'Execute independently of the primary.'},
-  //   {keyword:'Easy to use and can be added to the toolbox.'},
-  //   {keyword:'Angular provides several out of the box built-in features.'},
-  //   {keyword:'value type with a set of related named constant.'},
-  //   {keyword:'storing of data in a file'},
-  //   {keyword:''},
-  //   {keyword:''}, 
-  //   {keyword:''},
-  //   {keyword:''},
-  //   {keyword:''},
-  //   {keyword:''},
-    
-  // ];
-
-  
-
  
-  
-  
-  
-    
  
   flush(){
     this.Score='';
@@ -377,8 +333,8 @@ getCandidateDetails(){
   
   
   resume:boolean=false;
+  
   //slider value
-
   ngAfterViewInit() {   //background color
     this.elementRef.nativeElement.ownerDocument
         .body.style.backgroundColor = 'rgba(255, 228, 196, 0.32)';
