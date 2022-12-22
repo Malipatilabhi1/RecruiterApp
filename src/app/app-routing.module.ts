@@ -18,6 +18,7 @@ import { AssesmentScreenComponent } from './assesment-screen/assesment-screen.co
 
 const routes: Routes = [
    {path:'',component:DashboardComponent,},
+   {path:'header',component:HeaderComponent},
   {path:'profile',component:ProfileCreationComponent,canActivate:[MaslGuard]},
   {path:'QASection',component:SidebarContentComponent,canActivate:[MaslGuard]},
   {path:'sign',component:SignInPageComponent,},

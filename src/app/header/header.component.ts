@@ -49,11 +49,11 @@ export class HeaderComponent implements OnInit {
 
   login(){
    
-  this.msalService.loginRedirect();
-    // this.msalService.loginPopup().subscribe((response:AuthenticationResult)=>{
-    //   this.msalService.instance.setActiveAccount(response.account)
+  // this.msalService.loginRedirect();
+    this.msalService.loginPopup().subscribe((response:AuthenticationResult)=>{
+      this.msalService.instance.setActiveAccount(response.account)
       
-    // })
+    })
   }
 
   logout(){

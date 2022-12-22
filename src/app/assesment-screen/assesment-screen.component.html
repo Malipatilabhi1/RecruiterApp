@@ -75,10 +75,13 @@
             <div id="div3">
               <button class="new_candidate_btn" routerLink="/profile">New Candidate</button>
             </div>
+            <div id="div4">
+              <mat-icon>download</mat-icon>
+            </div>
           </mat-card>
 
 
-            <div class="row">
+            <div class="row cards">
               <div *ngFor="let data of Recentcandidates" class="col-md-4" >
                 <mat-card class="col-md-12 size zoom">
                   <div class="col-md-6">
@@ -113,6 +116,18 @@
                 </mat-card>
               </div> 
             </div>
+
+
+            <mat-card class="tablecard">
+              <label class="col-md-2 td">Name</label>
+              <label class="col-md-3">EmailId</label>
+              <label class="col-md-2">Phone</label>
+
+              <label>Skills</label>
+             
+                
+              
+            </mat-card>
 
 
             <div *ngFor="let data of Remainingcandidates | paginate: { itemsPerPage: 10, currentPage: p   }" >

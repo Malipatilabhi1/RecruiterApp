@@ -101,8 +101,7 @@ export function MSALInstanceFactory():IPublicClientApplication{
     MatListModule,
     ScrollingModule,
     MatGridListModule,
-    
-    
+    HttpClientModule,
     AngularEditorModule,
     MatStepperModule,
     NgxPaginationModule,
@@ -112,7 +111,7 @@ export function MSALInstanceFactory():IPublicClientApplication{
     MatTabsModule,
     MatDatepickerModule,
     MatNativeDateModule,MatRippleModule,
-    HttpClientModule,
+    
   MsalModule,
     
  

@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { Candidate-ScreenComponent } from './assesment-screen.component';
+import { HttpClientModule } from '@angular/common/http';
+import { AssesmentScreenComponent } from './assesment-screen.component'; 
 
 describe('AssesmentScreenComponent', () => {
-  let component: Candidate-ScreenComponent;
-  let fixture: ComponentFixture<Candidate-ScreenComponent>;
+  let component: AssesmentScreenComponent;
+  let fixture: ComponentFixture<AssesmentScreenComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ Candidate-ScreenComponent ]
+      declarations: [ AssesmentScreenComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(Candidate-ScreenComponent);
+    fixture = TestBed.createComponent(AssesmentScreenComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient,HttpClientModule } from '@angular/common/http';
 import { ChangeDetectionStrategy, Component, EventEmitter, 
   Input, OnInit, OnChanges, Output, SimpleChanges, ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';

@@ -1,4 +1,11 @@
 
+
+button{
+  background-color: green;
+  color: white;
+  border: none;
+  border-radius: 4px;
+}
  .split1{
   height: 10%;
   width: 40%;
@@ -18,9 +25,18 @@
   padding-right: 40%;
   padding-bottom: 90%;
 }
+mat-card{
+  margin-top: 1%;
+}
+label{
+  margin-left: 30px;
+  color: brown;
+}
 
-.container{
- border: 2px solid #ccc;
+.container-fluid{
+  margin-left: 1%;
+  margin-right: 1%;
+ /* border: 2px solid #ccc; */
 }
 #div1,#div2,#div3,#div4{
  display: inline;
@@ -90,7 +106,7 @@ form{
 }
 .float{
   float: end !important;
-  margin-left: 75%;
+  margin-left: 89%;
   position: fixed;
   
 }
@@ -118,36 +134,3 @@ form{
   -webkit-transform: rotate(-135deg);
 }
 
-/* table, th, td ,tr{
-  border: 3px solid rgb(255, 217, 192);
-  /* border-collapse: collapse;
-}*/
-/*
-h2,p{
-  padding-left: 9%;
-}
-.grid2{
-  padding-top: 4%;
-}
-.space{
-  padding-right: 50px;
-}
-table{
-  padding-left: 16%;
-  padding-right: 16%;
-  width:80%  
-}
-.adjustable
-{
- padding-left:2%;
- width: 80%;
- background-color: rgba(140, 138, 138, 0.048);
-}
-hr{
- background-color: rgba(8, 0, 0, 0);
- border-radius: 2px;
-}
-.size
-{
- border: black 4px;
-} */

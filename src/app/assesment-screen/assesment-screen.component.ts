@@ -9,6 +9,7 @@ import { EditDataComponent } from '../edit-data/edit-data.component';
 import { ScoreComponent } from '../score/score.component';
 import {userIdToken} from '../../app/header/header.component';
 
+
 import { style } from '@angular/animations';
 // import { baseColors, Label } from 'ng2-charts';
 
@@ -21,30 +22,30 @@ import { style } from '@angular/animations';
 })
 export class AssesmentScreenComponent implements OnInit {
 
-//   hardcode:any=[{canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
-//   {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
-//   {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
-//   {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
-//   {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
-//   {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
-//   {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
-//   {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
-//   {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
-//   {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
-//   {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
-//   {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
-//   {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
-//   {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
-//   {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
-//   {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
-//   {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
-//   {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
-//   {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
-//   {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
-//   {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
-//   {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
-//   {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
-// ]
+  hardcode:any=[{canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
+  {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
+  {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
+  {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
+  {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
+  {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
+  {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
+  {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
+  {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
+  {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
+  {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
+  {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
+  {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
+  {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
+  {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
+  {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
+  {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
+  {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
+  {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
+  {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
+  {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
+  {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
+  {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
+]
   
   headers = new HttpHeaders({'Authorization':`Bearer ${userIdToken}`});
 
@@ -79,7 +80,7 @@ export class AssesmentScreenComponent implements OnInit {
      
   ngOnInit(): void {
     this.getCandidates();
-    // this.filterCandidate(this.hardcode)
+    this.filterCandidate(this.hardcode)
   }
   
 
@@ -169,6 +170,13 @@ export class AssesmentScreenComponent implements OnInit {
     this.start_date="";
     this.end_date="";
   }
+
+  // downloadCSV(){
+  //   //this.dtHolidays : JSONDATA , HolidayList : CSV file Name, this.csvOptions : file options
+  //   new  AngularCsv(this.dtHolidays, "HolidayList", this.csvOptions);
+  // }
+
+  
   
 }
 

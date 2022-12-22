@@ -1,10 +1,5 @@
 
-mat-sidenav-content{
-  scrollbar-width:2px;
-}
-mat-sidenav{
-  width:20%;
-}
+
 mat-sidenav-content{ 
   margin-left: 3%;
   padding-right: 4%;
@@ -40,9 +35,7 @@ mat-form-field{
       float: right;
       right: 0;
     }
-    /* .namefilter{
-      margin-left: 7%;
-    } */
+    
   .new_candidate_btn{
     background-color: green;
     margin: none !important;   
@@ -67,7 +60,7 @@ mat-form-field{
    
   }
   
-  #div1,#div2,#div3{
+  #div1,#div2,#div3,#div4{
     display: inline;
   }
   .search_button{
@@ -90,11 +83,7 @@ button:disabled {
   background-color:#9b9b9b;
   
 }
-/* .zoom:hover {
-  -ms-transform: scale(1.1); 
-  -webkit-transform: scale(1.1); 
-  transform: scale(1.1); 
-} */
+
 .ScheduleAssesment_button{
   
   height: 25px;
@@ -116,7 +105,9 @@ button:disabled {
     margin-bottom: 1% !important;
   }
   
-
+.cards{
+  margin-bottom: 5%;
+}
 .rightF{
   float: right;
 }

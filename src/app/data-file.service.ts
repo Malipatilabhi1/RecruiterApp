@@ -15,6 +15,7 @@ export class DataFileService {
   Assessments:any=[];
   Search_email:any;
   candidateEmail:any;
+  
   constructor(private _http:HttpClient) { }
 
   Intermediate(data:any)

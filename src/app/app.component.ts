@@ -7,8 +7,7 @@ import { Component, Inject, OnInit } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit{
-
-  
+  title = 'Utility-app';
 
   constructor(){}
 
