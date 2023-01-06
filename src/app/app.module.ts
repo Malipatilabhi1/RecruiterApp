@@ -18,6 +18,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatListModule } from '@angular/material/list';
 import { MatTabsModule } from '@angular/material/tabs';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatDialogModule} from "@angular/material/dialog";
 import { ScrollingModule } from '@angular/cdk/scrolling';
@@ -37,13 +38,15 @@ import { HeaderComponent } from './header/header.component';
 import { ProfileCreationComponent } from './profile-creation/profile-creation.component';
 import { InterviewerScreenComponent } from './interviewer-screen/interviewer-screen.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+
 import { HttpClientModule,HTTP_INTERCEPTORS } from '@angular/common/http';
+
 import { SidebarContentComponent } from './sidebar-content/sidebar-content.component';
 import { SignInPageComponent } from './sign-in-page/sign-in-page.component';
 import { AssesmentScreenComponent } from './assesment-screen/assesment-screen.component';
 import { EditDataComponent } from './edit-data/edit-data.component';
 import { ScoreComponent } from './score/score.component';
-
+import { DataFileService } from './data-file.service';
 import * as CanvasJSAngularChart from '../assets/canvasjs.angular.component';
 import { FilterPipe } from './filter.pipe';
 import { AssessmentRecordComponent } from './assessment-record/assessment-record.component';
@@ -56,6 +59,7 @@ import { msalConfig, protectedResources } from './auth-config';
 import { WebapiComponent } from './webapi/webapi.component';
 
 var CanvasJSChart = CanvasJSAngularChart.CanvasJSChart;
+
 export function MSALInstanceFactory():IPublicClientApplication{
   return new PublicClientApplication({
     auth:{
@@ -85,6 +89,7 @@ export function MSALInstanceFactory():IPublicClientApplication{
     
     BrowserModule,
     AppRoutingModule,
+
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
@@ -102,6 +107,7 @@ export function MSALInstanceFactory():IPublicClientApplication{
     ScrollingModule,
     MatGridListModule,
     HttpClientModule,
+    MatCheckboxModule,
     AngularEditorModule,
     MatStepperModule,
     NgxPaginationModule,
@@ -124,7 +130,8 @@ export function MSALInstanceFactory():IPublicClientApplication{
       useFactory:MSALInstanceFactory
       
     },
-    MsalService
+    MsalService,
+    DataFileService
   ],
   bootstrap: [AppComponent]
 })

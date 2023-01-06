@@ -160,6 +160,7 @@ getCandidateDetails(){
   }
 
   getQuestion(canId:any,RowandQuestion_number:any,assessmentId:any){
+    
     this.httpClient.post<any>('http://localhost:3000/assessmentStagingManager',{
       canId,
       RowandQuestion_number,

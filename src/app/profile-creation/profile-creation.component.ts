@@ -168,9 +168,10 @@ export class ProfileCreationComponent implements OnInit{
     // debugger;
     return this._http.post<any>('url', data).subscribe((response) => {});
   }
+
+
   getComplexity() {
-    this._http
-      .get<any>('http://localhost:3000/ComplexityManager')
+    this._http.get<any>('http://localhost:3000/ComplexityManager')
       .subscribe((response) => {
         this.Complexity = response.result;
         console.log(this.Complexity);
@@ -179,7 +180,7 @@ export class ProfileCreationComponent implements OnInit{
 
   getSkills() {
     this._http
-      .get<any>('http://localhost:3000/skillsManager')
+      .get<any>('http://20.192.1.163:3000/skillsManager')
       .subscribe((response) => {
         this.Skill = response.result;
         console.log(this.Skill);

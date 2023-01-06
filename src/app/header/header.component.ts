@@ -42,18 +42,16 @@ export class HeaderComponent implements OnInit {
   public position = new FormControl(this.positionOptions[0]);
 
   isLoggedIn():boolean{
-    return this.msalService.instance.getActiveAccount()!=null
-    
-    
+    return this.msalService.instance.getActiveAccount()!=null 
   }
 
   login(){
    
-  // this.msalService.loginRedirect();
-    this.msalService.loginPopup().subscribe((response:AuthenticationResult)=>{
-      this.msalService.instance.setActiveAccount(response.account)
+  this.msalService.loginRedirect();
+    // this.msalService.loginPopup().subscribe((response:AuthenticationResult)=>{
+    //   this.msalService.instance.setActiveAccount(response.account)
       
-    })
+    // })
   }
 
   logout(){

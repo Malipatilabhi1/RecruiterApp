@@ -8,10 +8,13 @@
           <label class="filter_label">Filter Records</label>
           <mat-form-field  appearance="fill">  
             <mat-label>Status Type:</mat-label> 
-            <mat-select [(ngModel)]="Searchvalue"  placeholder="Choose status">
-             <mat-option  value="Open">Open</mat-option> 
-             <mat-option  value='closed'>Closed</mat-option>
-             <mat-option  value='new'>New</mat-option> 
+            <mat-select [(ngModel)]="Searchvalue" multiple  placeholder="Choose status">
+              <mat-option *ngFor="let status of CandidateStatus; let i =index" [value]="status">
+                {{status}}
+              </mat-option>
+             <!-- <mat-option  value="Open"><input type="checkbox" value="Open">Open</mat-option> 
+             <mat-option  value='closed'><input type="checkbox" value="closed">Closed</mat-option>
+             <mat-option  value='new'><input type="checkbox" value="new">New</mat-option>  -->
             </mat-select>  
           </mat-form-field>
 
@@ -68,21 +71,25 @@
               <label class="label">CandidateInfo</label>
             </div>
            
-            <mat-icon class="filter" id="div2" (click)="sidenavright.toggle()">filter_alt</mat-icon>
+            
             <div id="div2">
-              <button class="new_candidate_btn" routerLink="/interview-info">InterviewInfo</button>
+              <button class="new_candidate_btn space" routerLink="/interview-info">InterviewInfo</button>
             </div>
             <div id="div3">
               <button class="new_candidate_btn" routerLink="/profile">New Candidate</button>
             </div>
-            <div id="div4">
-              <mat-icon>download</mat-icon>
-            </div>
+           
+           
+              <mat-icon class="filter" id="div2" (click)="sidenavright.toggle()">filter_alt</mat-icon>
+
+              <mat-icon (click)="downloadCSV(Searchvalue,Searchvalue1,Searchvalue2,start_date,end_date)" class="download_button">download</mat-icon>
+           
           </mat-card>
 
 
             <div class="row cards">
               <div *ngFor="let data of Recentcandidates" class="col-md-4" >
+                
                 <mat-card class="col-md-12 size zoom">
                   <div class="col-md-6">
                     <h2>{{data.canName}}</h2>

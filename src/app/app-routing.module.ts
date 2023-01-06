@@ -30,16 +30,12 @@ const routes: Routes = [
   {path:'addqa',component:EditDataComponent,canActivate:[MaslGuard]},
   {path:'interview-info',component:InterviewInfoComponent,canActivate:[MaslGuard]},
   // {path:'**',component:DashboardComponent},
-  
-  
   {
     path: 'webapi',
     component: WebapiComponent,
     // The profile component is protected with MSAL Guard.
     // canActivate: [MsalGuard]
   },
-
-
 ];
 
 @NgModule({

@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder,ReactiveFormsModule,FormsModule} from '@angular/forms';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import {userIdToken} from '../../app/header/header.component';
 

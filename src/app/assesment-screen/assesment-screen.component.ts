@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
-import{FormBuilder} from '@angular/forms';
+import{FormBuilder,FormsModule,ReactiveFormsModule} from '@angular/forms';
 import { DataFileService } from '../data-file.service';
 import { Pipe,PipeTransform } from '@angular/core';
 import {MatDialog, MatDialogConfig, MatDialogRef} from "@angular/material/dialog";
 import { EditDataComponent } from '../edit-data/edit-data.component';
 import { ScoreComponent } from '../score/score.component';
 import {userIdToken} from '../../app/header/header.component';
+import { AngularCsv } from 'angular-csv-ext/dist/Angular-csv';
 
 
 import { style } from '@angular/animations';
@@ -22,30 +23,32 @@ import { style } from '@angular/animations';
 })
 export class AssesmentScreenComponent implements OnInit {
 
-  hardcode:any=[{canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
-  {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
-  {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
-  {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
-  {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
-  {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
-  {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
-  {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
-  {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
-  {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
-  {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
-  {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
-  {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
-  {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
-  {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
-  {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
-  {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
-  {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
-  {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
-  {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
-  {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
-  {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
-  {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
-]
+//   hardcode:any=[
+
+//   {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
+//   {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
+//   {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
+//   {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
+//   {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
+//   {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
+//   {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
+//   {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
+//   {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
+//   {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
+//   {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
+//   {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
+//   {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
+//   {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
+//   {canName:'abhi',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
+//   {canName:'Guru',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
+//   {canName:'Guru',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
+//   {canName:'Guru',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
+//   {canName:'Guru',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
+//   {canName:'Guru',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
+//   {canName:'Guru',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
+//   {canName:'Guru',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
+//   {canName:'Guru',EmailId:'abhi@gmail.com',canPhone:9876543212,Candidatestatus:'Open'},
+// ]
   
   headers = new HttpHeaders({'Authorization':`Bearer ${userIdToken}`});
 
@@ -57,7 +60,7 @@ export class AssesmentScreenComponent implements OnInit {
   skillA:any=[];
   buttonDisabled:boolean;
   search : String;
-  Searchvalue:string;
+  Searchvalue:any;
   Searchvalue1:string;
   Searchvalue2:string;
   start_date:string;
@@ -66,6 +69,8 @@ export class AssesmentScreenComponent implements OnInit {
   Rarr:any=[];
   statuss:any="closed";
   p: any = 0;
+  selected = -1;
+  CandidateStatus:any=['Open','closed','new'];
   dialogRef: MatDialogRef <any> ;
 
   constructor(
@@ -80,18 +85,22 @@ export class AssesmentScreenComponent implements OnInit {
      
   ngOnInit(): void {
     this.getCandidates();
-    this.filterCandidate(this.hardcode)
+    
+    // this.filterCandidate(this.hardcode)
   }
   
 
    getCandidates(){
     
     this.http.post<any>('http://localhost:3000/cardsFilterManager',{}
+
     ,{headers:this.headers}).subscribe(
       response=>{
         // console.log(response)
         this.arr=response.result;
+
         this.skillA=response.result.skills;
+
         console.log(this.arr);
         this.filterCandidate(this.arr)     
       }
@@ -104,6 +113,7 @@ export class AssesmentScreenComponent implements OnInit {
     debugger
     this.Recentcandidates=[];
     this.Remainingcandidates=[];
+
     for(let i=0 ;i<=value.length-1;i++){
       if(i<=8){
         this.Recentcandidates.push(value[i])    
@@ -148,7 +158,13 @@ export class AssesmentScreenComponent implements OnInit {
   });   
   }
 
+
+  onChange(status:any){
+    this.Searchvalue=status;
+  }
+
   searchFilter(status:any,name:any,emailId:any,startDate:any,endDate:any){
+      
     console.log(this.start_date)
     console.log(startDate)
     debugger
@@ -171,10 +187,33 @@ export class AssesmentScreenComponent implements OnInit {
     this.end_date="";
   }
 
-  // downloadCSV(){
-  //   //this.dtHolidays : JSONDATA , HolidayList : CSV file Name, this.csvOptions : file options
-  //   new  AngularCsv(this.dtHolidays, "HolidayList", this.csvOptions);
-  // }
+  csvOptions = {
+    fieldSeparator: ',',
+    quoteStrings: '"',
+    decimalseparator: '.',
+    showLabels: true,
+    showTitle: true,
+    title: 'Candidate Details :',
+    useBom: true,
+    noDownload: false,
+    headers: ["Candidate Name", "EmailId", "PhoneNo", "CanStatus"]
+  };
+
+  downloadfile:any;
+  downloadCSV(status:any,name:any,emailId:any,startDate:any,endDate:any){
+    debugger
+    
+    this.http.post<any>('http://localhost:3000/downloadManager/download',{
+      status,name,emailId,startDate,endDate
+    }
+    ,{headers:this.headers}).subscribe(
+      response=>{
+        this.downloadfile=response;
+      })
+
+    //this.dtHolidays : JSONDATA , HolidayList : CSV file Name, this.csvOptions : file options
+    new  AngularCsv(this.downloadfile, "Candidate-Details",this.csvOptions);
+  }
 
   
   
